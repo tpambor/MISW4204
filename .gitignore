@@ -1,0 +1,18 @@
+# Environments
+.env
+.venv
+env/
+venv/
+env.bak/
+venv.bak/
+
+.DS_Store
+
+# Prettier
+.prettierrc.json
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+# *.py[cod]
+# *$py.class
+# *.cpython*

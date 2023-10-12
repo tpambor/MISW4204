@@ -1,0 +1,13 @@
+services:
+  redis:
+    image: redis:latest
+  api:
+    build: api
+    ports:
+      - "5000:5000"
+    environment:
+      - BROKER=redis://redis:6379/0
+  converter:
+    build: converter
+    environment:
+      - BROKER=redis://redis:6379/0
