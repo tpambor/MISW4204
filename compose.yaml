@@ -2,12 +2,16 @@ services:
   redis:
     image: redis:latest
   api:
-    build: api
+    build: converter-api
+    environment:
+      - BROKER=redis://redis:6379/0
+  worker:
+    build: converter-worker
+    environment:
+      - BROKER=redis://redis:6379/0
+  nginx:
+    image: nginx:latest
     ports:
-      - "5000:5000"
-    environment:
-      - BROKER=redis://redis:6379/0
-  converter:
-    build: converter
-    environment:
-      - BROKER=redis://redis:6379/0
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro

@@ -6,4 +6,4 @@ RUN pip install -r /app/requirements.txt
 
 WORKDIR /app
 
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["gunicorn",  "--bind", "0.0.0.0:8000", "app:create_app()"]
