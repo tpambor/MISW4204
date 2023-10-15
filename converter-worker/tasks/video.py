@@ -1,5 +1,6 @@
 import os
 import time
+import subprocess
 from celery import Celery
 from celery.signals import worker_init, worker_process_init
 from sqlalchemy import update
@@ -7,6 +8,7 @@ import db
 from models import Task, TaskStatus
 
 BROKER = os.getenv('BROKER') or "redis://127.0.0.1:6379/0"
+VIDEO_DIR = os.getenv('VIDEO_DIR', '')
 
 celery_app = Celery(__name__, broker=BROKER)
 
@@ -25,7 +27,12 @@ def setup_worker(**kwargs):
 def convert_video(id_video, old_format, new_format):
     print(f"Converting video {id_video} from {old_format} to {new_format}")
 
-    time.sleep(15)
+    path_old = os.path.join(VIDEO_DIR, f'{id_video}.{old_format}')
+    path_new = os.path.join(VIDEO_DIR, f'{id_video}.{new_format}')
+
+    tstart = time.monotonic()
+    result = subprocess.run(['ffmpeg', '-y', '-nostats', '-i', path_old, path_new], capture_output=True, check=True)
+    duration = time.monotonic() - tstart
 
     with db.session() as session:
         session.execute(
@@ -33,4 +40,4 @@ def convert_video(id_video, old_format, new_format):
         )
         session.commit()
 
-    print(f"Finished converting video {id_video}")
+    print(f"Finished converting video {id_video} in {duration}s")
