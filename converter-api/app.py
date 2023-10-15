@@ -2,6 +2,7 @@ import os
 from flask import Flask
 import flask_smorest
 from celery import Celery
+from db import db
 from vistas import BlueprintTasks
 
 class CloudConversionToolApi(flask_smorest.Api):
@@ -11,6 +12,9 @@ def create_app():
     app = Flask(__name__)
     app.config['API_TITLE'] = 'Cloud Conversion Tool API'
     app.config['API_VERSION'] = 'v1'
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///app.sqlite')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['VIDEO_DIR'] = os.getenv('VIDEO_DIR', '')
     app.config['OPENAPI_VERSION'] = '3.1.0'
     app.config['OPENAPI_URL_PREFIX'] = '/'
     app.config['OPENAPI_SWAGGER_UI_PATH'] = '/swagger-ui'
@@ -26,6 +30,10 @@ def create_app():
             }
         }
     }
+
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
 
     app.extensions["celery"] = Celery(__name__, broker=os.getenv('BROKER', 'redis://127.0.0.1:6379/0'))
 
