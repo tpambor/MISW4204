@@ -3,7 +3,8 @@ from flask import Flask
 import flask_smorest
 from celery import Celery
 from db import db
-from vistas import BlueprintTasks
+from vistas import BlueprintTasks, BlueprintUser
+from flask_jwt_extended import JWTManager
 
 class CloudConversionToolApi(flask_smorest.Api):
     DEFAULT_ERROR_RESPONSE_NAME = None
@@ -30,6 +31,8 @@ def create_app():
             }
         }
     }
+    app.config['JWT_SECRET_KEY'] = 'frase-secreta'
+    app.config['PROPAGATE_EXCEPTIONS'] = True
 
     db.init_app(app)
     with app.app_context():
@@ -39,5 +42,7 @@ def create_app():
 
     api = CloudConversionToolApi(app)
     api.register_blueprint(BlueprintTasks)
+    api.register_blueprint(BlueprintUser)
+    jwt = JWTManager(app)
 
     return app
