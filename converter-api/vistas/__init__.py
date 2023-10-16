@@ -1,2 +1,2 @@
 from .tasks import blp as BlueprintTasks
-from .user import blp as BlueprintUser
+from .auth import blp as BlueprintAuth

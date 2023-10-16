@@ -8,27 +8,32 @@ import marshmallow as ma
 from db import db
 from modelos import User
 
-blp = Blueprint("User", __name__, description="API para gestionar registro y login de usuarios")
-
+blp = Blueprint("Auth", __name__, description="API para gestionar registro y login de usuarios")
 
 def passwordFormat(password):
     if len(password) < 8:
-        return "password should have at least 8 characters."
+        return "Password should have at least 8 characters."
     if not any(char.isalpha() for char in password):
-        return "password should have at least a letter."
+        return "Password should have at least a letter."
     if not any(char.isdigit() for char in password):
-        return "password should have at least a digit."
+        return "Password password should have at least a digit."
     return None
 
-class UserAuthSchema(ma.Schema):
+
+class UserSignUpSchema(ma.Schema):
     username = ma.fields.String(required=True)
     email = ma.fields.String(required=True)
     password1 = ma.fields.String(required=True)
     password2 = ma.fields.String(required=True)
-  
+
+class UserLoginSchema(ma.Schema):
+    username = ma.fields.String(required=True)
+    password = ma.fields.String(required=True)
+
+
 @blp.route("/api/auth/signup")
 class VistaSignUp(MethodView):
-  @blp.arguments(UserAuthSchema)
+  @blp.arguments(UserSignUpSchema)
   def post(self, user):
     username = user['username']
     email = user['email']
@@ -45,11 +50,11 @@ class VistaSignUp(MethodView):
     password_format = passwordFormat(password1)
 
     if(existing_user_username):
-       abort(400, message = "username already exists.")
+       abort(400, message = "Provided username already exists.")
     if(existing_user_email):
-       abort(400, message = "email already exists.")
+       abort(400, message = "Provided email already exists.")
     if(password1 != password2):
-       abort(400, message = "password1 and password2 aren't equals.")
+       abort(400, message = "Provided password1 and password2 aren't equals.")
     if(password_format):
        abort(400, message = password_format)
 
@@ -65,3 +70,23 @@ class VistaSignUp(MethodView):
         return {
             'message': 'Success sign up!'
         }, 201
+
+
+@blp.route("/api/auth/login")
+class VistaLogin(MethodView):
+  @blp.arguments(UserLoginSchema)
+  def post(self, user):
+        username = user['username']
+        password = user['password']
+        current_user = User.query.get(username)
+
+        if not current_user:
+           abort(401, message = "User doesn't found.")
+        if not check_password_hash(current_user.password, password):
+           abort(401, message = "Incorrect password.")
+
+        access_token = create_access_token(identity=current_user.username)
+
+        return {
+            'access_token': access_token
+        }, 200
