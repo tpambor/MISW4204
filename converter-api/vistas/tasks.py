@@ -1,7 +1,7 @@
 import os
 import datetime
 import pathlib
-from flask import current_app
+from flask import current_app, send_from_directory, jsonify, url_for
 from flask.views import MethodView
 from flask_smorest import Blueprint
 import marshmallow as ma
@@ -62,3 +62,22 @@ class VistaTasks(MethodView):
             new_format
         ))
         return new_task
+
+@blp.route("/api/video/<path:filename>")
+class VistaVideo(MethodView):
+    def get(self,filename):
+        video_dir = current_app.config['VIDEO_DIR']
+        original_video_path = os.path.join(video_dir, filename)
+
+        if os.path.exists(original_video_path):
+            return send_from_directory(video_dir, filename)
+
+@blp.route("/api/videos")
+class VistaVideos(MethodView):
+    def get(self):
+        video_links = {}
+
+        for video_path in ['1.mp4', '1.webm']:
+            video_links[video_path] = url_for('Tasks.VistaVideo', filename=video_path).replace("/api", "")
+        
+        return jsonify(video_links), 200

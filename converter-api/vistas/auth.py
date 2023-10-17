@@ -1,9 +1,8 @@
 
-from flask import current_app
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
-from flask_jwt_extended import jwt_required, create_access_token
-from werkzeug.security import generate_password_hash, check_password_hash  # Importa el módulo security
+from flask_jwt_extended import create_access_token
+from werkzeug.security import generate_password_hash, check_password_hash
 import marshmallow as ma
 from db import db
 from modelos import User
@@ -89,4 +88,4 @@ class VistaLogin(MethodView):
 
         return {
             'access_token': access_token
-        }, 200
+        }, 200      
