@@ -1,2 +1,2 @@
-from .task import *
 from .user import *
+from .task import *
