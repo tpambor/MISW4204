@@ -1,6 +1,7 @@
 FROM python:3.11-bookworm
 
-RUN apt update && \
+# Workaround https://github.com/microsoft/WSL/issues/4114
+RUN apt -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update && \
   apt install --no-install-recommends --yes \
     ffmpeg \
   && apt clean && \
