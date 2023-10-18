@@ -8,8 +8,23 @@ import marshmallow as ma
 from db import db
 from modelos import Task, TaskStatus
 
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask import  request
+
 blp = Blueprint("Tasks", __name__, description="API para gestionar tareas de conversión de formato")
 
+# Ejemplo del resultado de un llamado para obtener el detalle de una tarea para descargar
+TaskIdExample = [
+    {
+        'id': '3',
+        'created': '10-10-2023',
+        'status': 'processed',
+        'fileName': 'MiCancion',
+        'oldFormat': 'MP4',
+        'newFormat': 'AVI'
+    }
+    
+]
 class TaskInputFilesSchema(ma.Schema):
     fileName = ma.fields.Raw(required=True)
 
@@ -81,3 +96,37 @@ class VistaVideos(MethodView):
             video_links[video_path] = url_for('Tasks.VistaVideo', filename=video_path).replace("/api", "")
         
         return jsonify(video_links), 200
+    
+@blp.route("/api/tasks/<int:id_task>")
+class VistaTaskId(MethodView):
+    #@jwt_required
+    @blp.doc(parameters=[{'name': 'id_task', 'in': 'path', 'description': 'ID de la tarea', 'required': True}])
+    @blp.response(200, TaskSchema(), description="Detalle de la tarea para poder obtener los links de descargar", example=TaskIdExample[0])
+    def get(self, id_task):
+        """Detalle de una tarea
+        
+        Consultar el detalle de una tarea y para poder obtener los links de descargar
+        """
+        #user_id = get_jwt_identity()
+        
+        task = Task.query.filter_by(id=id_task).first()
+        
+        if not task:
+            return {"message": "El archivo no fue encontrado"}, 404
+
+        # Crea las URLs de descarga de archivos
+        
+        #video_dir = current_app.config['VIDEO_DIR']
+        
+        #  URLs de descarga
+        original_video_url = url_for('Tasks.VistaVideo', filename=f'{task.id}.{task.oldFormat}').replace("/api", "")
+        new_video_url = url_for('Tasks.VistaVideo', filename=f'{task.id}.{task.newFormat}').replace("/api", "")
+
+      # Diccionario con las URLs
+        download_urls = {
+            "original_video_url": original_video_url,
+            "new_video_url": new_video_url
+        }
+                    
+        return jsonify(download_urls), 200
+    
