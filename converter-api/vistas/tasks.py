@@ -19,12 +19,19 @@ TaskIdExample = [
     {
         'id': '3',
         'created': '10-10-2023',
-        'status': 'processed',
+        'status': 'PROCESSED',
         'fileName': 'MiCancion',
         'oldFormat': 'MP4',
         'newFormat': 'AVI'
+    },
+    {
+        'id': '5',
+        'created': '11-10-2023',
+        'status': 'UPLOADED',
+        'fileName': 'MiCancion2',
+        'oldFormat': 'webm',
+        'newFormat': 'mp4'
     }
-    
 ]
 class TaskInputFilesSchema(ma.Schema):
     fileName = ma.fields.Raw(required=True)
@@ -79,13 +86,11 @@ class VistaTasks(MethodView):
         ))
         return new_task
 
-    @blp.response(200)
+    @blp.response(200, TaskSchema(many=True), description="Lista de tareas", example=TaskIdExample)
     @jwt_required()
     def get(self):
         task = Task.query.all()
-        serialized_tasks = [TaskSchema().dump(t) for t in task]
-        return serialized_tasks
-
+        return task
 
 @blp.route("/api/video/<path:filename>")
 class VistaVideo(MethodView):
