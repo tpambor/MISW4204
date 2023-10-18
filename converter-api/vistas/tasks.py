@@ -5,6 +5,7 @@ from flask import current_app, send_from_directory, jsonify, url_for
 from flask.views import MethodView
 from flask_smorest import Blueprint
 import marshmallow as ma
+from flask_jwt_extended import jwt_required
 from db import db
 from modelos import Task, TaskStatus
 
@@ -62,6 +63,14 @@ class VistaTasks(MethodView):
             new_format
         ))
         return new_task
+
+    @blp.response(200)
+    @jwt_required()
+    def get(self):
+        task = Task.query.all()
+        serialized_tasks = [TaskSchema().dump(t) for t in task]
+        return serialized_tasks
+
 
 @blp.route("/api/video/<path:filename>")
 class VistaVideo(MethodView):
