@@ -1,7 +1,7 @@
 import os
 import datetime
 import pathlib
-from flask import current_app, send_from_directory, jsonify, url_for
+from flask import current_app, send_from_directory, jsonify, url_for, request
 from flask.views import MethodView
 from flask_smorest import Blueprint
 import marshmallow as ma
@@ -89,9 +89,27 @@ class VistaTasks(MethodView):
     @blp.response(200, TaskSchema(many=True), description="Lista de tareas", example=TaskIdExample)
     @jwt_required()
     def get(self):
-        task = Task.query.all()
-        return task
-
+        # obtener parametro 'max' de la url
+        max_param = request.args.get('max', type=int)
+        # obtener parametro 'order' de la url
+        order_param = request.args.get('order', type=int)
+        # Filtrar y ordenar las tareas de acuerdo a los parametros
+        tasks = Task.query
+        if order_param is not None:
+            if order_param == 1:
+                # Ordenar de forma descendente si el parametro es 1
+                tasks = tasks.order_by(Task.id.desc())
+            elif order_param == 0:
+                # Ordenar de forma ascendente si el parametro es 0
+                tasks = tasks.order_by(Task.id.asc())
+        if max_param is not None:
+            # Entregar maximo de tareas si el parametro es diferente de None
+            tasks = tasks.limit(max_param)
+        # Obtener todas las tareas despues de filtrar y ordenar
+        tasks = tasks.all()
+        # task = Task.query.all()
+        # return task
+        return tasks
 @blp.route("/api/video/<path:filename>")
 class VistaVideo(MethodView):
     def get(self,filename):
