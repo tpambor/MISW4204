@@ -31,7 +31,7 @@ def convert_video(id_video, old_format, new_format):
     path_new = os.path.join(VIDEO_DIR, f'{id_video}.{new_format}')
 
     tstart = time.monotonic()
-    result = subprocess.run(['ffmpeg', '-y', '-nostats', '-i', path_old, path_new], capture_output=True, check=True)
+    result = subprocess.run(['ffmpeg', '-y', '-nostats', '-i', path_old, '-b:v', '2M', path_new], capture_output=True, check=True)
     duration = time.monotonic() - tstart
 
     with db.session() as session:
