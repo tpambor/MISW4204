@@ -132,7 +132,6 @@ class VistaVideo(MethodView):
 
         fmt = id_task[1].lower()
         id_task = id_task[0]
-        print(id_task, flush=True)
 
         task = Task.query.filter_by(id=id_task).first()
 
@@ -169,7 +168,6 @@ class VistaTaskId(MethodView):
         if not task or task.user != get_jwt_identity():
             abort(404, message="Tarea no encontrada")
 
-        print(task, flush=True)
         task_data = vars(task)
 
         # Crea las URLs de descarga de archivos
