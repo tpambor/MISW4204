@@ -20,7 +20,7 @@ A continuación, encontrarás información sobre la aplicación, cómo configura
 | Shadith Perez Rivera | s.perezr@uniandes.edu.co |
 
 ## Descripción
-Cloud Conversion Tool es una aplicación web que permite a los usuarios cargar archivos multimedia y cambiar su formato o realizar procesos de compresión de manera gratuita. La aplicación se enfoca en la conversión de formatos de video, incluyendo MP4, WEBM, AVI, MPEG y WMV.
+Aplicación web que ofrece gratuitamente a usuarios de internet, puedan subir abiertamente diferentes formatos multimedia de archivos y cambiarles su formato o realizar procesos de compresión. El modelo general de funcionamiento de la aplicación se basa en crear una cuenta en el portal web y acceder al administrador de archivos. Una vez la cuenta ha sido creada, el usuario puede subir archivos y solicitar el cambio de formato de estos para descargarlos. La aplicación web le permite a un usuario convertir archivos multimedia en línea de un formato a otro, seleccionando únicamente el formato destino. La aplicación se enfoca en la conversión de formatos de video, incluyendo MP4, WEBM, AVI, MPEG y WMV.
 
 ## Tecnologías Utilizadas
 
@@ -41,9 +41,11 @@ Cloud Conversion Tool es una aplicación web que permite a los usuarios cargar a
 - Vista Funcional
 - Vista de Despliegue
 
+[Video Presentacion](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/EZXky1x7CAxBsCGKHg3t-jQBG-ErSnNLD5Bermb0M9LMTA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19&e=jD1bpe)
+
 Consulta la documentación completa de la arquitectura. 
-- [Presentacion](Docs)
-- [Video](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/EQVFU8pj7rtPpH6xZ7xeNDwBo4eb3ASiZOXjZMw0Bhz1rw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19&e=ipGhEr)
+- [Documento](Docs)
+- [Video](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/EQVFU8pj7rtPpH6xZ7xeNDwBo4eb3ASiZOXjZMw0Bhz1rw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19&e=k4icLV)
 
 ## API REST
 - /api/crear-cuenta (POST): Crea una cuenta de usuario.
@@ -58,4 +60,5 @@ Consulta la documentación completa de la arquitectura.
 Consulta la documentación completa de la API aqui: 
 - [Documentacion en Postman](https://documenter.getpostman.com/view/29422849/2s9YRB4CyY) 
 - [Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.docx)
+- [Video](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/EUsm0jWJLKJHigp_zkCJOAwB0MCSva_fnDBUKZSaOIyIiA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19&e=q7VTWj)
 
