@@ -1,0 +1,282 @@
+{
+	"info": {
+		"_postman_id": "1949c7bb-6d13-492d-8303-c4957166961a",
+		"name": "Cloud Conversion Tool",
+		"description": "## Introduccion\n\nLa API de Cloud Conversion Tool permite a los usuarios realizar conversiones de archivos multimedia en línea, cambiando entre varios formatos de video. A continuación, se detallan los servicios disponibles y cómo utilizarlos.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30660049",
+		"_collection_link": "https://www.postman.com/bold-flare-296231/workspace/cloud-conversion-tool/collection/29422849-1949c7bb-6d13-492d-8303-c4957166961a?action=share&source=collection_link&creator=30660049"
+	},
+	"item": [
+		{
+			"name": "Sign up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"email\": \"test_email@gmail.com\",\r\n    \"password1\": \"password+123\",\r\n    \"password2\": \"password+123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_api_url}}/api/auth/signup",
+					"host": [
+						"{{base_api_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				},
+				"description": "Este servicio permite a los usuarios registrarse en la aplicación proporcionando un nombre de usuario único, una dirección de correo electrónico y una contraseña. La dirección de correo electrónico se utiliza como identificador único para autenticación en la aplicación.\n\n**Parámetros**:\n\n- `username` (string): Nombre de usuario.\n- `email` (string): Correo electrónico único.\n- `password1` (string): Contraseña de la cuenta.\n    \n\n**Resultado Esperado**: Registro exitoso"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parsea la respuesta JSON\r",
+							"var responseJson = pm.response.json();\r",
+							"\r",
+							"// Obtiene el valor del campo \"token\" de la respuesta JSON\r",
+							"var tokenAcceso = responseJson.access_token;\r",
+							"\r",
+							"// Guarda el valor del token_acceso en la variable de entorno \"token\"\r",
+							"pm.environment.set(\"access_token\", tokenAcceso);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"password\": \"password+123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_api_url}}/api/auth/login",
+					"host": [
+						"{{base_api_url}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "**Descripción**: Al utilizar este servicio, los usuarios pueden iniciar sesión en la aplicación proporcionando su nombre de usuario y contraseña. Si la autenticación es exitosa, el servicio devuelve un token de sesión que debe incluirse en las solicitudes posteriores para acceder a los recursos de la aplicación.\n\n**Parámetros**:\n\n- `username` (string): Nombre de usuario.\n- `password` (string): Contraseña de la cuenta.\n    \n\n**Resultado Esperado**: Inicio de sesión exitoso y obtención de token"
+			},
+			"response": []
+		},
+		{
+			"name": "Convertir archivo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "fileName",
+							"type": "file",
+							"src": "/Users/tim/demo.mp4"
+						},
+						{
+							"key": "newFormat",
+							"value": "{{new_format}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_api_url}}/api/tasks",
+					"host": [
+						"{{base_api_url}}"
+					],
+					"path": [
+						"api",
+						"tasks"
+					]
+				},
+				"description": "**Descripción**: Este servicio permite a los usuarios cargar un archivo multimedia que desean convertir a otro formato. Deben proporcionar el archivo a convertir y especificar el formato de destino. El archivo se almacena en la plataforma y se inicia el proceso de conversión. Se requiere un token de autenticación para utilizar este servicio.\n\n**Resultado Esperado**: Archivo subido y en proceso de conversión."
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Tareas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_api_url}}/api/tasks?max=4&order=0",
+					"host": [
+						"{{base_api_url}}"
+					],
+					"path": [
+						"api",
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "max",
+							"value": "4",
+							"description": "[Parámetro opcional] Establece la cantidad máxima de objetos que retorna el API"
+						},
+						{
+							"key": "order",
+							"value": "1",
+							"description": "[Parámetro opcional] Establece orden descendente de objetos entregados (según ID)",
+							"disabled": true
+						},
+						{
+							"key": "order",
+							"value": "0",
+							"description": "[Parámetro opcional] Establece orden ascendente de objetos entregados (según ID)"
+						}
+					]
+				},
+				"description": "**Descripción**: Fragmentos usuarios pueden obtener una lista de las tareas de conversión asociadas a su cuenta. Pueden especificar el número máximo de tareas a recuperar y el orden de la lista. Se requiere un token de autenticación para utilizar este servicio.\n\n- Endpoint para obtener la lista de tareas.\n- Retorna lista de objetos JSON.\n- El parámetro de consulta _**max**_ es un entero, y determina el máximo de elementos entregados por el endpoint, el parámetro es opcional.\n- Token de autenticación."
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Tarea",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_api_url}}/api/tasks/{{task_id}}",
+					"host": [
+						"{{base_api_url}}"
+					],
+					"path": [
+						"api",
+						"tasks",
+						"{{task_id}}"
+					]
+				},
+				"description": "**Descripción**:Se proporcina información detallada sobre una tarea de conversión específica identificada por su ID. Los usuarios pueden acceder a detalles como el estado de la tarea y los archivos relacionados. Se requiere un token de autenticación para utilizar este servicio."
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener video",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_api_url}}/api/video/{{task_id}}.{{new_format}}",
+					"host": [
+						"{{base_api_url}}"
+					],
+					"path": [
+						"api",
+						"video",
+						"{{task_id}}.{{new_format}}"
+					]
+				},
+				"description": "**Descripción**: Al utilizar este servicio, los usuarios pueden descargar el archivo multimedia convertido. Deben proporcionar el ID de la tarea de conversión y el formato de destino. El servicio permite la descarga del archivo convertido. Se requiere un token de autenticación para utilizar este servicio.\n\n**Resultado Esperado**: Descarga del archivo de video convertido."
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Tarea",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_api_url}}/api/tasks/{{task_id}}",
+					"host": [
+						"{{base_api_url}}"
+					],
+					"path": [
+						"api",
+						"tasks",
+						"{{task_id}}"
+					]
+				},
+				"description": "**Descripción**: Elimina una tarea por su ID, siempre y cuando el estado de la tarea sea \"PROCESSED\".\n\n- Elimina una tarea por su id (ejemplo: 2).\n- Elimina si y solo si el status de la tarea es **\"PROCESSED\".**\n- Si no encuentra la tarea, código de respuesta es 404.\n- Si es estatus de la tarea es diferente al requerido, código de respuesta es 422.\n- Si la tarea ha sido eliminada exitosamente, código de respuesta es 204.\n- Requiere token de autenticación.\n    \n\n**Resultado Esperado**: Tarea eliminada si cumple con las condiciones"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
