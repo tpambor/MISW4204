@@ -67,4 +67,4 @@ El objetivo de este plan es evaluar la capacidad de la aplicación de convertido
 
 - [Documento Escenario y Pruebas de Estrés API REST y Batch](https://uniandes-my.sharepoint.com/:b:/g/personal/ld_molina11_uniandes_edu_co/EZjEiPqRvAZJg0NEApYC9PsBfqleDM8TTe7Bi9YVu6N88Q?e=VrsFkY)
 
-Video Pruebasde Estrés
+- [Video Pruebasde Estrés](https://uniandes-my.sharepoint.com/:b:/g/personal/ld_molina11_uniandes_edu_co/EZjEiPqRvAZJg0NEApYC9PsBfqleDM8TTe7Bi9YVu6N88Q?e=VrsFkY)
