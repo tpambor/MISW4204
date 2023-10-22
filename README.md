@@ -54,12 +54,12 @@ Consulta la documentación completa de la arquitectura.
 - [Documento](https://github.com/tpambor/MISW4204/blob/main/Docs/Proyecto%201%20entrega%201%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
 
 ## API REST
-- /api/crear-cuenta (POST): Crea una cuenta de usuario.
-- /api/iniciar-sesion (POST): Inicia sesión en la aplicación web.
-- /api/listar-tareas (GET): Lista todas las tareas de conversión de un usuario.
-- /api/subir-archivo (POST): Sube y cambia el formato de un archivo.
-- /api/info-tarea/{id} (GET): Obtiene información de una tarea de conversión específica.
-- /api/borrar-archivo/{id} (DELETE): Borra el archivo original y el archivo convertido de un usuario
+- /api/auth/signup (POST): Crea una cuenta de usuario.
+- /api/auth/login (POST): Inicia sesión en la aplicación web.
+- /api/tasks (GET): Lista todas las tareas de conversión de un usuario.
+- /api/tasks (POST): Sube y cambia el formato de un archivo.
+- /api/tasks/{{task_id}} (GET): Obtiene información de una tarea de conversión específica.
+- /api/tasks/{{task_id}} (DELETE): Borra el archivo original y el archivo convertido de un usuario
 
 Consulta la documentación completa de la API aqui: 
 - [Documentacion en Postman](https://documenter.getpostman.com/view/29422849/2s9YRB4CyY) 
