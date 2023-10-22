@@ -2,10 +2,10 @@
 	"info": {
 		"_postman_id": "1949c7bb-6d13-492d-8303-c4957166961a",
 		"name": "Cloud Conversion Tool",
-		"description": "## Introduccion\n\nLa API de Cloud Conversion Tool permite a los usuarios realizar conversiones de archivos multimedia en línea, cambiando entre varios formatos de video. A continuación, se detallan los servicios disponibles y cómo utilizarlos.",
+		"description": "# Introduccion\n\nLa API de Cloud Conversion Tool permite a los usuarios realizar conversiones de archivos multimedia en línea, cambiando entre varios formatos de video. En este documento se detallan los servicios disponibles y cómo utilizarlos.\n\n## Variables de entorno\n\n| Nombre de la variable | Descripción |\n| --- | --- |\n| `base_api_url` | URL base en la que está corriendo la aplicación. Al correrla con Docker debería ser `localhost:8080` |\n| `access_token` | Token de acceso que devuelve el endpoint de login. |\n| `task_id` | Id del task que se quiere consultar. |\n| `task_id_404` | Id de un task que no existe. |\n| `new_format` | Formato al cuál se quiere conventir (o se convirtió) el video original. |",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30660049",
-		"_collection_link": "https://www.postman.com/bold-flare-296231/workspace/cloud-conversion-tool/collection/29422849-1949c7bb-6d13-492d-8303-c4957166961a?action=share&source=collection_link&creator=30660049"
+		"_exporter_id": "26749673",
+		"_collection_link": "https://www.postman.com/bold-flare-296231/workspace/cloud-conversion-tool/collection/29422849-1949c7bb-6d13-492d-8303-c4957166961a?action=share&source=collection_link&creator=26749673"
 	},
 	"item": [
 		{
@@ -33,9 +33,442 @@
 						"signup"
 					]
 				},
-				"description": "Este servicio permite a los usuarios registrarse en la aplicación proporcionando un nombre de usuario único, una dirección de correo electrónico y una contraseña. La dirección de correo electrónico se utiliza como identificador único para autenticación en la aplicación.\n\n**Parámetros**:\n\n- `username` (string): Nombre de usuario.\n- `email` (string): Correo electrónico único.\n- `password1` (string): Contraseña de la cuenta.\n    \n\n**Resultado Esperado**: Registro exitoso"
+				"description": "**Descripción:** Este servicio permite a los usuarios registrarse en la aplicación proporcionando un nombre de usuario, una dirección de correo electrónico y una contraseña.\n\n**Datos solicitados:**\n\n- `username` (string): Nombre de usuario. Debe ser único, es decir, no puede existir otro usuario con dicho username registrado.\n- `email` (string): Correo electrónico. Debe ser único, es decir, no puede existir otro usuario con dicho email registrado.\n- `password1` (string): Contraseña de la cuenta. Debe contar con mínimo un dígito, una letra, y un caracter no alfanumérico.\n- `password2` (string): Verificación de la contraseña, debe ser tener el mismo valor registrado en `password1`.\n    \n\n**Resultado Esperado:** Registro exitoso."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Sucessful response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_username2\",\r\n    \"email\": \"test_email2@gmail.com\",\r\n    \"password1\": \"password+123\",\r\n    \"password2\": \"password+123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/auth/signup",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "CREATED",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 06:36:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "33"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Sign up succesfull\"\n}"
+				},
+				{
+					"name": "Error: Username already exists",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"email\": \"test_email2@gmail.com\",\r\n    \"password1\": \"password+123\",\r\n    \"password2\": \"password+123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/auth/signup",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "CONFLICT",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 06:37:04 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "78"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 409,\n    \"message\": \"Provided username already exists\",\n    \"status\": \"Conflict\"\n}"
+				},
+				{
+					"name": "Error: Email already exists",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_username3\",\r\n    \"email\": \"test_email@gmail.com\",\r\n    \"password1\": \"password+123\",\r\n    \"password2\": \"password+123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/auth/signup",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "CONFLICT",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 06:37:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "75"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 409,\n    \"message\": \"Provided email already exists\",\n    \"status\": \"Conflict\"\n}"
+				},
+				{
+					"name": "Error: Password and its verification don't match",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"email\": \"test_email@gmail.com\",\r\n    \"password1\": \"password+123\",\r\n    \"password2\": \"password+12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/auth/signup",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "UNPROCESSABLE ENTITY",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 08:38:28 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "95"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 422,\n    \"message\": \"Password1 and password2 are not equal\",\n    \"status\": \"Unprocessable Entity\"\n}"
+				},
+				{
+					"name": "Error: Password without digit",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"email\": \"test_email@gmail.com\",\r\n    \"password1\": \"password\",\r\n    \"password2\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/auth/signup",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "UNPROCESSABLE ENTITY",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 08:40:07 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "126"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 422,\n    \"errors\": {\n        \"json\": {\n            \"password1\": [\n                \"Password password must have at least a digit\"\n            ]\n        }\n    },\n    \"status\": \"Unprocessable Entity\"\n}"
+				},
+				{
+					"name": "Error: Password without non-alphanumeric character",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"email\": \"test_email@gmail.com\",\r\n    \"password1\": \"password123\",\r\n    \"password2\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/auth/signup",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "UNPROCESSABLE ENTITY",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 08:40:35 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "140"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 422,\n    \"errors\": {\n        \"json\": {\n            \"password1\": [\n                \"Password must have at least one non-alphanumeric character\"\n            ]\n        }\n    },\n    \"status\": \"Unprocessable Entity\"\n}"
+				},
+				{
+					"name": "Error: Password without letter",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"email\": \"test_email@gmail.com\",\r\n    \"password1\": \"+1234567\",\r\n    \"password2\": \"+1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/auth/signup",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "UNPROCESSABLE ENTITY",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 08:41:44 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "118"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 422,\n    \"errors\": {\n        \"json\": {\n            \"password1\": [\n                \"Password must have at least a letter\"\n            ]\n        }\n    },\n    \"status\": \"Unprocessable Entity\"\n}"
+				},
+				{
+					"name": "Error: Password length",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"email\": \"test_email@gmail.com\",\r\n    \"password1\": \"pass\",\r\n    \"password2\": \"pass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/auth/signup",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "UNPROCESSABLE ENTITY",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 08:42:20 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "165"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 422,\n    \"errors\": {\n        \"json\": {\n            \"password1\": [\n                \"Length must be between 8 and 200.\"\n            ],\n            \"password2\": [\n                \"Length must be between 8 and 200.\"\n            ]\n        }\n    },\n    \"status\": \"Unprocessable Entity\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Login",
@@ -81,9 +514,172 @@
 						"login"
 					]
 				},
-				"description": "**Descripción**: Al utilizar este servicio, los usuarios pueden iniciar sesión en la aplicación proporcionando su nombre de usuario y contraseña. Si la autenticación es exitosa, el servicio devuelve un token de sesión que debe incluirse en las solicitudes posteriores para acceder a los recursos de la aplicación.\n\n**Parámetros**:\n\n- `username` (string): Nombre de usuario.\n- `password` (string): Contraseña de la cuenta.\n    \n\n**Resultado Esperado**: Inicio de sesión exitoso y obtención de token"
+				"description": "**Descripción**: Al utilizar este servicio, los usuarios pueden iniciar sesión en la aplicación proporcionando su nombre de usuario y contraseña. Si la autenticación es exitosa, el servicio devuelve un token de sesión que debe incluirse en las solicitudes posteriores para acceder a los recursos de la aplicación.\n\n**Datos solicitados:**\n\n- `username` (string): Nombre de usuario.\n- `password` (string): Contraseña de la cuenta.\n    \n\n**Resultado Esperado**: Inicio de sesión exitoso y obtención de token"
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Successful response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"password\": \"password+123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/auth/login",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 06:48:32 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "281"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Nzk1NzMxMiwianRpIjoiYjFjYjU0NTYtMWY4ZS00OTc0LWFjOTEtMTk2NzEwNDA2YzU2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjk3OTU3MzEyLCJleHAiOjE2OTc5NTgyMTJ9.JmQ0ecmDke29Z724ov6jJWlVy9XsUIoeWVaV6OMWNEY\"\n}"
+				},
+				{
+					"name": "Error: User not found",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_usernam\",\r\n    \"password\": \"password+123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/auth/login",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "NOT FOUND",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 06:49:07 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "61"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 404,\n    \"message\": \"User not found\",\n    \"status\": \"Not Found\"\n}"
+				},
+				{
+					"name": "Error: Incorrect password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test_username\",\r\n    \"password\": \"password+12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/auth/login",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "UNAUTHORIZED",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 06:49:40 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "68"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 401,\n    \"message\": \"Incorrect password\",\n    \"status\": \"Unauthorized\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Convertir archivo",
@@ -93,7 +689,8 @@
 					{
 						"key": "Authorization",
 						"value": "Bearer {{access_token}}",
-						"type": "text"
+						"type": "text",
+						"description": "Token de acceso"
 					}
 				],
 				"body": {
@@ -101,12 +698,14 @@
 					"formdata": [
 						{
 							"key": "fileName",
+							"description": "Archivo a convertir",
 							"type": "file",
-							"src": "/Users/tim/demo.mp4"
+							"src": "demo.mp4"
 						},
 						{
 							"key": "newFormat",
 							"value": "{{new_format}}",
+							"description": "Formato a convertir",
 							"type": "text"
 						}
 					]
@@ -121,12 +720,404 @@
 						"tasks"
 					]
 				},
-				"description": "**Descripción**: Este servicio permite a los usuarios cargar un archivo multimedia que desean convertir a otro formato. Deben proporcionar el archivo a convertir y especificar el formato de destino. El archivo se almacena en la plataforma y se inicia el proceso de conversión. Se requiere un token de autenticación para utilizar este servicio.\n\n**Resultado Esperado**: Archivo subido y en proceso de conversión."
+				"description": "**Descripción**: Este servicio permite a los usuarios cargar un archivo multimedia que desean convertir a otro formato. Deben proporcionar el archivo a convertir y especificar el formato de destino. El archivo se almacena en la plataforma y se inicia el proceso de conversión. Se requiere un token de autenticación para utilizar este servicio.\n\n**Datos solicitados:**\n\n- `fileName` (file): Video a convertir.\n- `newFormat` (string): Fromato a convertir.\n    \n\n**Resultado Esperado**: Archivo subido y en proceso de conversión."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Successful response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileName",
+									"type": "file",
+									"src": "/D:/Documentos/Laura/Desarrollo de software en la nube/MISW4204/demo.mp4"
+								},
+								{
+									"key": "newFormat",
+									"value": "{{new_format}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"status": "CREATED",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 06:51:34 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "123"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"created\": \"2023-10-22T06:51:34.846892\",\n    \"fileName\": \"demo\",\n    \"id\": 2,\n    \"newFormat\": \"webm\",\n    \"oldFormat\": \"mp4\",\n    \"status\": \"UPLOADED\"\n}"
+				},
+				{
+					"name": "Error: Missing filename",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileName",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "newFormat",
+									"value": "{{new_format}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"status": "UNPROCESSABLE ENTITY",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 06:52:31 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "114"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 422,\n    \"errors\": {\n        \"files\": {\n            \"fileName\": [\n                \"Missing data for required field.\"\n            ]\n        }\n    },\n    \"status\": \"Unprocessable Entity\"\n}"
+				},
+				{
+					"name": "Error: Filename without extension",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileName",
+									"type": "file",
+									"src": "/home/laura/Documents/demo"
+								},
+								{
+									"key": "newFormat",
+									"value": "{{new_format}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"status": "UNPROCESSABLE ENTITY",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 07:47:12 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "88"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 422,\n    \"message\": \"Filename must have a extension\",\n    \"status\": \"Unprocessable Entity\"\n}"
+				},
+				{
+					"name": "Error: Invalid filename",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileName",
+									"type": "file",
+									"src": "/home/laura/Documents/_.mp4"
+								},
+								{
+									"key": "newFormat",
+									"value": "{{new_format}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"status": "UNPROCESSABLE ENTITY",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 07:50:25 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 422,\n    \"message\": \"Invalid filename\",\n    \"status\": \"Unprocessable Entity\"\n}"
+				},
+				{
+					"name": "Error: Format not supported",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileName",
+									"type": "file",
+									"src": "/home/laura/Documents/demo.abc"
+								},
+								{
+									"key": "newFormat",
+									"value": "{{new_format}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"status": "UNPROCESSABLE ENTITY",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 07:52:03 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "78"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 422,\n    \"message\": \"Format not supported\",\n    \"status\": \"Unprocessable Entity\"\n}"
+				},
+				{
+					"name": "Error: Token expired",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileName",
+									"type": "file",
+									"src": "/home/laura/Documents/demo"
+								},
+								{
+									"key": "newFormat",
+									"value": "{{new_format}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							]
+						}
+					},
+					"status": "UNAUTHORIZED",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 07:24:29 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"Token has expired\"\n}"
+				}
+			]
 		},
 		{
-			"name": "Obtener Tareas",
+			"name": "Obtener tareas",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -136,6 +1127,7 @@
 					{
 						"key": "Authorization",
 						"value": "Bearer {{access_token}}",
+						"description": "Token de acceso",
 						"type": "text"
 					}
 				],
@@ -176,18 +1168,175 @@
 						}
 					]
 				},
-				"description": "**Descripción**: Fragmentos usuarios pueden obtener una lista de las tareas de conversión asociadas a su cuenta. Pueden especificar el número máximo de tareas a recuperar y el orden de la lista. Se requiere un token de autenticación para utilizar este servicio.\n\n- Endpoint para obtener la lista de tareas.\n- Retorna lista de objetos JSON.\n- El parámetro de consulta _**max**_ es un entero, y determina el máximo de elementos entregados por el endpoint, el parámetro es opcional.\n- Token de autenticación."
+				"description": "**Descripción**: Los usuarios pueden obtener una lista de las tareas de conversión asociadas a su cuenta. Pueden especificar el número máximo de tareas a recuperar y el orden de la lista. Se requiere un token de autenticación para utilizar este servicio.\n\n**Resultado esperado:** Lista de tareas asociadas al usuario."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Successful response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks?max=4&order=0",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "max",
+									"value": "4",
+									"description": "[Parámetro opcional] Establece la cantidad máxima de objetos que retorna el API"
+								},
+								{
+									"key": "order",
+									"value": "1",
+									"description": "[Parámetro opcional] Establece orden descendente de objetos entregados (según ID)",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "0",
+									"description": "[Parámetro opcional] Establece orden ascendente de objetos entregados (según ID)"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 07:56:06 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "125"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"created\": \"2023-10-22T07:56:00.896063\",\n        \"fileName\": \"demo\",\n        \"id\": 1,\n        \"newFormat\": \"webm\",\n        \"oldFormat\": \"mp4\",\n        \"status\": \"UPLOADED\"\n    }\n]"
+				},
+				{
+					"name": "Error: Token expired",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"description": "Token de acceso",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks?max=4&order=0",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "max",
+									"value": "4",
+									"description": "[Parámetro opcional] Establece la cantidad máxima de objetos que retorna el API"
+								},
+								{
+									"key": "order",
+									"value": "1",
+									"description": "[Parámetro opcional] Establece orden descendente de objetos entregados (según ID)",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "0",
+									"description": "[Parámetro opcional] Establece orden ascendente de objetos entregados (según ID)"
+								}
+							]
+						}
+					},
+					"status": "UNAUTHORIZED",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 08:24:12 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"Token has expired\"\n}"
+				}
+			]
 		},
 		{
-			"name": "Obtener Tarea",
+			"name": "Obtener tarea",
 			"request": {
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
 						"value": "Bearer {{access_token}}",
+						"description": "Token de acceso",
 						"type": "text"
 					}
 				],
@@ -202,9 +1351,396 @@
 						"{{task_id}}"
 					]
 				},
-				"description": "**Descripción**:Se proporcina información detallada sobre una tarea de conversión específica identificada por su ID. Los usuarios pueden acceder a detalles como el estado de la tarea y los archivos relacionados. Se requiere un token de autenticación para utilizar este servicio."
+				"description": "**Descripción**: Se proporciona información detallada sobre una tarea de conversión específica identificada por su ID. Los usuarios pueden acceder a detalles como el estado de la tarea y los archivos relacionados. Se requiere un token de autenticación para utilizar este servicio.\n\n**Resultado esperado:** Información detallada de la tarea."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Successful response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks/{{task_id}}",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"{{task_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 07:58:07 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "192"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"created\": \"2023-10-22T07:56:00.896063\",\n    \"fileName\": \"demo\",\n    \"id\": 1,\n    \"newFormat\": \"webm\",\n    \"oldFormat\": \"mp4\",\n    \"status\": \"PROCESSED\",\n    \"urlConverted\": \"/api/video/1.webm\",\n    \"urlOriginal\": \"/api/video/1.mp4\"\n}"
+				},
+				{
+					"name": "Error: Task not found",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks/{{task_id_404}}",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"{{task_id_404}}"
+							]
+						}
+					},
+					"status": "NOT FOUND",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 08:00:13 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "66"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 404,\n    \"message\": \"Tarea no encontrada\",\n    \"status\": \"Not Found\"\n}"
+				},
+				{
+					"name": "Error: Token expired",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks/3",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"3"
+							]
+						}
+					},
+					"status": "UNAUTHORIZED",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 08:03:13 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"Token has expired\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar tarea",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text",
+						"description": "Token de acceso"
+					}
+				],
+				"url": {
+					"raw": "{{base_api_url}}/api/tasks/{{task_id}}",
+					"host": [
+						"{{base_api_url}}"
+					],
+					"path": [
+						"api",
+						"tasks",
+						"{{task_id}}"
+					]
+				},
+				"description": "**Descripción**: Elimina una tarea por su ID, siempre y cuando el estado de la tarea sea \"PROCESSED\".\n\n**Resultado Esperado**: Tarea eliminada si cumple con las condiciones."
+			},
+			"response": [
+				{
+					"name": "Successful response",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks/{{task_id}}",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"{{task_id}}"
+							]
+						}
+					},
+					"status": "UNPROCESSABLE ENTITY",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 08:06:27 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 204,\n    \"message\": \"Tarea eliminada exitosamente\",\n    \"status\": \"DELETED\"\n}"
+				},
+				{
+					"name": "Error: Unprocessed conversion",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks/3",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"3"
+							]
+						}
+					},
+					"status": "UNPROCESSABLE ENTITY",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 08:07:11 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "97"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 422,\n    \"message\": \"La conversión no ha sido procesada\",\n    \"status\": \"Unprocessable Entity\"\n}"
+				},
+				{
+					"name": "Error: Task not found",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks/{{task_id_404}}",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"{{task_id_404}}"
+							]
+						}
+					},
+					"status": "NOT FOUND",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 08:08:58 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "66"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 404,\n    \"message\": \"Tarea no encontrada\",\n    \"status\": \"Not Found\"\n}"
+				},
+				{
+					"name": "Error: Token expired",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text",
+								"description": "Token de acceso"
+							}
+						],
+						"url": {
+							"raw": "{{base_api_url}}/api/tasks/{{task_id}}",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"{{task_id}}"
+							]
+						}
+					},
+					"status": "UNAUTHORIZED",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 08:24:30 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"Token has expired\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Obtener video",
@@ -214,6 +1750,7 @@
 					{
 						"key": "Authorization",
 						"value": "Bearer {{access_token}}",
+						"description": "Token de acceso",
 						"type": "text"
 					}
 				],
@@ -228,35 +1765,62 @@
 						"{{task_id}}.{{new_format}}"
 					]
 				},
-				"description": "**Descripción**: Al utilizar este servicio, los usuarios pueden descargar el archivo multimedia convertido. Deben proporcionar el ID de la tarea de conversión y el formato de destino. El servicio permite la descarga del archivo convertido. Se requiere un token de autenticación para utilizar este servicio.\n\n**Resultado Esperado**: Descarga del archivo de video convertido."
+				"description": "**Descripción**: Al utilizar este servicio, los usuarios pueden obtener el archivo multimedia convertido. Deben proporcionar el ID de la tarea de conversión y el formato de destino. Se requiere un token de autenticación para utilizar este servicio.\n\n**Resultado Esperado**: Obtención del archivo de video convertido."
 			},
-			"response": []
-		},
-		{
-			"name": "Eliminar Tarea",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{base_api_url}}/api/tasks/{{task_id}}",
-					"host": [
-						"{{base_api_url}}"
+			"response": [
+				{
+					"name": "Error: Token expired",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"description": "Token de acceso",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_api_url}}/api/video/{{task_id}}.{{new_format}}",
+							"host": [
+								"{{base_api_url}}"
+							],
+							"path": [
+								"api",
+								"video",
+								"{{task_id}}.{{new_format}}"
+							]
+						}
+					},
+					"status": "UNAUTHORIZED",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.25.2"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 22 Oct 2023 08:24:45 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
 					],
-					"path": [
-						"api",
-						"tasks",
-						"{{task_id}}"
-					]
-				},
-				"description": "**Descripción**: Elimina una tarea por su ID, siempre y cuando el estado de la tarea sea \"PROCESSED\".\n\n- Elimina una tarea por su id (ejemplo: 2).\n- Elimina si y solo si el status de la tarea es **\"PROCESSED\".**\n- Si no encuentra la tarea, código de respuesta es 404.\n- Si es estatus de la tarea es diferente al requerido, código de respuesta es 422.\n- Si la tarea ha sido eliminada exitosamente, código de respuesta es 204.\n- Requiere token de autenticación.\n    \n\n**Resultado Esperado**: Tarea eliminada si cumple con las condiciones"
-			},
-			"response": []
+					"cookie": [],
+					"body": "{\n    \"msg\": \"Token has expired\"\n}"
+				}
+			]
 		}
 	],
 	"event": [
