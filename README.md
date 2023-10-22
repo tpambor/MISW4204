@@ -16,7 +16,7 @@ A continuación, encontrarás información sobre la aplicación, cómo configura
 | Camilo Ramírez Restrepo​ | c.ramirezr2@uniandes.edu.co |
 | Laura Daniela Molina Villar​ | ld.molina11@uniandes.edu.co |
 | Leidy Viviana Osorio Jiménez​ | l.osorioj@uniandes.edu.co |
-| Tim Ulf Pambor | l.osorioj@uniandes.edu.co |
+| Tim Ulf Pambor | t.pambor@uniandes.edu.co |
 | Shadith Perez Rivera | s.perezr@uniandes.edu.co |
 
 ## Sustentación
