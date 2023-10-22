@@ -51,7 +51,7 @@ Aplicación web que ofrece gratuitamente a usuarios de internet, puedan subir ab
 - Vista de Despliegue
 
 Consulta la documentación completa de la arquitectura. 
-- [Documento](https://github.com/tpambor/MISW4204/blob/main/Docs/Arquitectura.pdf)
+- [Documento](https://github.com/tpambor/MISW4204/blob/main/Docs/Proyecto%201%20entrega%201%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
 
 ## API REST
 - /api/crear-cuenta (POST): Crea una cuenta de usuario.
