@@ -65,3 +65,6 @@ Consulta la documentación completa de la API aqui:
 ## Escenario y Pruebas de Estrés API REST y Batch 
 El objetivo de este plan es evaluar la capacidad de la aplicación de convertidor de archivos y su infraestructura de soporte en un entorno tradicional para determinar sus máximos aceptables. El objetivo es comprender cómo la aplicación responde a diferentes niveles de carga de usuarios y cuál es su capacidad máxima. 
 
+Documento Escenario y Pruebas de Estrés API REST y Batch 
+
+Video Pruebasde Estrés
