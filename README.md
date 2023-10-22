@@ -10,7 +10,7 @@ A continuación, encontrarás información sobre la aplicación, cómo configura
 5. [Arquitectura](#arquitectura)
 6. [API REST](#api-rest)
 
-## Colaboladores
+## Integrantes
 | Nombre y apellidos | Correo|
 | --- | --- |
 | Camilo Ramírez Restrepo​ | c.ramirezr2@uniandes.edu.co |
@@ -18,6 +18,9 @@ A continuación, encontrarás información sobre la aplicación, cómo configura
 | Leidy Viviana Osorio Jiménez​ | l.osorioj@uniandes.edu.co |
 | Tim Ulf Pambor | l.osorioj@uniandes.edu.co |
 | Shadith Perez Rivera | s.perezr@uniandes.edu.co |
+
+## Sustentación
+[Video Entrega 1](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/EVyhEdkcFvdHuasJB6z8HK8B3smzySw0qnnNRPWPndmBHg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0RpcmVjdCJ9fQ&e=8ZVKQh)
 
 ## Descripción
 Aplicación web que ofrece gratuitamente a usuarios de internet, puedan subir abiertamente diferentes formatos multimedia de archivos y cambiarles su formato o realizar procesos de compresión. El modelo general de funcionamiento de la aplicación se basa en crear una cuenta en el portal web y acceder al administrador de archivos. Una vez la cuenta ha sido creada, el usuario puede subir archivos y solicitar el cambio de formato de estos para descargarlos. La aplicación web le permite a un usuario convertir archivos multimedia en línea de un formato a otro, seleccionando únicamente el formato destino. La aplicación se enfoca en la conversión de formatos de video, incluyendo MP4, WEBM, AVI, MPEG y WMV.
