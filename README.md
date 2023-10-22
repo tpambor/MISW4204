@@ -3,7 +3,7 @@ A continuación, encontrarás información sobre la aplicación, cómo configura
 
 ## Tabla de Contenidos
 
-1. [Colaboladores](#colaboladores)
+1. [Integrantes](#integrantes)
 2. [Descripción](#descripción)
 3. [Tecnologías Utilizadas](#tecnologías-utilizadas)
 4. [Requisitos de Instalación](#requisitos-de-instalación)
