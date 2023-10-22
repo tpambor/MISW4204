@@ -27,16 +27,22 @@ Aplicación web que ofrece gratuitamente a usuarios de internet, puedan subir ab
 
 ## Tecnologías Utilizadas
 
-- Python
+- Docker + Docker Compose
+- Python3
 - Flask
-- Docker
+- Celery
+- Redis
+- PostgreSQL
+- SQLAlchemy
+- nginx
+- gunicorn
 
 ## Requisitos de Instalación
 
-1. Clona este repositorio.
-2. Instala las dependencias utilizando el gestor de paquetes de Python:
-   ```bash
-   pip install -r requirements.txt
+1. Instalar Docker y Docker Compose
+2. Clona este repositorio.
+3. Ejecuta `docker compose build` para crear los diferentes contenedores
+4. Ejecuta `docker compose up` para ejecutar la aplicación
 
 ## Arquitectura 
 - Vista de Contexto y dominio​
@@ -44,11 +50,8 @@ Aplicación web que ofrece gratuitamente a usuarios de internet, puedan subir ab
 - Vista Funcional
 - Vista de Despliegue
 
-[Video Presentacion](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/EZXky1x7CAxBsCGKHg3t-jQBG-ErSnNLD5Bermb0M9LMTA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19&e=jD1bpe)
-
 Consulta la documentación completa de la arquitectura. 
-- [Documento](Docs)
-- [Video](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/EQVFU8pj7rtPpH6xZ7xeNDwBo4eb3ASiZOXjZMw0Bhz1rw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19&e=k4icLV)
+- [Documento](https://github.com/tpambor/MISW4204/blob/main/Docs/Arquitectura.pdf)
 
 ## API REST
 - /api/crear-cuenta (POST): Crea una cuenta de usuario.
@@ -58,15 +61,11 @@ Consulta la documentación completa de la arquitectura.
 - /api/info-tarea/{id} (GET): Obtiene información de una tarea de conversión específica.
 - /api/borrar-archivo/{id} (DELETE): Borra el archivo original y el archivo convertido de un usuario
 
-[Postman Collection](https://github.com/tpambor/MISW4204/blob/main/Cloud%20Conversion%20Tool.postman_collection.json)
-
 Consulta la documentación completa de la API aqui: 
 - [Documentacion en Postman](https://documenter.getpostman.com/view/29422849/2s9YRB4CyY) 
-- [Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.docx)
-- [Video](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/EUsm0jWJLKJHigp_zkCJOAwB0MCSva_fnDBUKZSaOIyIiA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19&e=q7VTWj)
+- [Postman Collection](https://github.com/tpambor/MISW4204/blob/main/Cloud%20Conversion%20Tool.postman_collection.json)
 
 ## Escenario y Pruebas de Estrés API REST y Batch 
 El objetivo de este plan es evaluar la capacidad de la aplicación de convertidor de archivos y su infraestructura de soporte en un entorno tradicional para determinar sus máximos aceptables. El objetivo es comprender cómo la aplicación responde a diferentes niveles de carga de usuarios y cuál es su capacidad máxima. 
 
-- [Documento Escenario y Pruebas de Estrés API REST y Batch](Docs)
-- [Video Pruebasde Estrés](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/EUVAVJJbgaNHlVBGZy_jVaEBy4zqGt0Df2BDPBx0hSXO3Q?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0RpcmVjdCJ9fQ&e=yV8giC)
+- [Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
