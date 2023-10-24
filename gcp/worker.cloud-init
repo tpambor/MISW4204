@@ -1,0 +1,49 @@
+#cloud-config
+
+write_files:
+- path: /etc/systemd/system/redis.service
+  permissions: '0644'
+  owner: root
+  content: |
+    [Unit]
+    Description=Start redis in a docker container
+
+    [Service]
+    ExecStart=/usr/bin/docker run --rm --net converter-net --name=redis -p 6379:6379 redis:latest
+    ExecStop=/usr/bin/docker stop redis
+    ExecStopPost=/usr/bin/docker rm redis
+
+- path: /etc/systemd/system/worker.service
+  permissions: '0644'
+  owner: root
+  content: |
+    [Unit]
+    Description=Start worker in a docker container
+
+    [Service]
+    ExecStart=/usr/bin/docker run --rm --net converter-net --name=worker --env-file /etc/worker.env ghcr.io/tpambor/misw4204/converter-worker:latest
+    ExecStop=/usr/bin/docker stop worker
+    ExecStopPost=/usr/bin/docker rm worker
+
+- path: /etc/cloud-start.sh
+  permissions: '0755'
+  owner: root
+  content: |
+    #!/bin/bash
+
+    export DATABASE_URL=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/database-url" -H "Metadata-Flavor: Google")
+    echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=redis://redis:6379/0" | tee /etc/worker.env
+
+    docker network create --driver bridge converter-net || true
+    systemctl daemon-reload
+    systemctl start redis.service
+    systemctl start worker.service
+
+    echo "Setup completed!"
+
+runcmd:
+- /etc/cloud-start.sh
+
+# Optional once-per-boot setup. For example: mounting a PD.
+bootcmd:
+- echo "bootcmd"
