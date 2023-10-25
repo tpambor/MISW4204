@@ -1,6 +1,7 @@
 from enum import IntEnum
 from db import db
 
+
 class TaskStatus(IntEnum):
     UPLOADED = 1
     PROCESSED = 2
@@ -12,4 +13,5 @@ class Task(db.Model):
     fileName = db.Column(db.String, nullable=False)
     oldFormat = db.Column(db.String, nullable=False)
     newFormat = db.Column(db.String, nullable=False)
+    conversionTime = db.Column(db.Numeric(precision=8, scale=4))
     user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)

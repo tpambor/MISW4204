@@ -17,4 +17,5 @@ class Task(db.Base):
     fileName: Mapped[str] = mapped_column(String(), nullable=False)
     oldFormat: Mapped[str] = mapped_column(String(), nullable=False)
     newFormat: Mapped[str] = mapped_column(String(), nullable=False)
-    conversionTime: Mapped[float] = mapped_column(Numeric(precision=8, scale=4))
+    conversionTime: Mapped[float] = mapped_column(Numeric(precision=8, scale=4), nullable=True)
+    user: Mapped[int] = mapped_column(Integer(), nullable=False, index=True)

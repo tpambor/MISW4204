@@ -36,7 +36,7 @@ def convert_video(id_video, old_format, new_format):
 
     with db.session() as session:
         session.execute(
-            update(Task).where(Task.id == id_video).values(status=TaskStatus.PROCESSED)
+            update(Task).where(Task.id == id_video).values(status=TaskStatus.PROCESSED, conversionTime=duration)
         )
         session.commit()
 
