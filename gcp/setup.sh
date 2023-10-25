@@ -2,6 +2,13 @@
 export REGION=us-central
 export ZONE=us-central1-c
 
+#### Enable required services
+
+gcloud services enable compute.googleapis.com
+gcloud services enable sqladmin.googleapis.com 
+
+echo ""
+
 #### Configure File Server
 
 gcloud compute instances create fileserver \
@@ -83,6 +90,17 @@ gcloud -q sql instances patch db1 \
   --authorized-networks=$WORKER_IP/32,$WEB_IP/32
 
 echo ""
+
+#### Configure Firewall
+
+gcloud compute firewall-rules create default-allow-http \
+  --direction=INGRESS \
+  --priority=1000 \
+  --network=default \
+  --action=ALLOW \
+  --rules=tcp:80 \
+  --source-ranges=0.0.0.0/0 \
+  --target-tags=http-server
 
 echo ""
 echo "Infrastructure created!"

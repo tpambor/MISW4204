@@ -54,7 +54,7 @@ EOF
 
 # Configure system
 export DATABASE_URL=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/database-url" -H "Metadata-Flavor: Google")
-echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=redis://redis:6379/0\nVIDEO_DIR=/video" | tee /etc/worker.env
+echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=redis://redis:6379/0\nVIDEO_DIR=/video\nCELERY_EXTRA_OPTS=-c 1" | tee /etc/worker.env
 
 export FILESERVER_IP=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/fileserver-ip" -H "Metadata-Flavor: Google")
 mkdir -p /mnt/video
