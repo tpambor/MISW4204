@@ -6,4 +6,4 @@ RUN pip install -r /monitor/requirements.txt
 
 WORKDIR /monitor
 
-CMD python /monitor/monitor.py
+CMD python -u /monitor/monitor.py
