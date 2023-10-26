@@ -48,7 +48,6 @@ def my_monitor(app):
             is_csv_empty = os.stat(csv_filename).st_size == 0
             fieldnames = ['id_video', 'received', 'started', 'succeeded']
             writer = csv.DictWriter(file, fieldnames=fieldnames)
-            print("ENTRA AQUI", os.path.exists(csv_filename))
             if not is_csv_exists or (is_csv_exists and is_csv_empty):
                 writer.writeheader()
             writer.writerow(data[id_video])
