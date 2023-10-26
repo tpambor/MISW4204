@@ -7,9 +7,6 @@ from sqlalchemy import update
 from models import Task, TaskStatus
 import db
 import datetime
-import json
-
-data = {}
 
 BROKER = os.getenv('BROKER') or "redis://127.0.0.1:6379/0"
 VIDEO_DIR = os.getenv('VIDEO_DIR', '')
@@ -48,24 +45,24 @@ def convert_video(self, id_video, old_format, new_format):
         )
         session.commit()
         
-    return id_video
+    # return id_video
 
-# TODO: ESTA SIGNAL NO FUNCIONA
-@after_task_publish.connect
-def after_task_publish_handler(sender=None, headers=None, body=None, **kwargs):
-    print('after_task_publish for task')
+# # TODO: ESTA SIGNAL NO FUNCIONA
+# @after_task_publish.connect
+# def after_task_publish_handler(sender=None, headers=None, body=None, **kwargs):
+#     print('after_task_publish for task')
 
-@task_received.connect
-def task_received_handler(sender=None, request=None, **kwargs):
-    request_body = request.body
-    request_converted = json.loads(request_body.decode('utf-8'))
-    id_video = request_converted[0][0]
-    print('task_received for task with video id {id}'.format(
-        id=id_video,
-    ))
+# @task_received.connect
+# def task_received_handler(sender=None, request=None, **kwargs):
+#     request_body = request.body
+#     request_converted = json.loads(request_body.decode('utf-8'))
+#     id_video = request_converted[0][0]
+#     print('task_received for task with video id {id}'.format(
+#         id=id_video,
+#     ))
 
-@task_success.connect
-def task_success_handler(sender=None, result=None, **kwargs):
-    print('task_success for task with video id {id}'.format(
-        id=result,
-    ))
+# @task_success.connect
+# def task_success_handler(sender=None, result=None, **kwargs):
+#     print('task_success for task with video id {id}'.format(
+#         id=result,
+#     ))

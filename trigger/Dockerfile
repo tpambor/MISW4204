@@ -6,4 +6,4 @@ RUN pip install -r /trigger/requirements.txt
 
 WORKDIR /trigger
 
-CMD ["python", "/trigger/trigger.py"]
+CMD python /trigger/trigger.py
