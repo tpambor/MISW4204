@@ -27,7 +27,7 @@ def create_and_send_task(index, cycle):
             status=TaskStatus.UPLOADED,
             oldFormat=OLD_FORMAT,
             newFormat=NEW_FORMAT,
-            conversionTime=None,
+            finished=None,
         )
         new_task_id =  None
         with db.session() as session:

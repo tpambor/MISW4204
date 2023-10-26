@@ -54,7 +54,7 @@ services:
     environment:
       - BROKER=redis://redis:6379/0
       - NUM_PARALLEL_TASKS=5
-      - NUM_CYCLES=10
+      - NUM_CYCLES=1
       - VIDEO_DIR=/video
       - OLD_FORMAT=mp4
       - NEW_FORMAT=webm
