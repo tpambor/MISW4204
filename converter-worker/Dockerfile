@@ -13,4 +13,4 @@ RUN pip install -r /app/requirements.txt
 
 WORKDIR /app
 
-CMD exec celery -A tasks worker $CELERY_EXTRA_OPTS
+CMD exec celery -A tasks worker -E $CELERY_EXTRA_OPTS
