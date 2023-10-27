@@ -1,0 +1,11 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1698432179756,1327,HTTP Request convertir archivo,201,CREATED,Prueba 1 1-1,text,true,,292,24801528,1,1,http://34.67.235.140/api/tasks,1326,0,63
+1698432181089,994,HTTP Request convertir archivo,201,CREATED,Prueba 1 1-1,text,true,,292,24801500,1,1,http://34.67.235.140/api/tasks,994,0,0
+1698432182084,992,HTTP Request convertir archivo,201,CREATED,Prueba 1 1-1,text,true,,292,24801492,1,1,http://34.67.235.140/api/tasks,992,0,0
+1698432183077,1015,HTTP Request convertir archivo,201,CREATED,Prueba 1 1-1,text,true,,293,24801500,1,1,http://34.67.235.140/api/tasks,1015,0,0
+1698432184092,916,HTTP Request convertir archivo,201,CREATED,Prueba 1 1-1,text,true,,293,24801516,1,1,http://34.67.235.140/api/tasks,916,0,0
+1698432185009,951,HTTP Request convertir archivo,201,CREATED,Prueba 1 1-1,text,true,,293,24801508,1,1,http://34.67.235.140/api/tasks,951,0,0
+1698432185961,1124,HTTP Request convertir archivo,201,CREATED,Prueba 1 1-1,text,true,,293,24801516,1,1,http://34.67.235.140/api/tasks,1124,0,0
+1698432187086,1244,HTTP Request convertir archivo,201,CREATED,Prueba 1 1-1,text,true,,293,24801500,1,1,http://34.67.235.140/api/tasks,1244,0,0
+1698432188331,1220,HTTP Request convertir archivo,201,CREATED,Prueba 1 1-1,text,true,,293,24801524,1,1,http://34.67.235.140/api/tasks,1220,0,0
+1698432189552,972,HTTP Request convertir archivo,201,CREATED,Prueba 1 1-1,text,true,,293,24801520,1,1,http://34.67.235.140/api/tasks,972,0,0
