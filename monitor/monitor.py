@@ -3,11 +3,18 @@ import csv
 import ast
 import datetime
 import os
+import numpy as np
+import subprocess
 
-csv_filename = 'data.csv'
+
+csv_filename = 'output.csv'
 data = {}
+time_per_request = []
+time_request_avg = 0
 
 BROKER = os.getenv('BROKER')
+NUM_PARALLEL_TASKS = os.getenv('NUM_PARALLEL_TASKS')
+NUM_CYCLES = os.getenv('NUM_CYCLES')
 
 def my_monitor(app):
     state = app.events.State()
@@ -59,22 +66,45 @@ def my_monitor(app):
         time_request = (succedded - sent).total_seconds() * 1000
         
         data[id_video]['time_request'] = time_request
+
+        time_per_request.append(time_request)
         
         print(data[id_video])
 
-        
-
         with open(csv_filename, mode='a', newline='') as file:
-            # Comprueba si el archivo CSV ya existe
             is_csv_exists = os.path.isfile(csv_filename)
-
-            # Comprueba si el archivo CSV está vacío
             is_csv_empty = os.stat(csv_filename).st_size == 0
-            fieldnames = ['id_video', 'sent', 'received', 'started', 'succeeded', 'time_request (ms)']
+
+            fieldnames = ['id_video', 'sent', 'received', 'started', 'succeeded', 'time_request']
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             if not is_csv_exists or (is_csv_exists and is_csv_empty):
                 writer.writeheader()
             writer.writerow(data[id_video])
+
+        if len(time_per_request) == int(NUM_PARALLEL_TASKS)*int(NUM_CYCLES):
+            total_requests = len(time_per_request)
+            total_time_ms = sum(time_per_request)
+            total_time_min = total_time_ms / (1000 * 60)
+            sorted_times = sorted(time_per_request)
+            percentil_95 = np.percentile(sorted_times, 95)
+            # print('RESULTADOS: %i %i %i %i', total_requests, total_time_ms, total_time_min, sorted_times)
+
+            print("-----------------------")
+            print('Reporte\n')
+            print('Total peticiones: %d' % total_requests)
+            print('Peticiones concurrentes: %s' % NUM_PARALLEL_TASKS)
+            print('Tiempo de respuesta por petición promedio (ms): %.2f' % (
+                total_time_ms/total_requests
+            ))
+            print('Tiempo de respuesta (ms) P95: %.2f' % (
+                percentil_95
+            ))
+            print('Peticiones por minuto: %.2f' % (
+                total_requests/total_time_min
+            ))
+            print("-----------------------")
+
+            subprocess.run("gnuplot plot.p", shell=True)
 
     with app.connection() as connection:
         recv = app.events.Receiver(connection, handlers={

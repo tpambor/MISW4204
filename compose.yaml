@@ -53,7 +53,7 @@ services:
     build: trigger
     environment:
       - BROKER=redis://redis:6379/0
-      - NUM_PARALLEL_TASKS=100
+      - NUM_PARALLEL_TASKS=5
       - NUM_CYCLES=1
       - VIDEO_DIR=/video
       - OLD_FORMAT=mp4
@@ -69,6 +69,10 @@ services:
       - video-volume:/video
   monitor:
     build: monitor
+    environment:
+      - BROKER=redis://redis:6379/0
+      - NUM_PARALLEL_TASKS=5
+      - NUM_CYCLES=1
     depends_on:
       redis:
         condition: service_healthy
