@@ -83,28 +83,30 @@ def my_monitor(app):
 
         if len(time_per_request) == int(NUM_PARALLEL_TASKS)*int(NUM_CYCLES):
             total_requests = len(time_per_request)
-            total_time_ms = sum(time_per_request)
+            acum_time_ms = sum(time_per_request)
+            total_time_ms = time_per_request[len(time_per_request) - 1]
             total_time_min = total_time_ms / (1000 * 60)
             sorted_times = sorted(time_per_request)
             percentil_95 = np.percentile(sorted_times, 95)
-            # print('RESULTADOS: %i %i %i %i', total_requests, total_time_ms, total_time_min, sorted_times)
+            # print('RESULTADOS: %i %i %i %i', total_requests, acum_time_ms, total_time_min, sorted_times)
 
             print("-----------------------")
             print('Reporte\n')
             print('Total peticiones: %d' % total_requests)
             print('Peticiones concurrentes: %s' % NUM_PARALLEL_TASKS)
             print('Tiempo de respuesta por petición promedio (ms): %.2f' % (
-                total_time_ms/total_requests
+                acum_time_ms/total_requests
             ))
             print('Tiempo de respuesta (ms) P95: %.2f' % (
                 percentil_95
             ))
-            print('Peticiones por minuto: %.2f' % (
+            print('Peticiones por minuto (Throughput): %.2f' % (
                 total_requests/total_time_min
             ))
             print("-----------------------")
 
             subprocess.run("gnuplot plot.p", shell=True)
+            
 
     with app.connection() as connection:
         recv = app.events.Receiver(connection, handlers={
