@@ -15,6 +15,8 @@ celery_app = Celery(__name__, broker=BROKER)
 
 celery_app.conf.broker_connection_retry_on_startup = True
 
+celery_app.conf.task_send_sent_event = True
+
 @worker_process_init.connect
 def setup_worker(**kwargs):
     """

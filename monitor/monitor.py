@@ -7,6 +7,9 @@ import os
 csv_filename = 'data.csv'
 data = {}
 
+
+BROKER = os.getenv('BROKER')
+
 def my_monitor(app):
     state = app.events.State()
 
@@ -15,20 +18,36 @@ def my_monitor(app):
         task = state.tasks.get(event['uuid'])
         return ast.literal_eval(task.info()['args'])[0]
     
+    def task_sent_handler(event):
+        id_video =  get_id_video(event)
+        print('TASK SENT FOR VIDEO: %s' % (
+           id_video,))
+        
+        if id_video in data:
+            data[id_video]['sent'] = datetime.datetime.utcnow().isoformat()
+        else:
+            data[id_video] = {'id_video': id_video, 'sent': datetime.datetime.utcnow().isoformat(), 'received': None, 'started': None, 'succeeded': None}
+
     def task_received_handler(event):
         id_video =  get_id_video(event)
         print('TASK RECEIVED FOR VIDEO: %s' % (
            id_video,))
         
-        data[id_video] = {'id_video': id_video, 'received': datetime.datetime.utcnow().isoformat(), 'started': None, 'succeeded': None}
+        if id_video in data:
+            data[id_video]['received'] = datetime.datetime.utcnow().isoformat()
+        else:
+            data[id_video] = {'id_video': id_video, 'sent': None, 'received': datetime.datetime.utcnow().isoformat(), 'started': None, 'succeeded': None}
 
     def task_started_handler(event):
         id_video = get_id_video(event)
         print('TASK STARTED FOR VIDEO: %s' % (
            id_video,))
         
-        data[id_video]['started'] = datetime.datetime.utcnow().isoformat()
-
+        if id_video in data:
+            data[id_video]['started'] = datetime.datetime.utcnow().isoformat()
+        else:
+            data[id_video] = {'id_video': id_video, 'sent': None, 'received': None, 'started': datetime.datetime.utcnow().isoformat(), 'succeeded': None}
+        
     def task_succeeded_handler(event):
         id_video =  get_id_video(event)
         print('TASK SUCCEEDED FOR VIDEO: %s' % (
@@ -46,7 +65,7 @@ def my_monitor(app):
 
             # Comprueba si el archivo CSV está vacío
             is_csv_empty = os.stat(csv_filename).st_size == 0
-            fieldnames = ['id_video', 'received', 'started', 'succeeded']
+            fieldnames = ['id_video', 'sent', 'received', 'started', 'succeeded']
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             if not is_csv_exists or (is_csv_exists and is_csv_empty):
                 writer.writeheader()
@@ -54,6 +73,7 @@ def my_monitor(app):
 
     with app.connection() as connection:
         recv = app.events.Receiver(connection, handlers={
+                'task-sent': task_sent_handler,                
                 'task-received': task_received_handler,
                 'task-started': task_started_handler,
                 'task-succeeded': task_succeeded_handler,
@@ -61,7 +81,7 @@ def my_monitor(app):
         recv.capture(limit=None, timeout=None, wakeup=True)
 
 
-app = Celery(broker='redis://redis:6379/0')
+app = Celery(broker=BROKER)
 
 
 my_monitor(app)

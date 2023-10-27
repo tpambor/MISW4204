@@ -55,7 +55,7 @@ echo ""
 
 gcloud compute instances create worker \
   --zone $ZONE \
-  --machine-type=e2-highcpu-2 \
+  --machine-type=t2d-standard-4 \
   --image-family debian-12 \
   --image-project debian-cloud \
   --metadata=database-url=$DATABASE_URL,fileserver-ip=$FILESERVER_IP_PRIVATE \
@@ -97,19 +97,17 @@ export NUM_PARALLEL_TASKS=100
 export NUM_CYCLES=1
 export OLD_FORMAT=mp4
 export NEW_FORMAT=webm
-export DEMO_VIDEO=demo.mp4
+export DEMO_VIDEO=salento-720p.mp4
 
 gcloud compute instances create monitoring-worker \
  --zone $ZONE \
  --machine-type=e2-highcpu-2 \
  --image-family debian-12 \
  --image-project debian-cloud \
+ --tags ssh-server \
  --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,fileserver-ip=$FILESERVER_IP_PRIVATE,num-parallel-taks=$NUM_PARALLEL_TASKS,num-cycles=$NUM_CYCLES,old-format=$OLD_FORMAT,new-format=$NEW_FORMAT,demo-video=$DEMO_VIDEO  \
  --metadata-from-file startup-script=monitoring.startup-script
 
-gcloud compute scp --recurse ../monitor monitoring-worker:/tmp/monitor --zone $ZONE
-
-gcloud compute scp --recurse ../trigger monitoring-worker:/tmp/trigger --zone $ZONE
 
 #### Configure Firewall
 
@@ -126,3 +124,9 @@ echo ""
 echo "Infrastructure created!"
 echo ""
 echo "API: http://$WEB_IP/"
+
+### Correr esto en el shell cuando todo lo demás haya terminado
+
+# gcloud compute scp --recurse ../monitor monitoring-worker:/tmp/monitor --zone $ZONE
+
+# gcloud compute scp --recurse ../trigger monitoring-worker:/tmp/trigger --zone $ZONE
