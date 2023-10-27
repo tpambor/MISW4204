@@ -15,6 +15,8 @@ celery_app = Celery(__name__, broker=BROKER)
 
 celery_app.conf.broker_connection_retry_on_startup = True
 
+celery_app.conf.task_send_sent_event = True
+
 @worker_process_init.connect
 def setup_worker(**kwargs):
     """
@@ -41,7 +43,7 @@ def convert_video(self, id_video, old_format, new_format):
 
     with db.session() as session:
         session.execute(
-            update(Task).where(Task.id == id_video).values(status=TaskStatus.PROCESSED, finished=datetime.datetime.utcnow())
+            update(Task).where(Task.id == id_video).values(status=TaskStatus.PROCESSED)
         )
         session.commit()
         

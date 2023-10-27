@@ -22,6 +22,9 @@ apt update
 
 apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+# Install htop
+apt-get install htop
+
 # Create service for redis
 cat <<EOF > /etc/systemd/system/redis.service
 [Unit]

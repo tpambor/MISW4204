@@ -47,8 +47,6 @@ class TaskSchema(ma.Schema):
 class TaskExtendedSchema(TaskSchema):
     urlOriginal = ma.fields.String()
     urlConverted = ma.fields.String()
-    finished = ma.fields.DateTime()
-
 
 @blp.route("/api/tasks")
 class VistaTasks(MethodView):
@@ -82,7 +80,6 @@ class VistaTasks(MethodView):
             status=TaskStatus.UPLOADED,
             oldFormat=old_format,
             newFormat=new_format,
-            finished=None,
         )
         db.session.add(new_task)
         db.session.commit()

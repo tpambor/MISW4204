@@ -17,4 +17,3 @@ class Task(db.Base):
     fileName: Mapped[str] = mapped_column(String(), nullable=False)
     oldFormat: Mapped[str] = mapped_column(String(), nullable=False)
     newFormat: Mapped[str] = mapped_column(String(), nullable=False)
-    finished: Mapped[datetime.datetime] = mapped_column(DateTime())

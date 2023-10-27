@@ -14,9 +14,9 @@ OLD_FORMAT = os.getenv('OLD_FORMAT')
 NEW_FORMAT = os.getenv('NEW_FORMAT')
 DEMO_VIDEO = os.getenv('DEMO_VIDEO')
 
-
 celery_app = Celery(__name__, broker=os.getenv('BROKER', 'redis://127.0.0.1:6379/0'))
 
+celery_app.conf.task_send_sent_event = True
 
 def create_and_send_task(index, cycle):
     try:
@@ -27,7 +27,6 @@ def create_and_send_task(index, cycle):
             status=TaskStatus.UPLOADED,
             oldFormat=OLD_FORMAT,
             newFormat=NEW_FORMAT,
-            finished=None,
         )
         new_task_id =  None
         with db.session() as session:
@@ -45,7 +44,7 @@ def create_and_send_task(index, cycle):
         print(f'Error al procesar la tarea: {str(e)}')
         
 def publish_tasks():
-    with ThreadPoolExecutor(max_workers=NUM_PARALLEL_TASKS) as executor:
+    with ThreadPoolExecutor() as executor:
         for cycle in range(NUM_CYCLES): 
             futures = {executor.submit(create_and_send_task, index, cycle): index for index in range(1, NUM_PARALLEL_TASKS + 1)}
             for future in as_completed(futures):

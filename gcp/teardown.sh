@@ -9,5 +9,6 @@ gcloud -q compute instances delete worker --zone=$ZONE &
 gcloud -q compute instances delete web --zone=$ZONE &
 gcloud -q sql instances delete db1 &
 gcloud -q compute instances delete fileserver --zone=$ZONE &
+gcloud -q compute instances delete monitoring-worker --zone=$ZONE &
 
 wait < <(jobs -p)

@@ -13,5 +13,4 @@ class Task(db.Model):
     fileName = db.Column(db.String, nullable=False)
     oldFormat = db.Column(db.String, nullable=False)
     newFormat = db.Column(db.String, nullable=False)
-    finished = db.Column(db.DateTime)
     user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, index=True)
