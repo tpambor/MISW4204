@@ -109,6 +109,16 @@ gcloud compute instances create monitoring-worker \
  --metadata-from-file startup-script=monitoring.startup-script
 
 
+export MONITOR_IP=$(gcloud compute instances describe monitoring-worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
+
+echo ""
+
+gcloud -q sql instances patch db1 \
+  --authorized-networks=$WORKER_IP/32,$WEB_IP/32,$MONITOR_IP/32
+
+echo ""
+
+
 #### Configure Firewall
 
 gcloud compute firewall-rules create default-allow-http \
@@ -127,6 +137,6 @@ echo "API: http://$WEB_IP/"
 
 ### Correr esto en el shell cuando todo lo demás haya terminado
 
+# export ZONE=us-central1-c
 # gcloud compute scp --recurse ../monitor monitoring-worker:/tmp/monitor --zone $ZONE
-
 # gcloud compute scp --recurse ../trigger monitoring-worker:/tmp/trigger --zone $ZONE
