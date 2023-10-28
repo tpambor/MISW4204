@@ -93,7 +93,7 @@ echo ""
 
 #### Configure Trigger / Monitoring
 
-export NUM_PARALLEL_TASKS=5
+export NUM_PARALLEL_TASKS=20
 export NUM_CYCLES=2
 export OLD_FORMAT=mp4
 export NEW_FORMAT=webm
