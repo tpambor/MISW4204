@@ -43,8 +43,8 @@ mount -t nfs $FILESERVER_IP:/srv/video /mnt/video
 # sudo su
 # cd /tmp/monitor
 # docker build -t monitoring-image .
-# docker run -d --env-file /etc/api.env --name monitoring-container monitoring-image
-# docker logs -f monitoring-container
+docker run -d --env-file /etc/api.env --name monitoring-container monitoring-image
+docker logs -f monitoring-container
 
 
 # sudo su
