@@ -1,7 +1,6 @@
 from enum import IntEnum
 from db import db
 
-
 class TaskStatus(IntEnum):
     UPLOADED = 1
     PROCESSED = 2
