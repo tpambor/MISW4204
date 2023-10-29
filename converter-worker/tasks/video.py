@@ -12,9 +12,7 @@ BROKER = os.getenv('BROKER') or "redis://127.0.0.1:6379/0"
 VIDEO_DIR = os.getenv('VIDEO_DIR', '')
 
 celery_app = Celery(__name__, broker=BROKER) 
-
 celery_app.conf.broker_connection_retry_on_startup = True
-
 celery_app.conf.task_send_sent_event = True
 
 @worker_process_init.connect
