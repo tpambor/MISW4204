@@ -1,0 +1,34 @@
+{
+  "HTTP Request convertir archivo" : {
+    "transaction" : "HTTP Request convertir archivo",
+    "sampleCount" : 200,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 10521.784999999996,
+    "medianResTime" : 10631.0,
+    "minResTime" : 2571.0,
+    "maxResTime" : 15935.0,
+    "pct1ResTime" : 11663.7,
+    "pct2ResTime" : 12163.699999999999,
+    "pct3ResTime" : 15696.500000000007,
+    "throughput" : 1.7905423552794142,
+    "receivedKBytesPerSec" : 0.5140814965353006,
+    "sentKBytesPerSec" : 43367.33375094004
+  },
+  "Total" : {
+    "transaction" : "Total",
+    "sampleCount" : 200,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 10521.784999999996,
+    "medianResTime" : 10631.0,
+    "minResTime" : 2571.0,
+    "maxResTime" : 15935.0,
+    "pct1ResTime" : 11663.7,
+    "pct2ResTime" : 12163.699999999999,
+    "pct3ResTime" : 15696.500000000007,
+    "throughput" : 1.7905423552794142,
+    "receivedKBytesPerSec" : 0.5140814965353006,
+    "sentKBytesPerSec" : 43367.33375094004
+  }
+}

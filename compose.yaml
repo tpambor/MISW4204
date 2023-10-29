@@ -49,5 +49,32 @@ services:
       - "8080:80"
     depends_on:
       - api
+  trigger:
+    build: trigger
+    environment:
+      - BROKER=redis://redis:6379/0
+      - NUM_PARALLEL_TASKS=5
+      - NUM_CYCLES=1
+      - VIDEO_DIR=/video
+      - OLD_FORMAT=mp4
+      - NEW_FORMAT=webm
+      - DEMO_VIDEO=demo.mp4
+      - DATABASE_URL=postgresql://postgres:postgres@db/converter
+    depends_on:
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    volumes:
+      - video-volume:/video
+  monitor:
+    build: monitor
+    environment:
+      - BROKER=redis://redis:6379/0
+      - NUM_PARALLEL_TASKS=5
+      - NUM_CYCLES=1
+    depends_on:
+      redis:
+        condition: service_healthy
 volumes:
   video-volume:
