@@ -69,3 +69,11 @@ Consulta la documentación completa de la API aqui:
 El objetivo de este plan es evaluar la capacidad de la aplicación de convertidor de archivos y su infraestructura de soporte en un entorno tradicional para determinar sus máximos aceptables. El objetivo es comprender cómo la aplicación responde a diferentes niveles de carga de usuarios y cuál es su capacidad máxima. 
 
 - [Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
+
+## Configuración Escenario 1 JMeter
+- [Configuración](https://github.com/tpambor/MISW4204/blob/main/Docs/Experimento%201%20-%20Configuraci%C3%B3n.pdf)
+- [Video](https://uniandes-my.sharepoint.com/personal/ld_molina11_uniandes_edu_co/_layouts/15/stream.aspx?id=%2Fpersonal%2Fld%5Fmolina11%5Funiandes%5Fedu%5Fco%2FDocuments%2FDesarrollo%20de%20software%20en%20la%20nube%2FSemana%203%2FVideo%2F2%2E%20Experimento%201%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview)
+
+## Configuración Escenario 2 Script GCP
+- [Configuración](https://github.com/tpambor/MISW4204/blob/main/Docs/Experimento%202%20-%20Configuraci%C3%B3n.pdf)
+- [Video](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/ERowgNb9SNxNhRiheiM35FgB8seEdbRzYU2Gky1t6o4FHQ?e=CIxKvy&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19)
