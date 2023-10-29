@@ -20,6 +20,8 @@ A continuación, encontrarás información sobre la aplicación, cómo configura
 | Shadith Perez Rivera | s.perezr@uniandes.edu.co |
 
 ## Sustentación
+[Video Entrega 2](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/ESXecRTbUxpKisAP5cWweW4B4SUSKG880KrYFCgVAyrz6w?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0RpcmVjdCJ9fQ&e=3UmHj0)
+
 [Video Entrega 1](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/EVyhEdkcFvdHuasJB6z8HK8B3smzySw0qnnNRPWPndmBHg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0RpcmVjdCJ9fQ&e=8ZVKQh)
 
 ## Descripción
