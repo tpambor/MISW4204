@@ -1,7 +1,7 @@
 import datetime
 from enum import IntEnum
 import db
-from sqlalchemy import String, DateTime, Integer, Numeric
+from sqlalchemy import String, DateTime, Integer
 from sqlalchemy.orm import Mapped, mapped_column
 
 class TaskStatus(IntEnum):

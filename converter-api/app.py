@@ -40,6 +40,7 @@ def create_app():
 
     app.extensions["celery"] = Celery(__name__, broker=os.getenv('BROKER', 'redis://127.0.0.1:6379/0'))
     app.extensions["celery"].conf.task_send_sent_event = True
+
     api = CloudConversionToolApi(app)
     api.register_blueprint(BlueprintTasks)
     api.register_blueprint(BlueprintAuth)
