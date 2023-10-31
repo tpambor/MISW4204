@@ -55,7 +55,8 @@ EOF
 # Configure system
 export DATABASE_URL=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/database-url" -H "Metadata-Flavor: Google")
 export BROKER=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/broker" -H "Metadata-Flavor: Google")
-echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=$BROKER\nVIDEO_DIR=/video" | tee /etc/api.env
+export BUCKET=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/bucket" -H "Metadata-Flavor: Google")
+echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=$BROKER\nVIDEO_DIR=/video\nBUCKET=$BUCKET" | tee /etc/api.env
 
 export FILESERVER_IP=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/fileserver-ip" -H "Metadata-Flavor: Google")
 mkdir -p /mnt/video

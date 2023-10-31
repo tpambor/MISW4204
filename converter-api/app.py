@@ -16,6 +16,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///app.sqlite')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['VIDEO_DIR'] = os.getenv('VIDEO_DIR', '')
+    app.config['GCP_BUCKET'] = os.getenv('BUCKET', '')
     app.config['OPENAPI_VERSION'] = '3.1.0'
     app.config['OPENAPI_URL_PREFIX'] = '/'
     app.config['OPENAPI_SWAGGER_UI_PATH'] = '/swagger-ui'

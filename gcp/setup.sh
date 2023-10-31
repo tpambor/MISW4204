@@ -73,13 +73,16 @@ echo ""
 
 #### Configure API REST / Web
 
+export BUCKET=misw4204-equipo1
+
 gcloud compute instances create web \
   --zone $ZONE \
   --machine-type=e2-highcpu-2 \
   --image-family debian-12 \
   --image-project debian-cloud \
   --tags http-server \
-  --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,fileserver-ip=$FILESERVER_IP_PRIVATE \
+  --scopes=storage-rw \
+  --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,fileserver-ip=$FILESERVER_IP_PRIVATE,bucket=$BUCKET \
   --metadata-from-file startup-script=web.startup-script
 
 export WEB_IP=$(gcloud compute instances describe web --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
