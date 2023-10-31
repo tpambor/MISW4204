@@ -85,13 +85,13 @@ class VistaTasks(MethodView):
         db.session.add(new_task)
         db.session.commit()
 
-        video_path = os.path.join(current_app.config['VIDEO_DIR'], f'{new_task.id}.{old_format}')
-        files['fileName'].save(video_path)
-
         storage_client = storage.Client()
         bucket = storage_client.bucket(current_app.config['GCP_BUCKET'])
         blob = bucket.blob(f'{new_task.id}.{old_format}')
         blob.upload_from_file(files['fileName'].stream)
+
+        video_path = os.path.join(current_app.config['VIDEO_DIR'], f'{new_task.id}.{old_format}')
+        files['fileName'].save(video_path)
 
         celery = current_app.extensions["celery"]
         celery.send_task("convert_video", (
