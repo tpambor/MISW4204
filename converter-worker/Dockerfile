@@ -11,6 +11,8 @@ COPY . /app
 
 RUN pip install -r /app/requirements.txt
 
+RUN mkdir /video
+
 WORKDIR /app
 
 CMD exec celery -A tasks worker -E $CELERY_EXTRA_OPTS

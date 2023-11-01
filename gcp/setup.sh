@@ -51,6 +51,7 @@ gcloud compute instances create worker \
   --machine-type=t2d-standard-4 \
   --image-family debian-12 \
   --image-project debian-cloud \
+  --scopes=storage-rw,monitoring-write \
   --metadata=database-url=$DATABASE_URL,bucket=$BUCKET \
   --metadata-from-file startup-script=worker.startup-script
 
@@ -72,7 +73,7 @@ gcloud compute instances create web \
   --image-family debian-12 \
   --image-project debian-cloud \
   --tags http-server \
-  --scopes=storage-rw \
+  --scopes=storage-rw,monitoring-write \
   --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,bucket=$BUCKET \
   --metadata-from-file startup-script=web.startup-script
 
