@@ -9,17 +9,45 @@ export PROJECT_ID=$(gcloud config get-value project)
 
 gcloud services enable compute.googleapis.com
 gcloud services enable sqladmin.googleapis.com 
+gcloud services enable monitoring.googleapis.com
+gcloud services enable iamcredentials.googleapis.com
+
+echo ""
+
+#### Create service account
+export SERVICE_ACCOUNT="converter@$PROJECT_ID.iam.gserviceaccount.com"
+
+gcloud iam service-accounts create converter \
+  --display-name="Converter" \
+  --description="Service account for converter"
+
+echo ""
+
+# Assign role to create/view/delete objects in Cloud Storage
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:$SERVICE_ACCOUNT" \
+  --role="roles/storage.objectAdmin"
+
+echo ""
+
+# Assign role to create links to download from Cloud Storage
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:$SERVICE_ACCOUNT" \
+  --role="roles/iam.serviceAccountTokenCreator"
+
+echo ""
+
+# Assign role for Cloud Monitoring
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:$SERVICE_ACCOUNT" \
+  --role="roles/monitoring.metricWriter"
 
 echo ""
 
 #### Configure Cloud Storage
-
-#gcloud iam service-accounts create converter --display-name="Service account for Converter"
-# Token...
-# Object Admin...
-export SERVICE_ACCOUNT="converter@$PROJECT_ID.iam.gserviceaccount.com"
-
-export BUCKET=misw4204-equipo1
+# Bucket name has to be globally unique, therefore add suffix
+BUCKET_SUFFIX=$(tr -dc a-z </dev/urandom | head -c 4 ; echo '')
+export BUCKET=misw4204-$BUCKET_SUFFIX
 
 gcloud storage buckets create gs://$BUCKET \
   --location=$BUCKET_LOCATION \
