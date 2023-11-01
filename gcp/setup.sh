@@ -1,6 +1,7 @@
 #!/bin/bash
 export REGION=us-central
 export ZONE=us-central1-c
+export BUCKET_LOCATION=us-central1
 
 #### Enable required services
 
@@ -12,6 +13,11 @@ echo ""
 #### Configure Cloud Storage
 
 export BUCKET=misw4204-equipo1
+
+gcloud storage buckets create gs://$BUCKET \
+  --location=$BUCKET_LOCATION \
+  --uniform-bucket-level-access \
+  --public-access-prevention
 
 echo ""
 

@@ -42,8 +42,11 @@ def convert_video(id_video, old_format, new_format):
     result = subprocess.run(['ffmpeg', '-y', '-nostats', '-i', path_old, '-b:v', '2M', path_new], capture_output=True, check=True)
     duration = time.monotonic() - tstart
 
-    blob = bucket.blob(f'{new_task.id}.{new_format}')
+    blob = bucket.blob(f'{id_video}.{new_format}')
     blob.upload_from_filename(path_new)
+
+    os.remove(path_old)
+    os.remove(path_new)
 
     with db.session() as session:
         session.execute(
