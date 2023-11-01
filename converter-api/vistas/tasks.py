@@ -90,9 +90,6 @@ class VistaTasks(MethodView):
         blob = bucket.blob(f'{new_task.id}.{old_format}')
         blob.upload_from_file(files['fileName'].stream)
 
-        video_path = os.path.join(current_app.config['VIDEO_DIR'], f'{new_task.id}.{old_format}')
-        files['fileName'].save(video_path)
-
         celery = current_app.extensions["celery"]
         celery.send_task("convert_video", (
             new_task.id,

@@ -9,16 +9,9 @@ gcloud services enable sqladmin.googleapis.com
 
 echo ""
 
-#### Configure File Server
+#### Configure Cloud Storage
 
-gcloud compute instances create fileserver \
-  --zone $ZONE \
-  --machine-type=e2-micro \
-  --image-family debian-12 \
-  --image-project debian-cloud \
-  --metadata-from-file startup-script=fileserver.startup-script
-
-export FILESERVER_IP_PRIVATE=$(gcloud compute instances describe fileserver --zone $ZONE --format json | jq -r '.networkInterfaces[0].networkIP')
+export BUCKET=misw4204-equipo1
 
 echo ""
 
@@ -58,7 +51,7 @@ gcloud compute instances create worker \
   --machine-type=t2d-standard-4 \
   --image-family debian-12 \
   --image-project debian-cloud \
-  --metadata=database-url=$DATABASE_URL,fileserver-ip=$FILESERVER_IP_PRIVATE \
+  --metadata=database-url=$DATABASE_URL,bucket=$BUCKET \
   --metadata-from-file startup-script=worker.startup-script
 
 export WORKER_IP=$(gcloud compute instances describe worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
@@ -73,8 +66,6 @@ echo ""
 
 #### Configure API REST / Web
 
-export BUCKET=misw4204-equipo1
-
 gcloud compute instances create web \
   --zone $ZONE \
   --machine-type=e2-highcpu-2 \
@@ -82,7 +73,7 @@ gcloud compute instances create web \
   --image-project debian-cloud \
   --tags http-server \
   --scopes=storage-rw \
-  --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,fileserver-ip=$FILESERVER_IP_PRIVATE,bucket=$BUCKET \
+  --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,bucket=$BUCKET \
   --metadata-from-file startup-script=web.startup-script
 
 export WEB_IP=$(gcloud compute instances describe web --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
@@ -96,30 +87,30 @@ echo ""
 
 #### Configure Trigger / Monitoring
 
-export NUM_PARALLEL_TASKS=20
-export NUM_CYCLES=2
-export OLD_FORMAT=mp4
-export NEW_FORMAT=webm
-export DEMO_VIDEO=salento-720p.mp4
+#export NUM_PARALLEL_TASKS=20
+#export NUM_CYCLES=2
+#export OLD_FORMAT=mp4
+#export NEW_FORMAT=webm
+#export DEMO_VIDEO=salento-720p.mp4
 
-gcloud compute instances create monitoring-worker \
- --zone $ZONE \
- --machine-type=e2-highcpu-2 \
- --image-family debian-12 \
- --image-project debian-cloud \
- --tags ssh-server \
- --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,fileserver-ip=$FILESERVER_IP_PRIVATE,num-parallel-taks=$NUM_PARALLEL_TASKS,num-cycles=$NUM_CYCLES,old-format=$OLD_FORMAT,new-format=$NEW_FORMAT,demo-video=$DEMO_VIDEO  \
- --metadata-from-file startup-script=monitoring.startup-script
+#gcloud compute instances create monitoring-worker \
+# --zone $ZONE \
+# --machine-type=e2-highcpu-2 \
+# --image-family debian-12 \
+# --image-project debian-cloud \
+# --tags ssh-server \
+# --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,fileserver-ip=$FILESERVER_IP_PRIVATE,num-parallel-taks=$NUM_PARALLEL_TASKS,num-cycles=$NUM_CYCLES,old-format=$OLD_FORMAT,new-format=$NEW_FORMAT,demo-video=$DEMO_VIDEO  \
+# --metadata-from-file startup-script=monitoring.startup-script
 
 
-export MONITOR_IP=$(gcloud compute instances describe monitoring-worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
+#export MONITOR_IP=$(gcloud compute instances describe monitoring-worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
 
-echo ""
+#echo ""
 
-gcloud -q sql instances patch db1 \
-  --authorized-networks=$WORKER_IP/32,$WEB_IP/32,$MONITOR_IP/32
+#gcloud -q sql instances patch db1 \
+#  --authorized-networks=$WORKER_IP/32,$WEB_IP/32,$MONITOR_IP/32
 
-echo ""
+#echo ""
 
 
 #### Configure Firewall

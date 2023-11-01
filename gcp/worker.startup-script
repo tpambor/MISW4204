@@ -5,9 +5,6 @@ apt update
 curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
 bash add-google-cloud-ops-agent-repo.sh --also-install
 
-# Install NFS
-apt install -y nfs-common
-
 # Install Docker
 apt install -y ca-certificates curl gnupg
 install -m 0755 -d /etc/apt/keyrings
@@ -50,18 +47,15 @@ StartLimitBurst=10
 [Service]
 Restart=on-failure
 RestartSec=30s
-ExecStart=/usr/bin/docker run --rm --net converter-net --name=worker -v /mnt/video:/video --env-file /etc/worker.env ghcr.io/tpambor/misw4204/converter-worker:latest
+ExecStart=/usr/bin/docker run --rm --net converter-net --name=worker -v type=tmpfs,destination=/video --env-file /etc/worker.env ghcr.io/tpambor/misw4204/converter-worker:entrega3
 ExecStop=/usr/bin/docker stop worker
 ExecStopPost=/usr/bin/docker rm worker
 EOF
 
 # Configure system
 export DATABASE_URL=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/database-url" -H "Metadata-Flavor: Google")
-echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=redis://redis:6379/0\nVIDEO_DIR=/video\nCELERY_EXTRA_OPTS=-c 1" | tee /etc/worker.env
-
-export FILESERVER_IP=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/fileserver-ip" -H "Metadata-Flavor: Google")
-mkdir -p /mnt/video
-mount -t nfs $FILESERVER_IP:/srv/video /mnt/video
+export BUCKET=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/bucket" -H "Metadata-Flavor: Google")
+echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=redis://redis:6379/0\nVIDEO_DIR=/video\nBUCKET=$BUCKET\nCELERY_EXTRA_OPTS=-c 1" | tee /etc/worker.env
 
 docker network create --driver bridge converter-net || true
 systemctl daemon-reload
