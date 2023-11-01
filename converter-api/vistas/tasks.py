@@ -9,6 +9,7 @@ import marshmallow as ma
 from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_request
 from google.cloud import storage
 from db import db
+from gcp import signing_credentials
 from modelos import Task, TaskStatus
 
 blp = Blueprint("Tasks", __name__, description="API para gestionar tareas de conversión de formato")
@@ -173,10 +174,17 @@ class VistaTaskId(MethodView):
 
         task_data = vars(task)
 
+        creds = signing_credentials()
+
+        storage_client = storage.Client()
+        bucket = storage_client.bucket(current_app.config['GCP_BUCKET'])
+        blob_old = bucket.blob(f'{task.id}.{task.oldFormat}')
+
         # Crea las URLs de descarga de archivos
-        task_data['urlOriginal'] = url_for('Tasks.VistaVideo', filename=f'{task.id}.{task.oldFormat}')
+        task_data['urlOriginal'] = blob_old.generate_signed_url(version="v4", credentials=creds, expiration=datetime.timedelta(minutes=15), method="GET")
         if task.status == TaskStatus.PROCESSED:
-            task_data['urlConverted'] = url_for('Tasks.VistaVideo', filename=f'{task.id}.{task.newFormat}')
+            blob_new = bucket.blob(f'{task.id}.{task.newFormat}')
+            task_data['urlConverted'] = blob_new.generate_signed_url(version="v4", credentials=creds, expiration=datetime.timedelta(minutes=15), method="GET")
         else:
             task_data['urlConverted'] = None
 

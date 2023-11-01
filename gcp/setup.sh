@@ -3,6 +3,8 @@ export REGION=us-central
 export ZONE=us-central1-c
 export BUCKET_LOCATION=us-central1
 
+export PROJECT_ID=$(gcloud config get-value project)
+
 #### Enable required services
 
 gcloud services enable compute.googleapis.com
@@ -11,6 +13,11 @@ gcloud services enable sqladmin.googleapis.com
 echo ""
 
 #### Configure Cloud Storage
+
+#gcloud iam service-accounts create converter --display-name="Service account for Converter"
+# Token...
+# Object Admin...
+export SERVICE_ACCOUNT="converter@$PROJECT_ID.iam.gserviceaccount.com"
 
 export BUCKET=misw4204-equipo1
 
@@ -57,7 +64,8 @@ gcloud compute instances create worker \
   --machine-type=t2d-standard-4 \
   --image-family debian-12 \
   --image-project debian-cloud \
-  --scopes=storage-rw,monitoring-write \
+  --service-account=$SERVICE_ACCOUNT \
+  --scopes=https://www.googleapis.com/auth/cloud-platform \
   --metadata=database-url=$DATABASE_URL,bucket=$BUCKET \
   --metadata-from-file startup-script=worker.startup-script
 
@@ -79,7 +87,8 @@ gcloud compute instances create web \
   --image-family debian-12 \
   --image-project debian-cloud \
   --tags http-server \
-  --scopes=storage-rw,monitoring-write \
+  --service-account=$SERVICE_ACCOUNT \
+  --scopes=https://www.googleapis.com/auth/cloud-platform \
   --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,bucket=$BUCKET \
   --metadata-from-file startup-script=web.startup-script
 
