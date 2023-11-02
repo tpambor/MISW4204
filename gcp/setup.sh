@@ -63,10 +63,12 @@ gcloud sql instances create db1 \
   --database-version=POSTGRES_15 \
   --cpu=1 \
   --memory=4096MB \
+  --no-assign-ip \
+  --network=projects/misw4204-e3/global/networks/default \
   --insights-config-query-insights-enabled \
   --insights-config-record-client-address
 
-export DB_IP=$(gcloud sql instances describe db1 --format=json | jq -r '.ipAddresses[] | select(.type=="PRIMARY").ipAddress')
+export DB_IP=$(gcloud sql instances describe db1 --format=json | jq -r '.ipAddresses[] | select(.type=="PRIVATE").ipAddress')
 
 echo ""
 
@@ -102,11 +104,6 @@ export WORKER_IP_PRIVATE=$(gcloud compute instances describe worker --zone $ZONE
 
 echo ""
 
-gcloud -q sql instances patch db1 \
-  --authorized-networks=$WORKER_IP/32
-
-echo ""
-
 #### Configure API REST / Web
 
 gcloud compute instances create web \
@@ -121,11 +118,6 @@ gcloud compute instances create web \
   --metadata-from-file startup-script=web.startup-script
 
 export WEB_IP=$(gcloud compute instances describe web --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
-
-echo ""
-
-gcloud -q sql instances patch db1 \
-  --authorized-networks=$WORKER_IP/32,$WEB_IP/32
 
 echo ""
 
@@ -150,12 +142,6 @@ echo ""
 #export MONITOR_IP=$(gcloud compute instances describe monitoring-worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
 
 #echo ""
-
-#gcloud -q sql instances patch db1 \
-#  --authorized-networks=$WORKER_IP/32,$WEB_IP/32,$MONITOR_IP/32
-
-#echo ""
-
 
 #### Configure Firewall
 
