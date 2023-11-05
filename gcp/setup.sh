@@ -1,7 +1,6 @@
 #!/bin/bash
-export REGION=us-central
+export REGION=us-central1
 export ZONE=us-central1-c
-export BUCKET_LOCATION=us-central1
 
 export PROJECT_ID=$(gcloud config get-value project)
 
@@ -50,7 +49,7 @@ BUCKET_SUFFIX=$(tr -dc a-z </dev/urandom | head -c 4 ; echo '')
 export BUCKET=misw4204-$BUCKET_SUFFIX
 
 gcloud storage buckets create gs://$BUCKET \
-  --location=$BUCKET_LOCATION \
+  --location=$REGION \
   --uniform-bucket-level-access \
   --public-access-prevention
 
@@ -106,18 +105,23 @@ echo ""
 
 #### Configure API REST / Web
 
-gcloud compute instances create web \
-  --zone $ZONE \
+gcloud compute instance-templates create web-template \
+  --instance-template-region=$REGION \
   --machine-type=e2-highcpu-2 \
-  --image-family debian-12 \
-  --image-project debian-cloud \
-  --tags http-server \
+  --image-family=debian-12 \
+  --image-project=debian-cloud \
+  --tags=http-server \
   --service-account=$SERVICE_ACCOUNT \
   --scopes=https://www.googleapis.com/auth/cloud-platform \
   --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,bucket=$BUCKET \
   --metadata-from-file startup-script=web.startup-script
 
-export WEB_IP=$(gcloud compute instances describe web --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
+gcloud compute instance-groups managed create web-mig \
+  --size=1 \
+  --template https://www.googleapis.com/compute/v1/projects/$PROJECT_ID/regions/$REGION/instanceTemplates/web-template \
+  --zone=$ZONE
+
+#export WEB_IP=$(gcloud compute instances describe web --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
 
 echo ""
 
@@ -157,7 +161,7 @@ gcloud compute firewall-rules create default-allow-http \
 echo ""
 echo "Infrastructure created!"
 echo ""
-echo "API: http://$WEB_IP/"
+#echo "API: http://$WEB_IP/"
 
 ### Correr esto en el shell cuando todo lo demás haya terminado
 
