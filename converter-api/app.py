@@ -3,7 +3,7 @@ from flask import Flask
 import flask_smorest
 from celery import Celery
 from db import db
-from vistas import BlueprintTasks, BlueprintAuth
+from vistas import BlueprintTasks, BlueprintAuth, BlueprintHealth
 from flask_jwt_extended import JWTManager
 
 class CloudConversionToolApi(flask_smorest.Api):
@@ -44,6 +44,7 @@ def create_app():
     api = CloudConversionToolApi(app)
     api.register_blueprint(BlueprintTasks)
     api.register_blueprint(BlueprintAuth)
+    api.register_blueprint(BlueprintHealth)
     jwt = JWTManager(app)
 
     return app

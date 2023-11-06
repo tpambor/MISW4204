@@ -1,8 +1,7 @@
 import os
 import re
 import datetime
-import pathlib
-from flask import current_app, send_file, url_for
+from flask import current_app
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 import marshmallow as ma
