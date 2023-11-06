@@ -124,38 +124,6 @@ class VistaTasks(MethodView):
         tasks = tasks.all()
         return tasks
 
-
-@blp.route("/api/video/<path:filename>")
-class VistaVideo(MethodView):
-    def get(self, filename):
-        verify_jwt_in_request()
-
-        id_task = filename.split('.')
-        if len(id_task) != 2:
-            abort(404, message="Video not found")
-
-        fmt = id_task[1].lower()
-        id_task = id_task[0]
-
-        task = Task.query.filter_by(id=id_task).first()
-
-        if not task or task.user != get_jwt_identity():
-            abort(404, message="Video not found")
-
-        if task.newFormat == fmt:
-            if task.status != TaskStatus.PROCESSED:
-                abort(404, message="Video not found")
-        elif task.oldFormat != fmt:
-            abort(404, message="Video not found")
-
-        video_dir = current_app.config['VIDEO_DIR']
-        original_video_path = os.path.join(video_dir, f"{id_task}.{fmt}")
-
-        if not os.path.exists(original_video_path):
-            abort(404, message="Video not found")
-
-        return send_file(original_video_path, as_attachment=True, download_name=f"{task.fileName}.{fmt}")
-
 @blp.route("/api/tasks/<int:id_task>")
 class VistaTaskId(MethodView):
     @blp.doc(parameters=[{'name': 'id_task', 'in': 'path', 'description': 'ID de la tarea', 'required': True}])
