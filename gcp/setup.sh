@@ -110,7 +110,7 @@ gcloud compute instance-templates create web-template \
   --machine-type=e2-highcpu-2 \
   --image-family=debian-12 \
   --image-project=debian-cloud \
-  --tags=allow-health-check \
+  --tags=allow-health-check,allow-load-balancer \
   --service-account=$SERVICE_ACCOUNT \
   --scopes=https://www.googleapis.com/auth/cloud-platform \
   --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,bucket=$BUCKET \
@@ -120,12 +120,26 @@ echo ""
 
 #### Create firewall rule for health check
 
-gcloud compute firewall-rules create health-check-http \
+gcloud compute firewall-rules create allow-health-check \
   --direction=ingress \
   --network=default \
   --action=allow \
   --source-ranges=130.211.0.0/22,35.191.0.0/16 \
   --target-tags=allow-health-check \
+  --rules=tcp:80
+
+echo ""
+
+#### Create firewall rule for load balancer
+
+export LOAD_BALANCER_SUBNET=$(gcloud compute networks subnets describe proxy-only-subnet --region=$REGION --format=json | jq -r '.ipCidrRange')
+
+gcloud compute firewall-rules create allow-load-balancer \
+  --direction=ingress \
+  --network=default \
+  --action=allow \
+  --source-ranges=$LOAD_BALANCER_SUBNET \
+  --target-tags=allow-load-balancer \
   --rules=tcp:80
 
 echo ""
@@ -194,22 +208,24 @@ echo ""
 #### Create http proxy
 
 gcloud compute target-http-proxies create web-proxy \
-  --region=us-central1 \
+  --region=$REGION \
   --url-map=web-url-map \
-  --url-map-region=us-central1
+  --url-map-region=$REGION
 
 echo ""
 
 #### Create forwarding rule
 
 gcloud compute forwarding-rules create web-forwarding-rule \
-  --region=us-central1 \
+  --region=$REGION \
   --load-balancing-scheme=EXTERNAL_MANAGED \
-  --network-tier=STANDARD \
   --network=default \
+  --network-tier=standard \
   --ports=80 \
   --target-http-proxy=web-proxy \
-  --target-http-proxy-region=us-central1
+  --target-http-proxy-region=$REGION
+
+export WEB_IP=$(gcloud compute forwarding-rules describe web-forwarding-rule --region=$REGION --format=json | jq -r '.IPAddress')
 
 echo ""
 
@@ -238,7 +254,7 @@ echo ""
 echo ""
 echo "Infrastructure created!"
 echo ""
-#echo "API: http://$WEB_IP/"
+echo "API: http://$WEB_IP/"
 
 ### Correr esto en el shell cuando todo lo demás haya terminado
 

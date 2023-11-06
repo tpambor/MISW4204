@@ -10,7 +10,8 @@ gcloud -q compute instances delete monitoring-worker --zone=$ZONE || true
 
 gcloud -q compute instances delete worker --zone=$ZONE || true
 
-gcloud -q compute firewall-rules delete health-check-http || true
+gcloud -q compute firewall-rules delete allow-health-check || true
+gcloud -q compute firewall-rules delete allow-load-balancer || true
 gcloud -q compute forwarding-rules delete web-forwarding-rule --region=$REGION || true
 gcloud -q compute target-http-proxies delete web-proxy --region=$REGION || true
 gcloud -q compute url-maps delete web-url-map --region=$REGION || true

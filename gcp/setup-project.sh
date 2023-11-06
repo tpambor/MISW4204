@@ -19,8 +19,8 @@ gcloud services vpc-peerings update \
   --force
 
 gcloud compute networks subnets create proxy-only-subnet \
+  --region=$REGION \
   --purpose=REGIONAL_MANAGED_PROXY \
   --role=ACTIVE \
-  --region=us-central1 \
   --network=default \
   --range=10.16.16.0/24
