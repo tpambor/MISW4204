@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 export REGION=us-central1
 export ZONE=us-central1-c
@@ -7,17 +6,21 @@ export ZONE=us-central1-c
 export PROJECT_ID=$(gcloud config get-value project)
 export SERVICE_ACCOUNT="converter@$PROJECT_ID.iam.gserviceaccount.com"
 
-gcloud -q compute firewall-rules delete default-allow-http &
-gcloud -q compute instances delete worker --zone=$ZONE &
-gcloud -q compute instance-groups managed delete web-mig --zone=$ZONE &
-gcloud -q sql instances delete db1 &
-gcloud storage rm -r gs://misw4204-* &
-gcloud -q compute instances delete monitoring-worker --zone=$ZONE &
+gcloud -q compute instances delete monitoring-worker --zone=$ZONE || true
 
-wait < <(jobs -p)
+gcloud -q compute instances delete worker --zone=$ZONE || true
 
-gcloud -q compute instance-templates delete web-template --region=$REGION
-gcloud -q projects remove-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/storage.objectAdmin"
-gcloud -q projects remove-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/iam.serviceAccountTokenCreator"
-gcloud -q projects remove-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/monitoring.metricWriter"
-gcloud -q iam service-accounts delete $SERVICE_ACCOUNT
+gcloud -q compute firewall-rules delete health-check-http || true
+gcloud -q compute backend-services delete web-backend-service --region=$REGION || true
+gcloud -q compute health-checks delete hc-http --region=$REGION || true
+gcloud -q compute instance-groups managed delete web-mig --zone=$ZONE || true
+gcloud -q compute instance-templates delete web-template --region=$REGION || true
+
+gcloud storage rm -r gs://misw4204-* || true
+
+gcloud -q sql instances delete db1 || true
+
+gcloud -q projects remove-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/storage.objectAdmin" || true
+gcloud -q projects remove-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/iam.serviceAccountTokenCreator" || true
+gcloud -q projects remove-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/monitoring.metricWriter" || true
+gcloud -q iam service-accounts delete $SERVICE_ACCOUNT || true

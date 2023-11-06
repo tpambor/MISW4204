@@ -103,25 +103,83 @@ export WORKER_IP_PRIVATE=$(gcloud compute instances describe worker --zone $ZONE
 
 echo ""
 
-#### Configure API REST / Web
+#### Create instance template for API REST / Web
 
 gcloud compute instance-templates create web-template \
   --instance-template-region=$REGION \
   --machine-type=e2-highcpu-2 \
   --image-family=debian-12 \
   --image-project=debian-cloud \
-  --tags=http-server \
+  --tags=allow-health-check \
   --service-account=$SERVICE_ACCOUNT \
   --scopes=https://www.googleapis.com/auth/cloud-platform \
   --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,bucket=$BUCKET \
   --metadata-from-file startup-script=web.startup-script
 
+echo ""
+
+#### Create firewall rule for health check
+
+gcloud compute firewall-rules create health-check-http \
+  --direction=ingress \
+  --network=default \
+  --action=allow \
+  --source-ranges=130.211.0.0/22,35.191.0.0/16 \
+  --target-tags=allow-health-check \
+  --rules=tcp:80
+
+echo ""
+
+#### Create managed instance group for API REST / Web
+
 gcloud compute instance-groups managed create web-mig \
   --size=1 \
-  --template https://www.googleapis.com/compute/v1/projects/$PROJECT_ID/regions/$REGION/instanceTemplates/web-template \
+  --template=https://www.googleapis.com/compute/v1/projects/$PROJECT_ID/regions/$REGION/instanceTemplates/web-template \
   --zone=$ZONE
 
-#export WEB_IP=$(gcloud compute instances describe web --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
+echo ""
+
+#### Configure named port http (80)
+
+gcloud compute instance-groups set-named-ports web-mig \
+  --zone=$ZONE \
+  --named-ports=http:80
+
+echo ""
+
+#### Create health check for API REST / Web
+
+gcloud compute health-checks create http hc-http \
+  --region=$REGION \
+  --description="HTTP health check" \
+  --use-serving-port \
+  --request-path='/health-check' \
+  --check-interval=5s \
+  --timeout=5s \
+  --healthy-threshold=2 \
+  --unhealthy-threshold=2
+
+echo ""
+
+#### Create backend service for API REST / Web
+
+gcloud compute backend-services create web-backend-service \
+  --region=$REGION \
+  --load-balancing-scheme=EXTERNAL_MANAGED \
+  --protocol=HTTP \
+  --port-name=http \
+  --health-checks=hc-http \
+  --health-checks-region=us-central1 \
+  --enable-logging
+
+echo ""
+
+#### Add managed instance group to backend service
+
+gcloud compute backend-services add-backend web-backend-service \
+  --region=$REGION \
+  --instance-group=web-mig \
+  --instance-group-zone=$ZONE
 
 echo ""
 
@@ -146,17 +204,6 @@ echo ""
 #export MONITOR_IP=$(gcloud compute instances describe monitoring-worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
 
 #echo ""
-
-#### Configure Firewall
-
-gcloud compute firewall-rules create default-allow-http \
-  --direction=INGRESS \
-  --priority=1000 \
-  --network=default \
-  --action=ALLOW \
-  --rules=tcp:80 \
-  --source-ranges=0.0.0.0/0 \
-  --target-tags=http-server
 
 echo ""
 echo "Infrastructure created!"
