@@ -169,7 +169,7 @@ gcloud compute backend-services create web-backend-service \
   --protocol=HTTP \
   --port-name=http \
   --health-checks=hc-http \
-  --health-checks-region=us-central1 \
+  --health-checks-region=$REGION \
   --enable-logging
 
 echo ""
@@ -180,6 +180,14 @@ gcloud compute backend-services add-backend web-backend-service \
   --region=$REGION \
   --instance-group=web-mig \
   --instance-group-zone=$ZONE
+
+echo ""
+
+#### Create url map
+
+gcloud compute url-maps create web-url-map \
+  --region=$REGION \
+  --default-service=web-backend-service
 
 echo ""
 
