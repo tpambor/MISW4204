@@ -191,6 +191,28 @@ gcloud compute url-maps create web-url-map \
 
 echo ""
 
+#### Create http proxy
+
+gcloud compute target-http-proxies create web-proxy \
+  --region=us-central1 \
+  --url-map=web-url-map \
+  --url-map-region=us-central1
+
+echo ""
+
+#### Create forwarding rule
+
+gcloud compute forwarding-rules create web-forwarding-rule \
+  --region=us-central1 \
+  --load-balancing-scheme=EXTERNAL_MANAGED \
+  --network-tier=STANDARD \
+  --network=default \
+  --ports=80 \
+  --target-http-proxy=web-proxy \
+  --target-http-proxy-region=us-central1
+
+echo ""
+
 #### Configure Trigger / Monitoring
 
 #export NUM_PARALLEL_TASKS=20

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export REGION=us-central1
 export PROJECT_ID=$(gcloud config get-value project)
 
 gcloud services enable networkconnectivity.googleapis.com
@@ -16,3 +17,10 @@ gcloud services vpc-peerings update \
   --network=default \
   --project=$PROJECT_ID \
   --force
+
+gcloud compute networks subnets create proxy-only-subnet \
+  --purpose=REGIONAL_MANAGED_PROXY \
+  --role=ACTIVE \
+  --region=us-central1 \
+  --network=default \
+  --range=10.16.16.0/24
