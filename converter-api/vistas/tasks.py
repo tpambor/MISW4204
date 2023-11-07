@@ -169,22 +169,23 @@ class VistaTaskId(MethodView):
         """
         verify_jwt_in_request()
 
+        storage_client = storage.Client()
+        bucket = storage_client.bucket(current_app.config['GCP_BUCKET'])
+
         task = Task.query.filter_by(id=id_task).first()
         if task is None or task.user != get_jwt_identity():
             abort(404, message="Tarea no encontrada")
         if task.status != TaskStatus.PROCESSED:
             abort(422, message="La conversión no ha sido procesada")
 
-        path_video_old = os.path.join(current_app.config['VIDEO_DIR'], f"{task.id}.{task.oldFormat}")
-        path_video_new = os.path.join(current_app.config['VIDEO_DIR'], f"{task.id}.{task.newFormat}")
+        blob_old = bucket.blob(f'{task.id}.{task.oldFormat}')
+        blob_new = bucket.blob(f'{task.id}.{task.newFormat}')
 
         db.session.delete(task)
         db.session.commit()
 
-        if os.path.exists(path_video_old):
-            os.remove(path_video_old)
-        if os.path.exists(path_video_new):
-            os.remove(path_video_new)
+        blob_old.delete()
+        blob_new.delete()
 
         final_message = {
             "code": 204,
