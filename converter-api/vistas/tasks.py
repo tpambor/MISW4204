@@ -72,6 +72,8 @@ class VistaTasks(MethodView):
         if not old_format in ('mp4', 'webm', 'avi', 'mpeg', 'wmv'):
             abort(422, message="Format not supported")
 
+        video_content_type = {'mp4': 'video/mp4', 'webm': 'video/webm', 'avi': 'video/x-msvideo', 'mpeg': 'video/mpeg', 'wmv': 'video/x-ms-wmv'}
+
         new_format = form['newFormat'].lower()
 
         new_task = Task(
@@ -88,7 +90,8 @@ class VistaTasks(MethodView):
         storage_client = storage.Client()
         bucket = storage_client.bucket(current_app.config['GCP_BUCKET'])
         blob = bucket.blob(f'{new_task.id}.{old_format}')
-        blob.upload_from_file(files['fileName'].stream)
+        blob.content_disposition = f'attachment; filename={filename}.{old_format}'
+        blob.upload_from_file(files['fileName'].stream, content_type=video_content_type[old_format])
 
         celery = current_app.extensions["celery"]
         celery.send_task("convert_video", (
