@@ -63,7 +63,7 @@ gcloud sql instances create db1 \
   --cpu=1 \
   --memory=4096MB \
   --no-assign-ip \
-  --network=projects/misw4204-e3/global/networks/default \
+  --network=projects/$PROJECT_ID/global/networks/default \
   --insights-config-query-insights-enabled \
   --insights-config-record-client-address
 
