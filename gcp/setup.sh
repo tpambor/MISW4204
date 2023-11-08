@@ -22,7 +22,7 @@ gcloud iam service-accounts create converter \
 
 echo ""
 
-# Assign role to create/view/delete objects in Cloud Storage
+# Assign role to create/view/delete objects and buckets in Cloud Storage
 gcloud projects add-iam-policy-binding $PROJECT_ID \
   --member="serviceAccount:$SERVICE_ACCOUNT" \
   --role="roles/storage.admin"
@@ -184,6 +184,7 @@ gcloud compute backend-services create web-backend-service \
   --port-name=http \
   --health-checks=hc-http \
   --health-checks-region=$REGION \
+  --timeout=600s \
   --enable-logging
 
 echo ""
@@ -257,9 +258,3 @@ echo ""
 echo "Infrastructure created!"
 echo ""
 echo "API: http://$WEB_IP/"
-
-### Correr esto en el shell cuando todo lo demás haya terminado
-
-# export ZONE=us-central1-c
-# gcloud compute scp --recurse ../monitor monitoring-worker:/tmp/monitor --zone $ZONE
-# gcloud compute scp --recurse ../trigger monitoring-worker:/tmp/trigger --zone $ZONE

@@ -33,16 +33,3 @@ export DEMO_VIDEO=$(curl "http://metadata.google.internal/computeMetadata/v1/ins
 export BUCKET=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/bucket" -H "Metadata-Flavor: Google")
 
 echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=$BROKER\nVIDEO_DIR=/video\nNUM_PARALLEL_TASKS=$NUM_PARALLEL_TASKS\nNUM_CYCLES=$NUM_CYCLES\nOLD_FORMAT=$OLD_FORMAT\nNEW_FORMAT=$NEW_FORMAT\nDEMO_VIDEO=$DEMO_VIDEO\nBUCKET=$BUCKET" | tee /etc/api.env
-
-# sudo su
-# cd /tmp/monitor
-# docker build -t monitoring-image .
-# docker run -d --env-file /etc/api.env --name monitoring-container monitoring-image
-# docker logs -f monitoring-container
-
-
-# sudo su
-# cd /tmp/trigger
-# docker build -t trigger-image .
-# docker run -d --env-file /etc/api.env --name trigger-container -v /mnt/video:/video trigger-image
-# docker logs -f trigger-container
