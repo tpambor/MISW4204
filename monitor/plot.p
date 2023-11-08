@@ -1,5 +1,5 @@
 set terminal png size 600
-set output "reporte.png"
+set output "output.png"
 set title "10 peticiones, 5 peticiones concurrentes"
 set size ratio 0.6
 set grid y

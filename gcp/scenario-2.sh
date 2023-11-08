@@ -37,8 +37,9 @@ while [ \"\$(docker inspect -f '{{.State.Running}}' monitoring-container)\" == '
 done && 
 echo \"El contenedor monitoring-container ha dejado de correr, ejecutar comandos adicionales aquí\" &&
 export MONITORING_CONTAINER_ID=\$(docker ps -aqf "name=monitoring-container") &&
-docker cp \$MONITORING_CONTAINER_ID:/monitor/reporte.png /home/ldmolinav &&
-docker cp \$MONITORING_CONTAINER_ID:/monitor/output.csv /home/ldmolinav
+docker cp \$MONITORING_CONTAINER_ID:/monitor/output.png /home/ldmolinav &&
+docker cp \$MONITORING_CONTAINER_ID:/monitor/output.csv /home/ldmolinav && 
+docker cp \$MONITORING_CONTAINER_ID:/monitor/reporte.txt /home/ldmolinav
 '"
 
 ### Inicializar trigger-container

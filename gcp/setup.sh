@@ -25,7 +25,7 @@ echo ""
 # Assign role to create/view/delete objects in Cloud Storage
 gcloud projects add-iam-policy-binding $PROJECT_ID \
   --member="serviceAccount:$SERVICE_ACCOUNT" \
-  --role="roles/storage.objectAdmin"
+  --role="roles/storage.admin"
 
 echo ""
 
