@@ -184,6 +184,7 @@ gcloud compute backend-services create web-backend-service \
   --port-name=http \
   --health-checks=hc-http \
   --health-checks-region=$REGION \
+  --timeout=600s \
   --enable-logging
 
 echo ""
