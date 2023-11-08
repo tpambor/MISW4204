@@ -92,20 +92,35 @@ def my_monitor(app):
             # print('RESULTADOS: %i %i %i %i', total_requests, acum_time_ms, total_time_min, sorted_times)
 
             report = f"""
-                -----------------------
-                Reporte
+-----------------------
+Reporte
 
-                Total peticiones: {total_requests}
-                Peticiones concurrentes: {NUM_PARALLEL_TASKS}
-                Tiempo de respuesta por petición promedio (ms): {acum_time_ms / total_requests:.2f}
-                Tiempo de respuesta (ms) P95: {percentil_95:.2f}
-                Peticiones por minuto (Throughput): {total_requests / total_time_min:.2f}
-                -----------------------
-                """
+Total peticiones: {total_requests}
+Peticiones concurrentes: {NUM_PARALLEL_TASKS}
+Tiempo de respuesta por petición promedio (ms): {acum_time_ms / total_requests:.2f}
+Tiempo de respuesta (ms) P95: {percentil_95:.2f}
+Peticiones por minuto (Throughput): {total_requests / total_time_min:.2f}
+-----------------------
+"""
             print(report)
 
             with open('reporte.txt', 'w') as file:
                 file.write(report)
+
+            plot_script = f"""
+set terminal png size 600
+set output "output.png"
+set title "{int(NUM_PARALLEL_TASKS)*int(NUM_CYCLES)} peticiones, {NUM_PARALLEL_TASKS} peticiones concurrentes"
+set size ratio 0.6
+set grid y
+set xlabel "Nro Peticiones"
+set ylabel "Tiempo de respuesta (ms)"
+set datafile separator ","
+plot "output.csv" using 6 smooth sbezier
+"""
+
+            with open('plot.p', 'w') as file:
+                file.write(plot_script)
 
             subprocess.run("gnuplot plot.p", shell=True, check=True)
             

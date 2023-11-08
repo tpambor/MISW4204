@@ -40,7 +40,6 @@ def create_and_send_task(index, cycle):
 
         client = storage.Client()
         client_str = repr(client)
-        print(f'Cliente google: {client_str}')
         bucket = client.get_bucket(BUCKET)
         blob = bucket.blob(f'{new_task.id}.{OLD_FORMAT}')
         blob.upload_from_filename(DEMO_VIDEO)
