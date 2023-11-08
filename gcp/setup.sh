@@ -107,7 +107,7 @@ echo ""
 
 gcloud compute instance-templates create web-template \
   --instance-template-region=$REGION \
-  --machine-type=e2-highcpu-2 \
+  --machine-type=e2-small \
   --image-family=debian-12 \
   --image-project=debian-cloud \
   --tags=allow-health-check,allow-load-balancer \
@@ -161,6 +161,17 @@ gcloud compute instance-groups set-named-ports web-mig \
 
 echo ""
 
+### Configure autoscaling
+
+gcloud compute instance-groups managed set-autoscaling web-mig \
+  --zone=$ZONE \
+  --max-num-replicas=3 \
+  --min-num-replicas=1 \
+  --target-cpu-utilization=0.60 \
+  --cool-down-period=180
+
+echo ""
+
 #### Create health check for API REST / Web
 
 gcloud compute health-checks create http hc-http \
@@ -168,10 +179,11 @@ gcloud compute health-checks create http hc-http \
   --description="HTTP health check" \
   --use-serving-port \
   --request-path='/health-check' \
-  --check-interval=5s \
-  --timeout=5s \
-  --healthy-threshold=2 \
-  --unhealthy-threshold=2
+  --check-interval=60s \
+  --timeout=60s \
+  --healthy-threshold=1 \
+  --unhealthy-threshold=2 \
+  --enable-logging
 
 echo ""
 
