@@ -5,6 +5,7 @@ import datetime
 import os
 import numpy as np
 import subprocess
+import sys
 
 
 csv_filename = 'output.csv'
@@ -90,22 +91,26 @@ def my_monitor(app):
             percentil_95 = np.percentile(sorted_times, 95)
             # print('RESULTADOS: %i %i %i %i', total_requests, acum_time_ms, total_time_min, sorted_times)
 
-            print("-----------------------")
-            print('Reporte\n')
-            print('Total peticiones: %d' % total_requests)
-            print('Peticiones concurrentes: %s' % NUM_PARALLEL_TASKS)
-            print('Tiempo de respuesta por petición promedio (ms): %.2f' % (
-                acum_time_ms/total_requests
-            ))
-            print('Tiempo de respuesta (ms) P95: %.2f' % (
-                percentil_95
-            ))
-            print('Peticiones por minuto (Throughput): %.2f' % (
-                total_requests/total_time_min
-            ))
-            print("-----------------------")
+            report = f"""
+                -----------------------
+                Reporte
 
-            subprocess.run("gnuplot plot.p", shell=True)
+                Total peticiones: {total_requests}
+                Peticiones concurrentes: {NUM_PARALLEL_TASKS}
+                Tiempo de respuesta por petición promedio (ms): {acum_time_ms / total_requests:.2f}
+                Tiempo de respuesta (ms) P95: {percentil_95:.2f}
+                Peticiones por minuto (Throughput): {total_requests / total_time_min:.2f}
+                -----------------------
+                """
+            print(report)
+
+            with open('reporte.txt', 'w') as file:
+                file.write(report)
+
+            subprocess.run("gnuplot plot.p", shell=True, check=True)
+            
+            sys.exit()
+
             
 
     with app.connection() as connection:

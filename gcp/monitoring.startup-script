@@ -5,9 +5,6 @@ apt update
 curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
 bash add-google-cloud-ops-agent-repo.sh --also-install
 
-# Install NFS
-apt install -y nfs-common
-
 # Install Docker
 apt install -y ca-certificates curl gnupg
 install -m 0755 -d /etc/apt/keyrings
@@ -33,12 +30,9 @@ export NUM_CYCLES=$(curl "http://metadata.google.internal/computeMetadata/v1/ins
 export OLD_FORMAT=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/old-format" -H "Metadata-Flavor: Google")
 export NEW_FORMAT=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/new-format" -H "Metadata-Flavor: Google")
 export DEMO_VIDEO=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/demo-video" -H "Metadata-Flavor: Google")
+export BUCKET=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/bucket" -H "Metadata-Flavor: Google")
 
-echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=$BROKER\nVIDEO_DIR=/video\nNUM_PARALLEL_TASKS=$NUM_PARALLEL_TASKS\nNUM_CYCLES=$NUM_CYCLES\nOLD_FORMAT=$OLD_FORMAT\nNEW_FORMAT=$NEW_FORMAT\nDEMO_VIDEO=$DEMO_VIDEO" | tee /etc/api.env
-
-export FILESERVER_IP=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/fileserver-ip" -H "Metadata-Flavor: Google")
-mkdir -p /mnt/video
-mount -t nfs $FILESERVER_IP:/srv/video /mnt/video
+echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=$BROKER\nVIDEO_DIR=/video\nNUM_PARALLEL_TASKS=$NUM_PARALLEL_TASKS\nNUM_CYCLES=$NUM_CYCLES\nOLD_FORMAT=$OLD_FORMAT\nNEW_FORMAT=$NEW_FORMAT\nDEMO_VIDEO=$DEMO_VIDEO\nBUCKET=$BUCKET" | tee /etc/api.env
 
 # sudo su
 # cd /tmp/monitor
