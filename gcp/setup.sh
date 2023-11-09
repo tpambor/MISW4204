@@ -107,7 +107,7 @@ echo ""
 
 gcloud compute instance-templates create web-template \
   --instance-template-region=$REGION \
-  --machine-type=e2-highcpu-2 \
+  --machine-type=n2-highcpu-2 \
   --image-family=debian-12 \
   --image-project=debian-cloud \
   --tags=allow-health-check,allow-load-balancer \
@@ -161,6 +161,20 @@ gcloud compute instance-groups set-named-ports web-mig \
 
 echo ""
 
+### Configure autoscaling
+
+gcloud compute instance-groups managed set-autoscaling web-mig \
+  --zone=$ZONE \
+  --max-num-replicas=3 \
+  --min-num-replicas=1 \
+  --update-stackdriver-metric=agent.googleapis.com/memory/percent_used \
+  --stackdriver-metric-filter="metric.labels.state = \"used\"" \
+  --stackdriver-metric-utilization-target-type=gauge \
+  --stackdriver-metric-utilization-target=55 \
+  --cool-down-period=180
+
+echo ""
+
 #### Create health check for API REST / Web
 
 gcloud compute health-checks create http hc-http \
@@ -168,10 +182,11 @@ gcloud compute health-checks create http hc-http \
   --description="HTTP health check" \
   --use-serving-port \
   --request-path='/health-check' \
-  --check-interval=5s \
-  --timeout=5s \
-  --healthy-threshold=2 \
-  --unhealthy-threshold=2
+  --check-interval=60s \
+  --timeout=60s \
+  --healthy-threshold=1 \
+  --unhealthy-threshold=3 \
+  --enable-logging
 
 echo ""
 
@@ -194,7 +209,9 @@ echo ""
 gcloud compute backend-services add-backend web-backend-service \
   --region=$REGION \
   --instance-group=web-mig \
-  --instance-group-zone=$ZONE
+  --instance-group-zone=$ZONE \
+  --balancing-mode=utilization \
+  --max-utilization=0.55
 
 echo ""
 
@@ -238,19 +255,19 @@ export OLD_FORMAT=mp4
 export NEW_FORMAT=webm
 export DEMO_VIDEO=salento-720p.mp4
 
-gcloud compute instances create monitoring-worker \
---zone $ZONE \
---machine-type=e2-highcpu-2 \
---image-family debian-12 \
---image-project debian-cloud \
---tags ssh-server \
---service-account=$SERVICE_ACCOUNT \
---scopes=https://www.googleapis.com/auth/cloud-platform \
---metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,num-parallel-taks=$NUM_PARALLEL_TASKS,num-cycles=$NUM_CYCLES,old-format=$OLD_FORMAT,new-format=$NEW_FORMAT,demo-video=$DEMO_VIDEO,bucket=$BUCKET  \
---metadata-from-file startup-script=monitoring.startup-script
+#gcloud compute instances create monitoring-worker \
+#--zone $ZONE \
+#--machine-type=e2-highcpu-2 \
+#--image-family debian-12 \
+#--image-project debian-cloud \
+#--tags ssh-server \
+#--service-account=$SERVICE_ACCOUNT \
+#--scopes=https://www.googleapis.com/auth/cloud-platform \
+#--metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,num-parallel-taks=$NUM_PARALLEL_TASKS,num-cycles=$NUM_CYCLES,old-format=$OLD_FORMAT,new-format=$NEW_FORMAT,demo-video=$DEMO_VIDEO,bucket=$BUCKET  \
+#--metadata-from-file startup-script=monitoring.startup-script
 
 
-export MONITOR_IP=$(gcloud compute instances describe monitoring-worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
+#export MONITOR_IP=$(gcloud compute instances describe monitoring-worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
 
 #echo ""
 
