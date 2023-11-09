@@ -12,8 +12,8 @@ sed -i 's/^NUM_CYCLES=.*/NUM_CYCLES=$NUM_CYCLES/' /etc/api.env &&
 sed -i 's/^NUM_PARALLEL_TASKS=.*/NUM_PARALLEL_TASKS=$NUM_PARALLEL_TASKS/' /etc/api.env'"
 
 ### Eliminar archivos existentes en las carpetas monitor y trigger (Opcional, recomendado en caso de haber hecho cambios en alguna de esas carpetas)
-gcloud compute ssh monitoring-worker --zone $ZONE -- "rm -rf /tmp/monitor"
-gcloud compute ssh monitoring-worker --zone $ZONE -- "rm -rf /tmp/trigger"
+# gcloud compute ssh monitoring-worker --zone $ZONE -- "rm -rf /tmp/monitor"
+# gcloud compute ssh monitoring-worker --zone $ZONE -- "rm -rf /tmp/trigger"
 
 ### Copia las carpetas monitor y trigger a la VM
 gcloud compute scp --recurse ../monitor monitoring-worker:/tmp/monitor --zone $ZONE
@@ -54,7 +54,7 @@ docker cp \$MONITORING_CONTAINER_ID:/monitor/reporte.txt /home/$USER'"
 export FOLDER_SCENARIO=/home/ldmolinav/MISW4204/escenario2
 export FOLDER_ASSIGMENT=segunda_entrega
 export SCENARIO_CASE=caso1
-export CASE_ITERATION=iteracion1
+export CASE_ITERATION=iteracion2
 
 mkdir -p "$FOLDER_SCENARIO/$FOLDER_ASSIGMENT/$SCENARIO_CASE/$CASE_ITERATION"
 
