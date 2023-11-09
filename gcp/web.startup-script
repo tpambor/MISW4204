@@ -17,7 +17,7 @@ echo \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
 apt update
 
-apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin htop
 
 # Create service for nginx
 cat <<EOF > /etc/systemd/system/nginx.service
@@ -60,5 +60,7 @@ docker network create --driver bridge converter-net || true
 systemctl daemon-reload
 systemctl start nginx.service
 systemctl start api.service
+
+echo "* * * * * docker exec nginx nginx -s reload 2>&1 >/dev/null" | sudo crontab -
 
 echo "Setup completed!"
