@@ -107,7 +107,7 @@ echo ""
 
 gcloud compute instance-templates create web-template \
   --instance-template-region=$REGION \
-  --machine-type=e2-highcpu-2 \
+  --machine-type=n2-highcpu-2 \
   --image-family=debian-12 \
   --image-project=debian-cloud \
   --tags=allow-health-check,allow-load-balancer \
@@ -170,7 +170,7 @@ gcloud compute instance-groups managed set-autoscaling web-mig \
   --update-stackdriver-metric=agent.googleapis.com/memory/percent_used \
   --stackdriver-metric-filter="metric.labels.state = \"used\"" \
   --stackdriver-metric-utilization-target-type=gauge \
-  --stackdriver-metric-utilization-target=60 \
+  --stackdriver-metric-utilization-target=55 \
   --cool-down-period=180
 
 echo ""
@@ -185,7 +185,7 @@ gcloud compute health-checks create http hc-http \
   --check-interval=60s \
   --timeout=60s \
   --healthy-threshold=1 \
-  --unhealthy-threshold=2 \
+  --unhealthy-threshold=3 \
   --enable-logging
 
 echo ""
@@ -209,7 +209,9 @@ echo ""
 gcloud compute backend-services add-backend web-backend-service \
   --region=$REGION \
   --instance-group=web-mig \
-  --instance-group-zone=$ZONE
+  --instance-group-zone=$ZONE \
+  --balancing-mode=utilization \
+  --max-utilization=0.55
 
 echo ""
 
