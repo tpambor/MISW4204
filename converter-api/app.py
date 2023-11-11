@@ -3,7 +3,7 @@ from flask import Flask
 import flask_smorest
 from celery import Celery
 from db import db
-from vistas import BlueprintTasks, BlueprintAuth
+from vistas import BlueprintTasks, BlueprintAuth, BlueprintHealth
 from flask_jwt_extended import JWTManager
 
 class CloudConversionToolApi(flask_smorest.Api):
@@ -15,7 +15,7 @@ def create_app():
     app.config['API_VERSION'] = 'v1'
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///app.sqlite')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['VIDEO_DIR'] = os.getenv('VIDEO_DIR', '')
+    app.config['GCP_BUCKET'] = os.getenv('BUCKET', '')
     app.config['OPENAPI_VERSION'] = '3.1.0'
     app.config['OPENAPI_URL_PREFIX'] = '/'
     app.config['OPENAPI_SWAGGER_UI_PATH'] = '/swagger-ui'
@@ -44,6 +44,7 @@ def create_app():
     api = CloudConversionToolApi(app)
     api.register_blueprint(BlueprintTasks)
     api.register_blueprint(BlueprintAuth)
+    api.register_blueprint(BlueprintHealth)
     jwt = JWTManager(app)
 
     return app

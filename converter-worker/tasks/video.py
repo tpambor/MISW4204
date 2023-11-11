@@ -4,11 +4,13 @@ import subprocess
 from celery import Celery
 from celery.signals import worker_init, worker_process_init
 from sqlalchemy import update
+from google.cloud import storage
 import db
 from models import Task, TaskStatus
 
 BROKER = os.getenv('BROKER') or "redis://127.0.0.1:6379/0"
 VIDEO_DIR = os.getenv('VIDEO_DIR', '')
+BUCKET = os.getenv('BUCKET', '')
 
 celery_app = Celery(__name__, broker=BROKER)
 celery_app.conf.task_send_sent_event = True
@@ -31,9 +33,20 @@ def convert_video(id_video, old_format, new_format):
     path_old = os.path.join(VIDEO_DIR, f'{id_video}.{old_format}')
     path_new = os.path.join(VIDEO_DIR, f'{id_video}.{new_format}')
 
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(BUCKET)
+    blob = bucket.blob(f'{id_video}.{old_format}')
+    blob.download_to_filename(path_old)
+
     tstart = time.monotonic()
     result = subprocess.run(['ffmpeg', '-y', '-nostats', '-i', path_old, '-b:v', '2M', path_new], capture_output=True, check=True)
     duration = time.monotonic() - tstart
+
+    blob = bucket.blob(f'{id_video}.{new_format}')
+    blob.upload_from_filename(path_new)
+
+    os.remove(path_old)
+    os.remove(path_new)
 
     with db.session() as session:
         session.execute(

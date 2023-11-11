@@ -1,13 +1,14 @@
 import os
 import re
 import datetime
-import pathlib
-from flask import current_app, send_file, url_for
+from flask import current_app
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 import marshmallow as ma
 from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_request
+from google.cloud import storage
 from db import db
+from gcp import signing_credentials
 from modelos import Task, TaskStatus
 
 blp = Blueprint("Tasks", __name__, description="API para gestionar tareas de conversión de formato")
@@ -71,6 +72,8 @@ class VistaTasks(MethodView):
         if not old_format in ('mp4', 'webm', 'avi', 'mpeg', 'wmv'):
             abort(422, message="Format not supported")
 
+        video_content_type = {'mp4': 'video/mp4', 'webm': 'video/webm', 'avi': 'video/x-msvideo', 'mpeg': 'video/mpeg', 'wmv': 'video/x-ms-wmv'}
+
         new_format = form['newFormat'].lower()
 
         new_task = Task(
@@ -84,8 +87,11 @@ class VistaTasks(MethodView):
         db.session.add(new_task)
         db.session.commit()
 
-        video_path = os.path.join(current_app.config['VIDEO_DIR'], f'{new_task.id}.{old_format}')
-        files['fileName'].save(video_path)
+        storage_client = storage.Client()
+        bucket = storage_client.bucket(current_app.config['GCP_BUCKET'])
+        blob = bucket.blob(f'{new_task.id}.{old_format}')
+        blob.content_disposition = f'attachment; filename={filename}.{old_format}'
+        blob.upload_from_file(files['fileName'].stream, content_type=video_content_type[old_format])
 
         celery = current_app.extensions["celery"]
         celery.send_task("convert_video", (
@@ -120,38 +126,6 @@ class VistaTasks(MethodView):
         tasks = tasks.all()
         return tasks
 
-
-@blp.route("/api/video/<path:filename>")
-class VistaVideo(MethodView):
-    def get(self, filename):
-        verify_jwt_in_request()
-
-        id_task = filename.split('.')
-        if len(id_task) != 2:
-            abort(404, message="Video not found")
-
-        fmt = id_task[1].lower()
-        id_task = id_task[0]
-
-        task = Task.query.filter_by(id=id_task).first()
-
-        if not task or task.user != get_jwt_identity():
-            abort(404, message="Video not found")
-
-        if task.newFormat == fmt:
-            if task.status != TaskStatus.PROCESSED:
-                abort(404, message="Video not found")
-        elif task.oldFormat != fmt:
-            abort(404, message="Video not found")
-
-        video_dir = current_app.config['VIDEO_DIR']
-        original_video_path = os.path.join(video_dir, f"{id_task}.{fmt}")
-
-        if not os.path.exists(original_video_path):
-            abort(404, message="Video not found")
-
-        return send_file(original_video_path, as_attachment=True, download_name=f"{task.fileName}.{fmt}")
-
 @blp.route("/api/tasks/<int:id_task>")
 class VistaTaskId(MethodView):
     @blp.doc(parameters=[{'name': 'id_task', 'in': 'path', 'description': 'ID de la tarea', 'required': True}])
@@ -170,10 +144,17 @@ class VistaTaskId(MethodView):
 
         task_data = vars(task)
 
+        creds = signing_credentials()
+
+        storage_client = storage.Client()
+        bucket = storage_client.bucket(current_app.config['GCP_BUCKET'])
+        blob_old = bucket.blob(f'{task.id}.{task.oldFormat}')
+
         # Crea las URLs de descarga de archivos
-        task_data['urlOriginal'] = url_for('Tasks.VistaVideo', filename=f'{task.id}.{task.oldFormat}')
+        task_data['urlOriginal'] = blob_old.generate_signed_url(version="v4", credentials=creds, expiration=datetime.timedelta(minutes=15), method="GET")
         if task.status == TaskStatus.PROCESSED:
-            task_data['urlConverted'] = url_for('Tasks.VistaVideo', filename=f'{task.id}.{task.newFormat}')
+            blob_new = bucket.blob(f'{task.id}.{task.newFormat}')
+            task_data['urlConverted'] = blob_new.generate_signed_url(version="v4", credentials=creds, expiration=datetime.timedelta(minutes=15), method="GET")
         else:
             task_data['urlConverted'] = None
 
@@ -191,22 +172,23 @@ class VistaTaskId(MethodView):
         """
         verify_jwt_in_request()
 
+        storage_client = storage.Client()
+        bucket = storage_client.bucket(current_app.config['GCP_BUCKET'])
+
         task = Task.query.filter_by(id=id_task).first()
         if task is None or task.user != get_jwt_identity():
             abort(404, message="Tarea no encontrada")
         if task.status != TaskStatus.PROCESSED:
             abort(422, message="La conversión no ha sido procesada")
 
-        path_video_old = os.path.join(current_app.config['VIDEO_DIR'], f"{task.id}.{task.oldFormat}")
-        path_video_new = os.path.join(current_app.config['VIDEO_DIR'], f"{task.id}.{task.newFormat}")
+        blob_old = bucket.blob(f'{task.id}.{task.oldFormat}')
+        blob_new = bucket.blob(f'{task.id}.{task.newFormat}')
 
         db.session.delete(task)
         db.session.commit()
 
-        if os.path.exists(path_video_old):
-            os.remove(path_video_old)
-        if os.path.exists(path_video_new):
-            os.remove(path_video_new)
+        blob_old.delete()
+        blob_new.delete()
 
         final_message = {
             "code": 204,

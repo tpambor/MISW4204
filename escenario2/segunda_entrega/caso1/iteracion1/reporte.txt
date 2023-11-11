@@ -1,0 +1,10 @@
+
+-----------------------
+Reporte
+
+Total peticiones: 10
+Peticiones concurrentes: 5
+Tiempo de respuesta por petición promedio (ms): 413904.96
+Tiempo de respuesta (ms) P95: 723472.03
+Peticiones por minuto (Throughput): 0.79
+-----------------------

@@ -5,9 +5,6 @@ apt update
 curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh
 bash add-google-cloud-ops-agent-repo.sh --also-install
 
-# Install NFS
-apt install -y nfs-common
-
 # Install Docker
 apt install -y ca-certificates curl gnupg
 install -m 0755 -d /etc/apt/keyrings
@@ -20,7 +17,7 @@ echo \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
 apt update
 
-apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin htop
 
 # Create service for nginx
 cat <<EOF > /etc/systemd/system/nginx.service
@@ -32,7 +29,7 @@ StartLimitBurst=10
 [Service]
 Restart=on-failure
 RestartSec=30s
-ExecStart=/usr/bin/docker run --rm --net converter-net --name=nginx -p 80:80 ghcr.io/tpambor/misw4204/converter-gateway:latest
+ExecStart=/usr/bin/docker run --rm --net converter-net --name=nginx -p 80:80 ghcr.io/tpambor/misw4204/converter-gateway:entrega3
 ExecStop=/usr/bin/docker stop nginx
 ExecStopPost=/usr/bin/docker rm nginx
 EOF
@@ -47,7 +44,7 @@ StartLimitBurst=10
 [Service]
 Restart=on-failure
 RestartSec=30s
-ExecStart=/usr/bin/docker run --rm --net converter-net --name=api -v /mnt/video:/video --env-file /etc/api.env ghcr.io/tpambor/misw4204/converter-api:latest
+ExecStart=/usr/bin/docker run --rm --net converter-net --name=api --env-file /etc/api.env ghcr.io/tpambor/misw4204/converter-api:entrega3
 ExecStop=/usr/bin/docker stop api
 ExecStopPost=/usr/bin/docker rm api
 EOF
@@ -55,16 +52,15 @@ EOF
 # Configure system
 export DATABASE_URL=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/database-url" -H "Metadata-Flavor: Google")
 export BROKER=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/broker" -H "Metadata-Flavor: Google")
-echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=$BROKER\nVIDEO_DIR=/video" | tee /etc/api.env
-
-export FILESERVER_IP=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/fileserver-ip" -H "Metadata-Flavor: Google")
-mkdir -p /mnt/video
-mount -t nfs $FILESERVER_IP:/srv/video /mnt/video
+export BUCKET=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/bucket" -H "Metadata-Flavor: Google")
+echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=$BROKER\nBUCKET=$BUCKET" | tee /etc/api.env
 
 # Start everything
 docker network create --driver bridge converter-net || true
 systemctl daemon-reload
 systemctl start nginx.service
 systemctl start api.service
+
+echo "* * * * * docker exec nginx nginx -s reload 2>&1 >/dev/null" | sudo crontab -
 
 echo "Setup completed!"
