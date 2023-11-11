@@ -24,7 +24,7 @@ gcloud storage rm -r gs://misw4204-* || true
 
 gcloud -q sql instances delete db1 || true
 
-gcloud -q projects remove-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/storage.objectAdmin" || true
+gcloud -q projects remove-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/storage.admin" || true
 gcloud -q projects remove-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/iam.serviceAccountTokenCreator" || true
 gcloud -q projects remove-iam-policy-binding $PROJECT_ID --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/monitoring.metricWriter" || true
 gcloud -q iam service-accounts delete $SERVICE_ACCOUNT || true
