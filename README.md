@@ -74,7 +74,8 @@ Consulta la documentación completa de la API aqui:
 ## Escenario y Pruebas de Estrés API REST y Batch 
 El objetivo de este plan es evaluar la capacidad de la aplicación de convertidor de archivos y su infraestructura de soporte en un entorno tradicional para determinar sus máximos aceptables. El objetivo es comprender cómo la aplicación responde a diferentes niveles de carga de usuarios y cuál es su capacidad máxima. 
 
-- [Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
+- [Entrega 2 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%202%20Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
+- [Entrega 3 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%203%20Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
 
 ## Configuración Escenario 1 JMeter
 - [Configuración](https://github.com/tpambor/MISW4204/blob/main/Docs/Experimento%201%20-%20Configuraci%C3%B3n.pdf)
