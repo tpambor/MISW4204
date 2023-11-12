@@ -1,11 +1,10 @@
-celery==5.3.4
 Flask==2.3.3
 flask-smorest==0.42.1
 Flask-SQLAlchemy==3.1.1
+google-cloud-pubsub==2.18.4
 google-cloud-storage==2.13.0
 gunicorn==21.2.0
 psycopg2==2.9.9
-redis==5.0.1
 SQLAlchemy==2.0.22
 Flask-JWT-Extended==4.5.3
 Flask-WTF==1.2.1
