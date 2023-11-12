@@ -30,9 +30,9 @@ def conversion_callback(message):
         # if the ack future succeeds.
         ack_future = message.ack_with_response()
         ack_future.result()
-        print(f"Ack for message {message.message_id} (video {id_video}) successful")
+        print(f"Ack for message {message.message_id} (video {id_video}) successful", flush=True)
     except sub_exceptions.AcknowledgeError as e:
-        print(f"Ack for message {message.message_id} (video {id_video}) failed with error: {e.error_code}")
+        print(f"Ack for message {message.message_id} (video {id_video}) failed with error: {e.error_code}", flush=True)
         return
 
     path_old = os.path.join(VIDEO_DIR, f'{id_video}.{old_format}')
@@ -65,5 +65,7 @@ with pubsub_v1.SubscriberClient() as subscriber:
     executor = futures.ThreadPoolExecutor(max_workers=1)
     scheduler = pubsub_v1.subscriber.scheduler.ThreadScheduler(executor)
     future = subscriber.subscribe(SUBSCRIPTION_NAME, conversion_callback, scheduler=scheduler)
+
+    print("Worker started", flush=True)
 
     future.result()
