@@ -53,9 +53,10 @@ Aplicación web que ofrece gratuitamente a usuarios de internet, puedan subir ab
 - Vista de Despliegue
 
 Consulta la documentación completa de la arquitectura. 
-- [Documento](https://github.com/tpambor/MISW4204/blob/main/Docs/Proyecto%201%20entrega%201%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
-- [Arquitectura Cloud](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%202%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
-  
+- [Entrega 1 - Arquitectura tradicional](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%201%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
+- [Entrega 2 - Arquitectura Cloud](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%202%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
+- [Entrega 3 - Arquitectura Cloud con escalabilidad en la capa web](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%203%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
+    
 ## API REST
 - /api/auth/signup (POST): Crea una cuenta de usuario.
 - /api/auth/login (POST): Inicia sesión en la aplicación web.
