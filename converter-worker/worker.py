@@ -20,7 +20,8 @@ def conversion_callback(message):
     old_format = req['old_format']
     new_format = req['new_format']
 
-    print(f"Converting video {id_video} from {old_format} to {new_format}")
+    print(f"Converting video {id_video} from {old_format} to {new_format}", flush=True)
+    message.ack()
 
     path_old = os.path.join(VIDEO_DIR, f'{id_video}.{old_format}')
     path_new = os.path.join(VIDEO_DIR, f'{id_video}.{new_format}')
@@ -46,7 +47,7 @@ def conversion_callback(message):
         )
         session.commit()
 
-    print(f"Finished converting video {id_video} in {duration}s")
+    print(f"Finished converting video {id_video} in {duration}s", flush=True)
 
 with pubsub_v1.SubscriberClient() as subscriber:
     executor = futures.ThreadPoolExecutor(max_workers=1)

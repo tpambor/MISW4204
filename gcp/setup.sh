@@ -55,6 +55,31 @@ gcloud storage buckets create gs://$BUCKET \
 
 echo ""
 
+#### Create PubSub topic
+
+gcloud pubsub topics create converter
+
+export PUBSUB_TOPIC="projects/$PROJECT_ID/topics/converter"
+
+echo ""
+
+#### Create PubSub subscription
+
+gcloud pubsub subscriptions create converter-sub \
+  --topic $PUBSUB_TOPIC \
+  --enable-exactly-once-delivery
+
+export PUBSUB_SUBSCRIPTION="projects/$PROJECT_ID/subscriptions/converter-sub"
+
+echo ""
+
+# Assign role for PubSub subscription to service account
+gcloud pubsub subscriptions add-iam-policy-binding converter-sub \
+  --member="serviceAccount:$SERVICE_ACCOUNT" \
+  --role="roles/pubsub.subscriber"
+
+echo ""
+
 #### Configure Database
 
 gcloud sql instances create db1 \
@@ -95,13 +120,12 @@ gcloud compute instances create worker \
   --image-project debian-cloud \
   --service-account=$SERVICE_ACCOUNT \
   --scopes=https://www.googleapis.com/auth/cloud-platform \
-  --metadata=database-url=$DATABASE_URL,bucket=$BUCKET \
+  --metadata=database-url=$DATABASE_URL,pubsub-subscription=$PUBSUB_SUBSCRIPTION,bucket=$BUCKET \
   --metadata-from-file startup-script=worker.startup-script
 
-export WORKER_IP=$(gcloud compute instances describe worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
-export WORKER_IP_PRIVATE=$(gcloud compute instances describe worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].networkIP')
-
 echo ""
+
+exit
 
 #### Create instance template for API REST / Web
 
