@@ -63,6 +63,13 @@ export PUBSUB_TOPIC="projects/$PROJECT_ID/topics/converter"
 
 echo ""
 
+# Assign role for PubSub publisher to service account
+gcloud pubsub topics add-iam-policy-binding converter \
+  --member="serviceAccount:$SERVICE_ACCOUNT" \
+  --role="roles/pubsub.publisher"
+
+echo ""
+
 #### Create PubSub subscription
 
 gcloud pubsub subscriptions create converter-sub \
@@ -134,8 +141,6 @@ gcloud compute instance-groups managed create worker-mig \
 
 echo ""
 
-exit
-
 #### Create instance template for API REST / Web
 
 gcloud compute instance-templates create web-template \
@@ -146,7 +151,7 @@ gcloud compute instance-templates create web-template \
   --tags=allow-health-check,allow-load-balancer \
   --service-account=$SERVICE_ACCOUNT \
   --scopes=https://www.googleapis.com/auth/cloud-platform \
-  --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,bucket=$BUCKET \
+  --metadata=database-url=$DATABASE_URL,pubsub-topic=$PUBSUB_TOPIC,bucket=$BUCKET \
   --metadata-from-file startup-script=web.startup-script
 
 echo ""
@@ -282,24 +287,24 @@ echo ""
 
 #### Configure Trigger / Monitoring
 
-export NUM_PARALLEL_TASKS=5
-export NUM_CYCLES=1
-export OLD_FORMAT=mp4
-export NEW_FORMAT=webm
-export DEMO_VIDEO=salento-720p.mp4
+#export NUM_PARALLEL_TASKS=5
+#export NUM_CYCLES=1
+#export OLD_FORMAT=mp4
+#export NEW_FORMAT=webm
+#export DEMO_VIDEO=salento-720p.mp4
 
-gcloud compute instances create monitoring-worker \
-  --zone $ZONE \
-  --machine-type=e2-highcpu-2 \
-  --image-family debian-12 \
-  --image-project debian-cloud \
-  --tags ssh-server \
-  --service-account=$SERVICE_ACCOUNT \
-  --scopes=https://www.googleapis.com/auth/cloud-platform \
-  --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,num-parallel-taks=$NUM_PARALLEL_TASKS,num-cycles=$NUM_CYCLES,old-format=$OLD_FORMAT,new-format=$NEW_FORMAT,demo-video=$DEMO_VIDEO,bucket=$BUCKET  \
-  --metadata-from-file startup-script=monitoring.startup-script
+#gcloud compute instances create monitoring-worker \
+#  --zone $ZONE \
+#  --machine-type=e2-highcpu-2 \
+#  --image-family debian-12 \
+#  --image-project debian-cloud \
+#  --tags ssh-server \
+#  --service-account=$SERVICE_ACCOUNT \
+#  --scopes=https://www.googleapis.com/auth/cloud-platform \
+#  --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,num-parallel-taks=$NUM_PARALLEL_TASKS,num-cycles=$NUM_CYCLES,old-format=$OLD_FORMAT,new-format=$NEW_FORMAT,demo-video=$DEMO_VIDEO,bucket=$BUCKET  \
+#  --metadata-from-file startup-script=monitoring.startup-script
 
-export MONITOR_IP=$(gcloud compute instances describe monitoring-worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
+#export MONITOR_IP=$(gcloud compute instances describe monitoring-worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
 
 echo ""
 

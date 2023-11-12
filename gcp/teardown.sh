@@ -23,6 +23,7 @@ gcloud -q compute instance-templates delete web-template --region=$REGION || tru
 
 gcloud -q pubsub subscriptions remove-iam-policy-binding converter-sub --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/pubsub.subscriber" || true
 gcloud -q pubsub subscriptions delete converter-sub || true
+gcloud -q pubsub topics remove-iam-policy-binding converter --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/pubsub.publisher" || true
 gcloud -q pubsub topics delete converter || true
 
 gcloud storage rm -r gs://misw4204-* || true

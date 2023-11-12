@@ -5,6 +5,7 @@ import json
 from concurrent import futures
 from sqlalchemy import update
 from google.cloud import pubsub_v1
+from google.cloud.pubsub_v1.subscriber import exceptions as sub_exceptions
 from google.cloud import storage
 import db
 from models import Task, TaskStatus
@@ -20,8 +21,20 @@ def conversion_callback(message):
     old_format = req['old_format']
     new_format = req['new_format']
 
-    print(f"Converting video {id_video} from {old_format} to {new_format}", flush=True)
-    message.ack()
+    print(f"Received request to convert video {id_video} from {old_format} to {new_format}", flush=True)
+
+    # Use `ack_with_response()` instead of `ack()` to get a future that tracks
+    # the result of the acknowledge call. When exactly-once delivery is enabled
+    # on the subscription, the message is guaranteed to not be delivered again
+    # if the ack future succeeds.
+    ack_future = message.ack_with_response()
+    
+    try:
+        ack_future.result()
+        print(f"Ack for message {message.message_id} (video {id_video}) successful")
+    except sub_exceptions.AcknowledgeError as e:
+        print(f"Ack for message {message.message_id} (video {id_video}) failed with error: {e.error_code}")
+        return
 
     path_old = os.path.join(VIDEO_DIR, f'{id_video}.{old_format}')
     path_new = os.path.join(VIDEO_DIR, f'{id_video}.{new_format}')

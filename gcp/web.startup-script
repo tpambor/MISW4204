@@ -51,9 +51,9 @@ EOF
 
 # Configure system
 export DATABASE_URL=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/database-url" -H "Metadata-Flavor: Google")
-export BROKER=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/broker" -H "Metadata-Flavor: Google")
+export PUBSUB_TOPIC=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/pubsub-topic" -H "Metadata-Flavor: Google")
 export BUCKET=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/bucket" -H "Metadata-Flavor: Google")
-echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=$BROKER\nBUCKET=$BUCKET" | tee /etc/api.env
+echo -e "DATABASE_URL=$DATABASE_URL\nTOPIC=$PUBSUB_TOPIC\nBUCKET=$BUCKET" | tee /etc/api.env
 
 # Start everything
 docker network create --driver bridge converter-net || true
