@@ -22,14 +22,13 @@ def conversion_callback(message):
     new_format = req['new_format']
 
     print(f"Received request to convert video {id_video} from {old_format} to {new_format}", flush=True)
-
-    # Use `ack_with_response()` instead of `ack()` to get a future that tracks
-    # the result of the acknowledge call. When exactly-once delivery is enabled
-    # on the subscription, the message is guaranteed to not be delivered again
-    # if the ack future succeeds.
-    ack_future = message.ack_with_response()
     
     try:
+        # Use `ack_with_response()` instead of `ack()` to get a future that tracks
+        # the result of the acknowledge call. When exactly-once delivery is enabled
+        # on the subscription, the message is guaranteed to not be delivered again
+        # if the ack future succeeds.
+        ack_future = message.ack_with_response()
         ack_future.result()
         print(f"Ack for message {message.message_id} (video {id_video}) successful")
     except sub_exceptions.AcknowledgeError as e:
