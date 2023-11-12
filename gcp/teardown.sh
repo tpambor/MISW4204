@@ -8,7 +8,8 @@ export SERVICE_ACCOUNT="converter@$PROJECT_ID.iam.gserviceaccount.com"
 
 gcloud -q compute instances delete monitoring-worker --zone=$ZONE || true
 
-gcloud -q compute instances delete worker --zone=$ZONE || true
+gcloud -q compute instance-groups managed delete worker-mig --zone=$ZONE || true
+gcloud -q compute instance-templates delete worker-template --region=$REGION || true
 
 gcloud -q compute firewall-rules delete allow-health-check || true
 gcloud -q compute firewall-rules delete allow-load-balancer || true

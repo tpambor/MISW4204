@@ -111,10 +111,10 @@ export DATABASE_URL="postgresql://postgres:$POSTGRES_PASSWORD@$DB_IP/converter"
 
 echo ""
 
-#### Configure Worker
+#### Configure instance template for worker
 
-gcloud compute instances create worker \
-  --zone $ZONE \
+gcloud compute instance-templates create worker-template \
+  --instance-template-region=$REGION \
   --machine-type=t2d-standard-4 \
   --image-family debian-12 \
   --image-project debian-cloud \
@@ -122,6 +122,15 @@ gcloud compute instances create worker \
   --scopes=https://www.googleapis.com/auth/cloud-platform \
   --metadata=database-url=$DATABASE_URL,pubsub-subscription=$PUBSUB_SUBSCRIPTION,bucket=$BUCKET \
   --metadata-from-file startup-script=worker.startup-script
+
+echo ""
+
+#### Create managed instance group for worker
+
+gcloud compute instance-groups managed create worker-mig \
+  --size=1 \
+  --template=https://www.googleapis.com/compute/v1/projects/$PROJECT_ID/regions/$REGION/instanceTemplates/worker-template \
+  --zone=$ZONE
 
 echo ""
 
