@@ -1,6 +1,7 @@
 import os
 import re
 import datetime
+import json
 from flask import current_app
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
@@ -93,12 +94,18 @@ class VistaTasks(MethodView):
         blob.content_disposition = f'attachment; filename={filename}.{old_format}'
         blob.upload_from_file(files['fileName'].stream, content_type=video_content_type[old_format])
 
-        celery = current_app.extensions["celery"]
-        celery.send_task("convert_video", (
-            new_task.id,
-            old_format,
-            new_format
-        ))
+        pubsub_task = {
+            'id_video': new_task.id,
+            'old_format': old_format,
+            'new_format': new_format
+        }
+
+        future = current_app.extensions["pubsub"].publish(
+            current_app.config['PUBSUB_TOPIC'],
+            json.dumps(pubsub_task).encode('utf-8')
+        )
+        future.result()
+
         return new_task
 
     @blp.arguments(TaskListParameterSchema, location="query")
