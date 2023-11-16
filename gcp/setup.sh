@@ -1,6 +1,7 @@
 #!/bin/bash
 export REGION=us-central1
 export ZONE=us-central1-c
+export ZONE2=us-central1-f
 
 export PROJECT_ID=$(gcloud config get-value project)
 
@@ -104,7 +105,9 @@ echo ""
 #### Configure Database
 
 gcloud sql instances create db1 \
+  --availability-type=regional \
   --zone=$ZONE \
+  --secondary-zone=$ZONE2 \
   --database-version=POSTGRES_15 \
   --cpu=1 \
   --memory=4096MB \
@@ -199,16 +202,16 @@ echo ""
 #### Create managed instance group for API REST / Web
 
 gcloud compute instance-groups managed create web-mig \
-  --size=1 \
+  --size=2 \
   --template=https://www.googleapis.com/compute/v1/projects/$PROJECT_ID/regions/$REGION/instanceTemplates/web-template \
-  --zone=$ZONE
+  --zones=$ZONE,$ZONE2
 
 echo ""
 
 #### Configure named port http (80)
 
 gcloud compute instance-groups set-named-ports web-mig \
-  --zone=$ZONE \
+  --region=$REGION \
   --named-ports=http:80
 
 echo ""
@@ -216,13 +219,13 @@ echo ""
 ### Configure autoscaling
 
 gcloud compute instance-groups managed set-autoscaling web-mig \
-  --zone=$ZONE \
+  --region=$REGION \
   --max-num-replicas=3 \
-  --min-num-replicas=1 \
+  --min-num-replicas=2 \
   --update-stackdriver-metric=agent.googleapis.com/memory/percent_used \
   --stackdriver-metric-filter="metric.labels.state = \"used\"" \
   --stackdriver-metric-utilization-target-type=gauge \
-  --stackdriver-metric-utilization-target=55 \
+  --stackdriver-metric-utilization-target=60 \
   --cool-down-period=180
 
 echo ""
@@ -261,7 +264,7 @@ echo ""
 gcloud compute backend-services add-backend web-backend-service \
   --region=$REGION \
   --instance-group=web-mig \
-  --instance-group-zone=$ZONE \
+  --instance-group-region=$REGION \
   --balancing-mode=utilization \
   --max-utilization=0.55
 
@@ -301,7 +304,7 @@ echo ""
 
 #### Configure Trigger / Monitoring
 
-export NUM_PARALLEL_TASKS=5
+export NUM_PARALLEL_TASKS=1
 export NUM_CYCLES=1
 export OLD_FORMAT=mp4
 export NEW_FORMAT=webm

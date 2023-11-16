@@ -55,7 +55,9 @@ def create_and_send_task(index, cycle):
             'task_sent': datetime.datetime.utcnow().isoformat()
         }
 
-        publisher.publish(PUBSUB_TOPIC, json.dumps(pubsub_task).encode('utf-8'))
+        future = publisher.publish(PUBSUB_TOPIC, json.dumps(pubsub_task).encode('utf-8'))
+
+        future.result()
        
         print(f'Enviada solicitud {index} del ciclo {cycle} a la cola de mensajes con id {new_task_id}.')
 
