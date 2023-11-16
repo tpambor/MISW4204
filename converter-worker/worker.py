@@ -9,10 +9,13 @@ from google.cloud.pubsub_v1.subscriber import exceptions as sub_exceptions
 from google.cloud import storage
 import db
 from models import Task, TaskStatus
+import datetime
+
 
 VIDEO_DIR = os.getenv('VIDEO_DIR')
 BUCKET = os.getenv('BUCKET')
 SUBSCRIPTION_NAME = os.getenv('SUBSCRIPTION')
+PUBSUB_TOPIC_COMPLETION = os.getenv('PUBSUB_TOPIC_COMPLETION')
 
 def conversion_callback(message):
     req = json.loads(message.data)
@@ -60,6 +63,12 @@ def conversion_callback(message):
         session.commit()
 
     print(f"Finished converting video {id_video} in {duration}s", flush=True)
+
+    # Envía una señal de finalización al script principal
+    publisher = pubsub_v1.PublisherClient()
+    signal_message = {'task_id': id_video, 'status': 'completed', 'task_completed': datetime.datetime.utcnow().isoformat()}
+    future = publisher.publish(PUBSUB_TOPIC_COMPLETION, json.dumps(signal_message).encode('utf-8'))
+    future.result()
 
 with pubsub_v1.SubscriberClient() as subscriber:
     executor = futures.ThreadPoolExecutor(max_workers=1)

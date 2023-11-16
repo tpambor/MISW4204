@@ -5,7 +5,6 @@ export ZONE=us-central1-c
 export PROJECT_ID=$(gcloud config get-value project)
 
 #### Enable required services
-
 gcloud services enable compute.googleapis.com
 gcloud services enable sqladmin.googleapis.com 
 gcloud services enable monitoring.googleapis.com
@@ -55,11 +54,17 @@ gcloud storage buckets create gs://$BUCKET \
 
 echo ""
 
-#### Create PubSub topic
-
+#### Create PubSub topic converter
 gcloud pubsub topics create converter
 
 export PUBSUB_TOPIC="projects/$PROJECT_ID/topics/converter"
+
+echo ""
+
+#### Create PubSub topic para saber cuando finaliza una tarea
+gcloud pubsub topics create conversion-completion
+
+export PUBSUB_TOPIC_COMPLETION="projects/$PROJECT_ID/topics/conversion-completion"
 
 echo ""
 
@@ -70,7 +75,16 @@ gcloud pubsub topics add-iam-policy-binding converter \
 
 echo ""
 
-#### Create PubSub subscription
+#### Create PubSub subscription conversion-completion
+gcloud pubsub subscriptions create conversion-completion-sub \
+  --topic $PUBSUB_TOPIC_COMPLETION \
+  --enable-exactly-once-delivery
+
+export PUBSUB_COMPLETION_SUBSCRIPTION="projects/$PROJECT_ID/subscriptions/conversion-completion-sub"
+
+echo ""
+
+#### Create PubSub subscription converter
 
 gcloud pubsub subscriptions create converter-sub \
   --topic $PUBSUB_TOPIC \
@@ -127,7 +141,7 @@ gcloud compute instance-templates create worker-template \
   --image-project debian-cloud \
   --service-account=$SERVICE_ACCOUNT \
   --scopes=https://www.googleapis.com/auth/cloud-platform \
-  --metadata=database-url=$DATABASE_URL,pubsub-subscription=$PUBSUB_SUBSCRIPTION,bucket=$BUCKET \
+  --metadata=database-url=$DATABASE_URL,pubsub-subscription=$PUBSUB_SUBSCRIPTION,bucket=$BUCKET,pubsub-topic-completion=$PUBSUB_TOPIC_COMPLETION \
   --metadata-from-file startup-script=worker.startup-script
 
 echo ""
@@ -287,24 +301,24 @@ echo ""
 
 #### Configure Trigger / Monitoring
 
-#export NUM_PARALLEL_TASKS=5
-#export NUM_CYCLES=1
-#export OLD_FORMAT=mp4
-#export NEW_FORMAT=webm
-#export DEMO_VIDEO=salento-720p.mp4
+export NUM_PARALLEL_TASKS=5
+export NUM_CYCLES=1
+export OLD_FORMAT=mp4
+export NEW_FORMAT=webm
+export DEMO_VIDEO=salento-720p.mp4
 
-#gcloud compute instances create monitoring-worker \
-#  --zone $ZONE \
-#  --machine-type=e2-highcpu-2 \
-#  --image-family debian-12 \
-#  --image-project debian-cloud \
-#  --tags ssh-server \
-#  --service-account=$SERVICE_ACCOUNT \
-#  --scopes=https://www.googleapis.com/auth/cloud-platform \
-#  --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,num-parallel-taks=$NUM_PARALLEL_TASKS,num-cycles=$NUM_CYCLES,old-format=$OLD_FORMAT,new-format=$NEW_FORMAT,demo-video=$DEMO_VIDEO,bucket=$BUCKET  \
-#  --metadata-from-file startup-script=monitoring.startup-script
+gcloud compute instances create monitoring-worker \
+ --zone $ZONE \
+ --machine-type=e2-highcpu-2 \
+ --image-family debian-12 \
+ --image-project debian-cloud \
+ --tags ssh-server \
+ --service-account=$SERVICE_ACCOUNT \
+ --scopes=https://www.googleapis.com/auth/cloud-platform \
+ --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,num-parallel-taks=$NUM_PARALLEL_TASKS,num-cycles=$NUM_CYCLES,old-format=$OLD_FORMAT,new-format=$NEW_FORMAT,demo-video=$DEMO_VIDEO,bucket=$BUCKET,pubsub-topic=$PUBSUB_TOPIC,pubsub-sub=$PUBSUB_SUBSCRIPTION,pubsub-completion-sub=$PUBSUB_COMPLETION_SUBSCRIPTION  \
+ --metadata-from-file startup-script=monitoring.startup-script
 
-#export MONITOR_IP=$(gcloud compute instances describe monitoring-worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
+export MONITOR_IP=$(gcloud compute instances describe monitoring-worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
 
 echo ""
 

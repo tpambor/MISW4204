@@ -41,7 +41,8 @@ EOF
 export DATABASE_URL=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/database-url" -H "Metadata-Flavor: Google")
 export PUBSUB_SUBSCRIPTION=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/pubsub-subscription" -H "Metadata-Flavor: Google")
 export BUCKET=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/bucket" -H "Metadata-Flavor: Google")
-echo -e "DATABASE_URL=$DATABASE_URL\nSUBSCRIPTION=$PUBSUB_SUBSCRIPTION\nVIDEO_DIR=/video\nBUCKET=$BUCKET" | tee /etc/worker.env
+export PUBSUB_TOPIC_COMPLETION=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/pubsub-topic-completion" -H "Metadata-Flavor: Google")
+echo -e "DATABASE_URL=$DATABASE_URL\nSUBSCRIPTION=$PUBSUB_SUBSCRIPTION\nVIDEO_DIR=/video\nBUCKET=$BUCKET\nPUBSUB_TOPIC_COMPLETION=$PUBSUB_TOPIC_COMPLETION" | tee /etc/worker.env
 
 systemctl daemon-reload
 systemctl start worker.service
