@@ -339,8 +339,8 @@ echo ""
 
 #### Configure Trigger / Monitoring
 
-export NUM_PARALLEL_TASKS=2
-export NUM_CYCLES=2
+export NUM_PARALLEL_TASKS=1
+export NUM_CYCLES=1
 export OLD_FORMAT=mp4
 export NEW_FORMAT=webm
 export DEMO_VIDEO=salento-720p.mp4
