@@ -24,7 +24,6 @@ apt-get install htop
 
 # Configure system
 export DATABASE_URL=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/database-url" -H "Metadata-Flavor: Google")
-export BROKER=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/broker" -H "Metadata-Flavor: Google")
 export NUM_PARALLEL_TASKS=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/num-parallel-taks" -H "Metadata-Flavor: Google")
 export NUM_CYCLES=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/num-cycles" -H "Metadata-Flavor: Google")
 export OLD_FORMAT=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/old-format" -H "Metadata-Flavor: Google")
@@ -32,7 +31,7 @@ export NEW_FORMAT=$(curl "http://metadata.google.internal/computeMetadata/v1/ins
 export DEMO_VIDEO=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/demo-video" -H "Metadata-Flavor: Google")
 export BUCKET=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/bucket" -H "Metadata-Flavor: Google")
 export PUBSUB_TOPIC=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/pubsub-topic" -H "Metadata-Flavor: Google")
-export PUBSUB_SUBSCRIPTION=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/pubsub-sub" -H "Metadata-Flavor: Google")
-export PUBSUB_COMPLETION_SUBSCRIPTION=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/pubsub-completion-sub" -H "Metadata-Flavor: Google")
+export PUBSUB_MONITOR_SUBSCRIPTION=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/pubsub-monitor-sub" -H "Metadata-Flavor: Google")
+export PUBSUB_COMPLETION_MONITOR_SUBSCRIPTION=$(curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/pubsub-completion-monitor-sub" -H "Metadata-Flavor: Google")
 
-echo -e "DATABASE_URL=$DATABASE_URL\nBROKER=$BROKER\nVIDEO_DIR=/video\nNUM_PARALLEL_TASKS=$NUM_PARALLEL_TASKS\nNUM_CYCLES=$NUM_CYCLES\nOLD_FORMAT=$OLD_FORMAT\nNEW_FORMAT=$NEW_FORMAT\nDEMO_VIDEO=$DEMO_VIDEO\nBUCKET=$BUCKET\nPUBSUB_TOPIC=$PUBSUB_TOPIC\nPUBSUB_SUBSCRIPTION=$PUBSUB_SUBSCRIPTION\nPUBSUB_COMPLETION_SUBSCRIPTION=$PUBSUB_COMPLETION_SUBSCRIPTION" | tee /etc/api.env
+echo -e "DATABASE_URL=$DATABASE_URL\nNUM_PARALLEL_TASKS=$NUM_PARALLEL_TASKS\nNUM_CYCLES=$NUM_CYCLES\nOLD_FORMAT=$OLD_FORMAT\nNEW_FORMAT=$NEW_FORMAT\nDEMO_VIDEO=$DEMO_VIDEO\nBUCKET=$BUCKET\nPUBSUB_TOPIC=$PUBSUB_TOPIC\nPUBSUB_MONITOR_SUBSCRIPTION=$PUBSUB_MONITOR_SUBSCRIPTION\nPUBSUB_COMPLETION_MONITOR_SUBSCRIPTION=$PUBSUB_COMPLETION_MONITOR_SUBSCRIPTION" | tee /etc/api.env

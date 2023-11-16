@@ -1,0 +1,741 @@
+2023-11-15 12:25:58,550 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2023-11-15 12:25:58,572 INFO o.a.j.JMeter: Loading user properties from: /home/admin/jmeter/bin/user.properties
+2023-11-15 12:25:58,573 INFO o.a.j.JMeter: Loading system properties from: /home/admin/jmeter/bin/system.properties
+2023-11-15 12:25:58,579 INFO o.a.j.JMeter: Copyright (c) 1998-2023 The Apache Software Foundation
+2023-11-15 12:25:58,579 INFO o.a.j.JMeter: Version 5.6.2
+2023-11-15 12:25:58,579 INFO o.a.j.JMeter: java.version=17.0.9
+2023-11-15 12:25:58,579 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2023-11-15 12:25:58,579 INFO o.a.j.JMeter: os.name=Linux
+2023-11-15 12:25:58,579 INFO o.a.j.JMeter: os.arch=amd64
+2023-11-15 12:25:58,579 INFO o.a.j.JMeter: os.version=6.1.0-13-cloud-amd64
+2023-11-15 12:25:58,579 INFO o.a.j.JMeter: file.encoding=UTF-8
+2023-11-15 12:25:58,580 INFO o.a.j.JMeter: java.awt.headless=true
+2023-11-15 12:25:58,580 INFO o.a.j.JMeter: Max memory     =1073741824
+2023-11-15 12:25:58,580 INFO o.a.j.JMeter: Available Processors =2
+2023-11-15 12:25:58,590 INFO o.a.j.JMeter: Default Locale=English (EN)
+2023-11-15 12:25:58,590 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2023-11-15 12:25:58,590 INFO o.a.j.JMeter: JMeterHome=/home/admin/jmeter
+2023-11-15 12:25:58,590 INFO o.a.j.JMeter: user.dir  =/home/admin/MISW4204/escenario1
+2023-11-15 12:25:58,590 INFO o.a.j.JMeter: PWD       =/home/admin/MISW4204/escenario1
+2023-11-15 12:25:58,601 INFO o.a.j.JMeter: IP: 172.31.60.142 Name: ip-172-31-60-142 FullName: ip-172-31-60-142.ec2.internal
+2023-11-15 12:25:58,619 INFO o.a.j.s.FileServer: Default base='/home/admin/MISW4204/escenario1'
+2023-11-15 12:25:58,621 INFO o.a.j.s.FileServer: Set new base='/home/admin/MISW4204/escenario1'
+2023-11-15 12:25:58,904 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2023-11-15 12:25:58,945 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2023-11-15 12:25:58,949 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2023-11-15 12:25:58,953 INFO o.a.j.s.SaveService: Loading file: HTTPRequest.jmx
+2023-11-15 12:25:59,021 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-11-15 12:25:59,021 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-11-15 12:25:59,021 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-11-15 12:25:59,021 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2023-11-15 12:25:59,021 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2023-11-15 12:25:59,022 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2023-11-15 12:25:59,562 INFO o.a.j.e.KeyToolUtils: keytool found at 'keytool'
+2023-11-15 12:25:59,563 INFO o.a.j.p.h.p.ProxyControl: HTTP(S) Test Script Recorder SSL Proxy will use keys that support embedded 3rd party resources in file /home/admin/jmeter/bin/proxyserver.jks
+2023-11-15 12:25:59,574 INFO o.a.j.JMeter: Creating summariser <summary>
+2023-11-15 12:25:59,591 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2023-11-15 12:25:59,591 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2023-11-15 12:25:59,591 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2023-11-15 12:25:59,597 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2023-11-15 12:25:59,597 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2023-11-15 12:25:59,687 INFO o.a.j.JMeter: Running test (1700051159687)
+2023-11-15 12:25:59,726 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : Prueba 1
+2023-11-15 12:25:59,726 INFO o.a.j.e.StandardJMeterEngine: Starting 300 threads for group Prueba 1.
+2023-11-15 12:25:59,726 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2023-11-15 12:25:59,726 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=300 ramp-up=9000 delayedStart=false
+2023-11-15 12:25:59,737 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-1
+2023-11-15 12:25:59,756 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = ip-172-31-60-142
+2023-11-15 12:25:59,763 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
+2023-11-15 12:25:59,765 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2023-11-15 12:25:59,765 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to UTF-8
+2023-11-15 12:25:59,765 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2023-11-15 12:25:59,765 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2023-11-15 12:25:59,891 INFO o.a.j.s.FileServer: Stored: ../salento-1080p.mp4
+2023-11-15 12:26:00,101 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2023-11-15 12:26:00,102 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2023-11-15 12:26:01,898 INFO o.a.j.r.Summariser: summary +      1 in 00:00:02 =    0.5/s Avg:  2010 Min:  2010 Max:  2010 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0
+2023-11-15 12:26:29,734 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-2
+2023-11-15 12:26:59,732 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-3
+2023-11-15 12:27:00,064 INFO o.a.j.r.Summariser: summary +     38 in 00:00:58 =    0.7/s Avg:  2307 Min:  1014 Max: 10368 Err:     0 (0.00%) Active: 3 Started: 3 Finished: 0
+2023-11-15 12:27:00,065 INFO o.a.j.r.Summariser: summary =     39 in 00:01:00 =    0.6/s Avg:  2300 Min:  1014 Max: 10368 Err:     0 (0.00%)
+2023-11-15 12:27:29,735 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-4
+2023-11-15 12:27:30,209 INFO o.a.j.r.Summariser: summary +     52 in 00:00:30 =    1.7/s Avg:  1719 Min:  1071 Max:  3964 Err:     0 (0.00%) Active: 4 Started: 4 Finished: 0
+2023-11-15 12:27:30,210 INFO o.a.j.r.Summariser: summary =     91 in 00:01:31 =    1.0/s Avg:  1968 Min:  1014 Max: 10368 Err:     0 (0.00%)
+2023-11-15 12:27:59,733 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-5
+2023-11-15 12:28:00,252 INFO o.a.j.r.Summariser: summary +     48 in 00:00:30 =    1.6/s Avg:  2441 Min:  1007 Max: 10164 Err:     0 (0.00%) Active: 5 Started: 5 Finished: 0
+2023-11-15 12:28:00,252 INFO o.a.j.r.Summariser: summary =    139 in 00:02:01 =    1.2/s Avg:  2131 Min:  1007 Max: 10368 Err:     0 (0.00%)
+2023-11-15 12:28:29,733 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-6
+2023-11-15 12:28:30,235 INFO o.a.j.r.Summariser: summary +     38 in 00:00:30 =    1.3/s Avg:  3279 Min:  1117 Max:  9848 Err:     0 (0.00%) Active: 6 Started: 6 Finished: 0
+2023-11-15 12:28:30,236 INFO o.a.j.r.Summariser: summary =    177 in 00:02:31 =    1.2/s Avg:  2378 Min:  1007 Max: 10368 Err:     0 (0.00%)
+2023-11-15 12:28:59,734 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-7
+2023-11-15 12:29:00,534 INFO o.a.j.r.Summariser: summary +     51 in 00:00:30 =    1.7/s Avg:  4059 Min:  1169 Max: 11409 Err:     0 (0.00%) Active: 7 Started: 7 Finished: 0
+2023-11-15 12:29:00,535 INFO o.a.j.r.Summariser: summary =    228 in 00:03:01 =    1.3/s Avg:  2754 Min:  1007 Max: 11409 Err:     0 (0.00%)
+2023-11-15 12:29:29,733 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-8
+2023-11-15 12:29:30,073 INFO o.a.j.r.Summariser: summary +     73 in 00:00:30 =    2.5/s Avg:  2783 Min:  1108 Max:  9885 Err:     0 (0.00%) Active: 8 Started: 8 Finished: 0
+2023-11-15 12:29:30,074 INFO o.a.j.r.Summariser: summary =    301 in 00:03:30 =    1.4/s Avg:  2761 Min:  1007 Max: 11409 Err:     0 (0.00%)
+2023-11-15 12:29:59,734 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-9
+2023-11-15 12:30:00,276 INFO o.a.j.r.Summariser: summary +     88 in 00:00:30 =    2.9/s Avg:  2736 Min:  1045 Max:  7450 Err:     0 (0.00%) Active: 9 Started: 9 Finished: 0
+2023-11-15 12:30:00,277 INFO o.a.j.r.Summariser: summary =    389 in 00:04:01 =    1.6/s Avg:  2755 Min:  1007 Max: 11409 Err:     0 (0.00%)
+2023-11-15 12:30:29,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-10
+2023-11-15 12:30:30,024 INFO o.a.j.r.Summariser: summary +     92 in 00:00:30 =    3.1/s Avg:  2894 Min:  1146 Max:  5803 Err:     0 (0.00%) Active: 10 Started: 10 Finished: 0
+2023-11-15 12:30:30,025 INFO o.a.j.r.Summariser: summary =    481 in 00:04:30 =    1.8/s Avg:  2782 Min:  1007 Max: 11409 Err:     0 (0.00%)
+2023-11-15 12:30:59,738 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-11
+2023-11-15 12:31:00,221 INFO o.a.j.r.Summariser: summary +    102 in 00:00:30 =    3.4/s Avg:  2953 Min:  1094 Max: 11636 Err:     0 (0.00%) Active: 11 Started: 11 Finished: 0
+2023-11-15 12:31:00,221 INFO o.a.j.r.Summariser: summary =    583 in 00:05:01 =    1.9/s Avg:  2812 Min:  1007 Max: 11636 Err:     0 (0.00%)
+2023-11-15 12:31:29,736 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-12
+2023-11-15 12:31:30,355 INFO o.a.j.r.Summariser: summary +     97 in 00:00:30 =    3.2/s Avg:  3418 Min:  1096 Max: 13772 Err:     0 (0.00%) Active: 12 Started: 12 Finished: 0
+2023-11-15 12:31:30,356 INFO o.a.j.r.Summariser: summary =    680 in 00:05:31 =    2.1/s Avg:  2898 Min:  1007 Max: 13772 Err:     0 (0.00%)
+2023-11-15 12:31:59,733 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-13
+2023-11-15 12:32:00,135 INFO o.a.j.r.Summariser: summary +    104 in 00:00:30 =    3.5/s Avg:  3393 Min:  1423 Max:  7623 Err:     0 (0.00%) Active: 13 Started: 13 Finished: 0
+2023-11-15 12:32:00,135 INFO o.a.j.r.Summariser: summary =    784 in 00:06:00 =    2.2/s Avg:  2964 Min:  1007 Max: 13772 Err:     0 (0.00%)
+2023-11-15 12:32:29,734 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-14
+2023-11-15 12:32:31,135 INFO o.a.j.r.Summariser: summary +     78 in 00:00:31 =    2.5/s Avg:  3732 Min:  1592 Max: 14640 Err:     0 (0.00%) Active: 14 Started: 14 Finished: 0
+2023-11-15 12:32:31,136 INFO o.a.j.r.Summariser: summary =    862 in 00:06:31 =    2.2/s Avg:  3033 Min:  1007 Max: 14640 Err:     0 (0.00%)
+2023-11-15 12:32:59,733 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-15
+2023-11-15 12:33:00,016 INFO o.a.j.r.Summariser: summary +     57 in 00:00:29 =    2.0/s Avg:  8800 Min:  1722 Max: 17979 Err:     0 (0.00%) Active: 15 Started: 15 Finished: 0
+2023-11-15 12:33:00,017 INFO o.a.j.r.Summariser: summary =    919 in 00:07:00 =    2.2/s Avg:  3391 Min:  1007 Max: 17979 Err:     0 (0.00%)
+2023-11-15 12:33:29,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-16
+2023-11-15 12:33:30,515 INFO o.a.j.r.Summariser: summary +     55 in 00:00:30 =    1.8/s Avg:  7685 Min:  1430 Max: 23367 Err:     0 (0.00%) Active: 16 Started: 16 Finished: 0
+2023-11-15 12:33:30,515 INFO o.a.j.r.Summariser: summary =    974 in 00:07:31 =    2.2/s Avg:  3634 Min:  1007 Max: 23367 Err:     0 (0.00%)
+2023-11-15 12:33:59,730 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-17
+2023-11-15 12:34:29,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-18
+2023-11-15 12:34:30,176 INFO o.a.j.r.Summariser: summary +     74 in 00:01:00 =    1.2/s Avg: 11892 Min:  1541 Max: 26936 Err:     0 (0.00%) Active: 18 Started: 18 Finished: 0
+2023-11-15 12:34:30,177 INFO o.a.j.r.Summariser: summary =   1048 in 00:08:30 =    2.1/s Avg:  4217 Min:  1007 Max: 26936 Err:     0 (0.00%)
+2023-11-15 12:34:59,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-19
+2023-11-15 12:35:00,088 INFO o.a.j.r.Summariser: summary +    103 in 00:00:30 =    3.4/s Avg:  6364 Min:  1177 Max: 21977 Err:     1 (0.97%) Active: 19 Started: 19 Finished: 0
+2023-11-15 12:35:00,089 INFO o.a.j.r.Summariser: summary =   1151 in 00:09:00 =    2.1/s Avg:  4409 Min:  1007 Max: 26936 Err:     1 (0.09%)
+2023-11-15 12:35:29,731 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-20
+2023-11-15 12:35:30,341 INFO o.a.j.r.Summariser: summary +    104 in 00:00:30 =    3.4/s Avg:  5603 Min:  1804 Max: 12462 Err:     0 (0.00%) Active: 20 Started: 20 Finished: 0
+2023-11-15 12:35:30,342 INFO o.a.j.r.Summariser: summary =   1255 in 00:09:31 =    2.2/s Avg:  4508 Min:  1007 Max: 26936 Err:     1 (0.08%)
+2023-11-15 12:35:59,732 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-21
+2023-11-15 12:36:00,410 INFO o.a.j.r.Summariser: summary +     28 in 00:00:30 =    0.9/s Avg: 17997 Min:  2481 Max: 28900 Err:     0 (0.00%) Active: 21 Started: 21 Finished: 0
+2023-11-15 12:36:00,411 INFO o.a.j.r.Summariser: summary =   1283 in 00:10:01 =    2.1/s Avg:  4802 Min:  1007 Max: 28900 Err:     1 (0.08%)
+2023-11-15 12:36:29,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-22
+2023-11-15 12:36:30,120 INFO o.a.j.r.Summariser: summary +     38 in 00:00:30 =    1.3/s Avg: 18874 Min:  2268 Max: 31788 Err:     0 (0.00%) Active: 22 Started: 22 Finished: 0
+2023-11-15 12:36:30,121 INFO o.a.j.r.Summariser: summary =   1321 in 00:10:30 =    2.1/s Avg:  5207 Min:  1007 Max: 31788 Err:     1 (0.08%)
+2023-11-15 12:36:59,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-23
+2023-11-15 12:37:00,371 INFO o.a.j.r.Summariser: summary +    108 in 00:00:30 =    3.6/s Avg:  5885 Min:  1399 Max: 16074 Err:     0 (0.00%) Active: 23 Started: 23 Finished: 0
+2023-11-15 12:37:00,372 INFO o.a.j.r.Summariser: summary =   1429 in 00:11:01 =    2.2/s Avg:  5258 Min:  1007 Max: 31788 Err:     1 (0.07%)
+2023-11-15 12:37:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-24
+2023-11-15 12:37:32,094 INFO o.a.j.r.Summariser: summary +     97 in 00:00:32 =    3.1/s Avg:  6866 Min:  1357 Max: 19760 Err:     0 (0.00%) Active: 24 Started: 24 Finished: 0
+2023-11-15 12:37:32,095 INFO o.a.j.r.Summariser: summary =   1526 in 00:11:32 =    2.2/s Avg:  5360 Min:  1007 Max: 31788 Err:     1 (0.07%)
+2023-11-15 12:37:59,732 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-25
+2023-11-15 12:38:03,003 INFO o.a.j.r.Summariser: summary +     41 in 00:00:31 =    1.3/s Avg: 15661 Min:  1777 Max: 24887 Err:     0 (0.00%) Active: 25 Started: 25 Finished: 0
+2023-11-15 12:38:03,003 INFO o.a.j.r.Summariser: summary =   1567 in 00:12:03 =    2.2/s Avg:  5630 Min:  1007 Max: 31788 Err:     1 (0.06%)
+2023-11-15 12:38:29,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-26
+2023-11-15 12:38:30,079 INFO o.a.j.r.Summariser: summary +     42 in 00:00:27 =    1.6/s Avg: 19212 Min:  2427 Max: 30970 Err:     0 (0.00%) Active: 26 Started: 26 Finished: 0
+2023-11-15 12:38:30,079 INFO o.a.j.r.Summariser: summary =   1609 in 00:12:30 =    2.1/s Avg:  5984 Min:  1007 Max: 31788 Err:     1 (0.06%)
+2023-11-15 12:38:59,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-27
+2023-11-15 12:39:00,397 INFO o.a.j.r.Summariser: summary +     59 in 00:00:30 =    1.9/s Avg: 10306 Min:  1703 Max: 24193 Err:     0 (0.00%) Active: 27 Started: 27 Finished: 0
+2023-11-15 12:39:00,397 INFO o.a.j.r.Summariser: summary =   1668 in 00:13:01 =    2.1/s Avg:  6137 Min:  1007 Max: 31788 Err:     1 (0.06%)
+2023-11-15 12:39:29,739 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-28
+2023-11-15 12:39:30,053 INFO o.a.j.r.Summariser: summary +     60 in 00:00:30 =    2.0/s Avg: 15405 Min:  1536 Max: 24373 Err:     0 (0.00%) Active: 28 Started: 28 Finished: 0
+2023-11-15 12:39:30,053 INFO o.a.j.r.Summariser: summary =   1728 in 00:13:30 =    2.1/s Avg:  6459 Min:  1007 Max: 31788 Err:     1 (0.06%)
+2023-11-15 12:39:59,738 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-29
+2023-11-15 12:40:00,612 INFO o.a.j.r.Summariser: summary +     78 in 00:00:31 =    2.6/s Avg: 10206 Min:  1725 Max: 24432 Err:     0 (0.00%) Active: 29 Started: 29 Finished: 0
+2023-11-15 12:40:00,613 INFO o.a.j.r.Summariser: summary =   1806 in 00:14:01 =    2.1/s Avg:  6621 Min:  1007 Max: 31788 Err:     1 (0.06%)
+2023-11-15 12:40:29,731 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-30
+2023-11-15 12:40:30,084 INFO o.a.j.r.Summariser: summary +     92 in 00:00:29 =    3.1/s Avg:  9654 Min:  2185 Max: 27196 Err:     0 (0.00%) Active: 30 Started: 30 Finished: 0
+2023-11-15 12:40:30,085 INFO o.a.j.r.Summariser: summary =   1898 in 00:14:30 =    2.2/s Avg:  6768 Min:  1007 Max: 31788 Err:     1 (0.05%)
+2023-11-15 12:40:59,737 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-31
+2023-11-15 12:41:00,049 INFO o.a.j.r.Summariser: summary +    100 in 00:00:30 =    3.3/s Avg:  9652 Min:  4380 Max: 24829 Err:     0 (0.00%) Active: 31 Started: 31 Finished: 0
+2023-11-15 12:41:00,049 INFO o.a.j.r.Summariser: summary =   1998 in 00:15:00 =    2.2/s Avg:  6912 Min:  1007 Max: 31788 Err:     1 (0.05%)
+2023-11-15 12:41:29,733 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-32
+2023-11-15 12:41:30,326 INFO o.a.j.r.Summariser: summary +     81 in 00:00:30 =    2.7/s Avg:  9826 Min:  1514 Max: 27390 Err:     0 (0.00%) Active: 32 Started: 32 Finished: 0
+2023-11-15 12:41:30,326 INFO o.a.j.r.Summariser: summary =   2079 in 00:15:31 =    2.2/s Avg:  7026 Min:  1007 Max: 31788 Err:     1 (0.05%)
+2023-11-15 12:41:59,736 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-33
+2023-11-15 12:42:00,412 INFO o.a.j.r.Summariser: summary +    102 in 00:00:30 =    3.4/s Avg: 10804 Min:  4958 Max: 26303 Err:     0 (0.00%) Active: 33 Started: 33 Finished: 0
+2023-11-15 12:42:00,412 INFO o.a.j.r.Summariser: summary =   2181 in 00:16:01 =    2.3/s Avg:  7203 Min:  1007 Max: 31788 Err:     1 (0.05%)
+2023-11-15 12:42:29,735 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-34
+2023-11-15 12:42:35,300 INFO o.a.j.r.Summariser: summary +     82 in 00:00:35 =    2.4/s Avg:  9350 Min:  4001 Max: 27522 Err:     0 (0.00%) Active: 34 Started: 34 Finished: 0
+2023-11-15 12:42:35,300 INFO o.a.j.r.Summariser: summary =   2263 in 00:16:36 =    2.3/s Avg:  7280 Min:  1007 Max: 31788 Err:     1 (0.04%)
+2023-11-15 12:42:59,734 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-35
+2023-11-15 12:43:00,934 INFO o.a.j.r.Summariser: summary +     32 in 00:00:26 =    1.2/s Avg: 26538 Min:  6594 Max: 34463 Err:     0 (0.00%) Active: 35 Started: 35 Finished: 0
+2023-11-15 12:43:00,934 INFO o.a.j.r.Summariser: summary =   2295 in 00:17:01 =    2.2/s Avg:  7549 Min:  1007 Max: 34463 Err:     1 (0.04%)
+2023-11-15 12:43:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-36
+2023-11-15 12:43:30,738 INFO o.a.j.r.Summariser: summary +     28 in 00:00:30 =    0.9/s Avg: 31602 Min: 12688 Max: 40581 Err:     0 (0.00%) Active: 36 Started: 36 Finished: 0
+2023-11-15 12:43:30,738 INFO o.a.j.r.Summariser: summary =   2323 in 00:17:31 =    2.2/s Avg:  7839 Min:  1007 Max: 40581 Err:     1 (0.04%)
+2023-11-15 12:43:59,734 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-37
+2023-11-15 12:44:00,038 INFO o.a.j.r.Summariser: summary +     31 in 00:00:29 =    1.1/s Avg: 34211 Min: 21485 Max: 41658 Err:     0 (0.00%) Active: 37 Started: 37 Finished: 0
+2023-11-15 12:44:00,038 INFO o.a.j.r.Summariser: summary =   2354 in 00:18:00 =    2.2/s Avg:  8186 Min:  1007 Max: 41658 Err:     1 (0.04%)
+2023-11-15 12:44:29,734 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-38
+2023-11-15 12:44:31,049 INFO o.a.j.r.Summariser: summary +     30 in 00:00:31 =    1.0/s Avg: 39585 Min: 27530 Max: 43864 Err:     0 (0.00%) Active: 38 Started: 38 Finished: 0
+2023-11-15 12:44:31,049 INFO o.a.j.r.Summariser: summary =   2384 in 00:18:31 =    2.1/s Avg:  8581 Min:  1007 Max: 43864 Err:     1 (0.04%)
+2023-11-15 12:44:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-39
+2023-11-15 12:45:01,514 INFO o.a.j.r.Summariser: summary +     24 in 00:00:30 =    0.8/s Avg: 42552 Min: 30498 Max: 49548 Err:     0 (0.00%) Active: 39 Started: 39 Finished: 0
+2023-11-15 12:45:01,515 INFO o.a.j.r.Summariser: summary =   2408 in 00:19:02 =    2.1/s Avg:  8920 Min:  1007 Max: 49548 Err:     1 (0.04%)
+2023-11-15 12:45:29,736 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-40
+2023-11-15 12:45:31,502 INFO o.a.j.r.Summariser: summary +     19 in 00:00:30 =    0.6/s Avg: 45017 Min: 42882 Max: 47075 Err:     0 (0.00%) Active: 40 Started: 40 Finished: 0
+2023-11-15 12:45:31,503 INFO o.a.j.r.Summariser: summary =   2427 in 00:19:32 =    2.1/s Avg:  9202 Min:  1007 Max: 49548 Err:     1 (0.04%)
+2023-11-15 12:45:59,732 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-41
+2023-11-15 12:46:01,248 INFO o.a.j.r.Summariser: summary +     32 in 00:00:30 =    1.1/s Avg: 46371 Min: 39538 Max: 75036 Err:     0 (0.00%) Active: 41 Started: 41 Finished: 0
+2023-11-15 12:46:01,248 INFO o.a.j.r.Summariser: summary =   2459 in 00:20:02 =    2.0/s Avg:  9686 Min:  1007 Max: 75036 Err:     1 (0.04%)
+2023-11-15 12:46:29,731 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-42
+2023-11-15 12:46:32,098 INFO o.a.j.r.Summariser: summary +     33 in 00:00:31 =    1.1/s Avg: 42570 Min: 38606 Max: 51621 Err:     0 (0.00%) Active: 42 Started: 42 Finished: 0
+2023-11-15 12:46:32,099 INFO o.a.j.r.Summariser: summary =   2492 in 00:20:32 =    2.0/s Avg: 10122 Min:  1007 Max: 75036 Err:     1 (0.04%)
+2023-11-15 12:46:59,734 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-43
+2023-11-15 12:47:01,772 INFO o.a.j.r.Summariser: summary +     21 in 00:00:30 =    0.7/s Avg: 43690 Min: 38065 Max: 59463 Err:     0 (0.00%) Active: 43 Started: 43 Finished: 0
+2023-11-15 12:47:01,775 INFO o.a.j.r.Summariser: summary =   2513 in 00:21:02 =    2.0/s Avg: 10402 Min:  1007 Max: 75036 Err:     1 (0.04%)
+2023-11-15 12:47:29,735 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-44
+2023-11-15 12:47:31,471 INFO o.a.j.r.Summariser: summary +     26 in 00:00:30 =    0.9/s Avg: 45761 Min: 43001 Max: 62726 Err:     0 (0.00%) Active: 44 Started: 44 Finished: 0
+2023-11-15 12:47:31,471 INFO o.a.j.r.Summariser: summary =   2539 in 00:21:32 =    2.0/s Avg: 10764 Min:  1007 Max: 75036 Err:     1 (0.04%)
+2023-11-15 12:47:59,735 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-45
+2023-11-15 12:48:00,786 INFO o.a.j.r.Summariser: summary +     33 in 00:00:29 =    1.1/s Avg: 49912 Min: 43551 Max: 89022 Err:     0 (0.00%) Active: 45 Started: 45 Finished: 0
+2023-11-15 12:48:00,788 INFO o.a.j.r.Summariser: summary =   2572 in 00:22:01 =    1.9/s Avg: 11266 Min:  1007 Max: 89022 Err:     1 (0.04%)
+2023-11-15 12:48:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-46
+2023-11-15 12:48:30,031 INFO o.a.j.r.Summariser: summary +     55 in 00:00:29 =    1.9/s Avg: 28437 Min: 10978 Max: 59455 Err:     0 (0.00%) Active: 46 Started: 46 Finished: 0
+2023-11-15 12:48:30,032 INFO o.a.j.r.Summariser: summary =   2627 in 00:22:30 =    1.9/s Avg: 11626 Min:  1007 Max: 89022 Err:     1 (0.04%)
+2023-11-15 12:48:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-47
+2023-11-15 12:49:01,025 INFO o.a.j.r.Summariser: summary +     27 in 00:00:31 =    0.9/s Avg: 28579 Min:  9351 Max: 43484 Err:     0 (0.00%) Active: 47 Started: 47 Finished: 0
+2023-11-15 12:49:01,025 INFO o.a.j.r.Summariser: summary =   2654 in 00:23:01 =    1.9/s Avg: 11798 Min:  1007 Max: 89022 Err:     1 (0.04%)
+2023-11-15 12:49:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-48
+2023-11-15 12:49:30,189 INFO o.a.j.r.Summariser: summary +     20 in 00:00:29 =    0.7/s Avg: 51413 Min: 40776 Max: 59712 Err:     0 (0.00%) Active: 48 Started: 48 Finished: 0
+2023-11-15 12:49:30,189 INFO o.a.j.r.Summariser: summary =   2674 in 00:23:31 =    1.9/s Avg: 12095 Min:  1007 Max: 89022 Err:     1 (0.04%)
+2023-11-15 12:49:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-49
+2023-11-15 12:50:01,404 INFO o.a.j.r.Summariser: summary +     41 in 00:00:31 =    1.3/s Avg: 51601 Min: 38744 Max: 61035 Err:     0 (0.00%) Active: 49 Started: 49 Finished: 0
+2023-11-15 12:50:01,404 INFO o.a.j.r.Summariser: summary =   2715 in 00:24:02 =    1.9/s Avg: 12691 Min:  1007 Max: 89022 Err:     1 (0.04%)
+2023-11-15 12:50:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-50
+2023-11-15 12:50:30,081 INFO o.a.j.r.Summariser: summary +     33 in 00:00:29 =    1.2/s Avg: 36308 Min: 33451 Max: 43296 Err:     0 (0.00%) Active: 50 Started: 50 Finished: 0
+2023-11-15 12:50:30,083 INFO o.a.j.r.Summariser: summary =   2748 in 00:24:30 =    1.9/s Avg: 12975 Min:  1007 Max: 89022 Err:     1 (0.04%)
+2023-11-15 12:50:59,730 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-51
+2023-11-15 12:51:00,122 INFO o.a.j.r.Summariser: summary +     29 in 00:00:30 =    1.0/s Avg: 46967 Min: 41547 Max: 59016 Err:     0 (0.00%) Active: 51 Started: 51 Finished: 0
+2023-11-15 12:51:00,123 INFO o.a.j.r.Summariser: summary =   2777 in 00:25:00 =    1.9/s Avg: 13330 Min:  1007 Max: 89022 Err:     1 (0.04%)
+2023-11-15 12:51:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-52
+2023-11-15 12:51:32,185 INFO o.a.j.r.Summariser: summary +     22 in 00:00:32 =    0.7/s Avg: 54322 Min: 51102 Max: 58126 Err:     0 (0.00%) Active: 52 Started: 52 Finished: 0
+2023-11-15 12:51:32,186 INFO o.a.j.r.Summariser: summary =   2799 in 00:25:32 =    1.8/s Avg: 13652 Min:  1007 Max: 89022 Err:     1 (0.04%)
+2023-11-15 12:51:59,733 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-53
+2023-11-15 12:52:00,174 INFO o.a.j.r.Summariser: summary +     27 in 00:00:28 =    1.0/s Avg: 60111 Min: 53652 Max: 107932 Err:     0 (0.00%) Active: 53 Started: 53 Finished: 0
+2023-11-15 12:52:00,174 INFO o.a.j.r.Summariser: summary =   2826 in 00:26:00 =    1.8/s Avg: 14096 Min:  1007 Max: 107932 Err:     1 (0.04%)
+2023-11-15 12:52:29,733 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-54
+2023-11-15 12:52:31,641 INFO o.a.j.r.Summariser: summary +     26 in 00:00:31 =    0.8/s Avg: 59685 Min: 54511 Max: 107261 Err:     0 (0.00%) Active: 54 Started: 54 Finished: 0
+2023-11-15 12:52:31,642 INFO o.a.j.r.Summariser: summary =   2852 in 00:26:32 =    1.8/s Avg: 14512 Min:  1007 Max: 107932 Err:     1 (0.04%)
+2023-11-15 12:52:59,731 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-55
+2023-11-15 12:53:02,203 INFO o.a.j.r.Summariser: summary +     31 in 00:00:31 =    1.0/s Avg: 57752 Min: 53777 Max: 76196 Err:     0 (0.00%) Active: 55 Started: 55 Finished: 0
+2023-11-15 12:53:02,203 INFO o.a.j.r.Summariser: summary =   2883 in 00:27:03 =    1.8/s Avg: 14976 Min:  1007 Max: 107932 Err:     1 (0.03%)
+2023-11-15 12:53:29,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-56
+2023-11-15 12:53:31,510 INFO o.a.j.r.Summariser: summary +     23 in 00:00:29 =    0.8/s Avg: 58639 Min: 53845 Max: 90567 Err:     0 (0.00%) Active: 56 Started: 56 Finished: 0
+2023-11-15 12:53:31,510 INFO o.a.j.r.Summariser: summary =   2906 in 00:27:32 =    1.8/s Avg: 15322 Min:  1007 Max: 107932 Err:     1 (0.03%)
+2023-11-15 12:53:59,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-57
+2023-11-15 12:54:00,144 INFO o.a.j.r.Summariser: summary +     31 in 00:00:29 =    1.1/s Avg: 58292 Min: 52584 Max: 91218 Err:     0 (0.00%) Active: 57 Started: 57 Finished: 0
+2023-11-15 12:54:00,144 INFO o.a.j.r.Summariser: summary =   2937 in 00:28:00 =    1.7/s Avg: 15776 Min:  1007 Max: 107932 Err:     1 (0.03%)
+2023-11-15 12:54:29,735 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-58
+2023-11-15 12:54:33,639 INFO o.a.j.r.Summariser: summary +     23 in 00:00:33 =    0.7/s Avg: 59370 Min: 53402 Max: 99867 Err:     0 (0.00%) Active: 58 Started: 58 Finished: 0
+2023-11-15 12:54:33,639 INFO o.a.j.r.Summariser: summary =   2960 in 00:28:34 =    1.7/s Avg: 16114 Min:  1007 Max: 107932 Err:     1 (0.03%)
+2023-11-15 12:54:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-59
+2023-11-15 12:55:00,026 INFO o.a.j.r.Summariser: summary +     32 in 00:00:26 =    1.2/s Avg: 64072 Min: 56857 Max: 115083 Err:     0 (0.00%) Active: 59 Started: 59 Finished: 0
+2023-11-15 12:55:00,026 INFO o.a.j.r.Summariser: summary =   2992 in 00:29:00 =    1.7/s Avg: 16627 Min:  1007 Max: 115083 Err:     1 (0.03%)
+2023-11-15 12:55:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-60
+2023-11-15 12:55:32,951 INFO o.a.j.r.Summariser: summary +     18 in 00:00:33 =    0.5/s Avg: 66434 Min: 56229 Max: 104070 Err:     0 (0.00%) Active: 60 Started: 60 Finished: 0
+2023-11-15 12:55:32,951 INFO o.a.j.r.Summariser: summary =   3010 in 00:29:33 =    1.7/s Avg: 16925 Min:  1007 Max: 115083 Err:     1 (0.03%)
+2023-11-15 12:55:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-61
+2023-11-15 12:56:00,112 INFO o.a.j.r.Summariser: summary +     32 in 00:00:27 =    1.2/s Avg: 63020 Min: 55333 Max: 97894 Err:     0 (0.00%) Active: 61 Started: 61 Finished: 0
+2023-11-15 12:56:00,113 INFO o.a.j.r.Summariser: summary =   3042 in 00:30:00 =    1.7/s Avg: 17410 Min:  1007 Max: 115083 Err:     1 (0.03%)
+2023-11-15 12:56:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-62
+2023-11-15 12:56:31,275 INFO o.a.j.r.Summariser: summary +     22 in 00:00:31 =    0.7/s Avg: 71242 Min: 60472 Max: 114571 Err:     0 (0.00%) Active: 62 Started: 62 Finished: 0
+2023-11-15 12:56:31,275 INFO o.a.j.r.Summariser: summary =   3064 in 00:30:32 =    1.7/s Avg: 17797 Min:  1007 Max: 115083 Err:     1 (0.03%)
+2023-11-15 12:56:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-63
+2023-11-15 12:57:00,028 INFO o.a.j.r.Summariser: summary +     17 in 00:00:29 =    0.6/s Avg: 77745 Min: 67798 Max: 120560 Err:     0 (0.00%) Active: 63 Started: 63 Finished: 0
+2023-11-15 12:57:00,028 INFO o.a.j.r.Summariser: summary =   3081 in 00:31:00 =    1.7/s Avg: 18127 Min:  1007 Max: 120560 Err:     1 (0.03%)
+2023-11-15 12:57:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-64
+2023-11-15 12:57:30,577 INFO o.a.j.r.Summariser: summary +     33 in 00:00:31 =    1.1/s Avg: 75988 Min: 71279 Max: 89279 Err:     0 (0.00%) Active: 64 Started: 64 Finished: 0
+2023-11-15 12:57:30,577 INFO o.a.j.r.Summariser: summary =   3114 in 00:31:31 =    1.6/s Avg: 18740 Min:  1007 Max: 120560 Err:     1 (0.03%)
+2023-11-15 12:57:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-65
+2023-11-15 12:58:00,055 INFO o.a.j.r.Summariser: summary +     17 in 00:00:29 =    0.6/s Avg: 82390 Min: 73690 Max: 122185 Err:     0 (0.00%) Active: 65 Started: 65 Finished: 0
+2023-11-15 12:58:00,056 INFO o.a.j.r.Summariser: summary =   3131 in 00:32:00 =    1.6/s Avg: 19086 Min:  1007 Max: 122185 Err:     1 (0.03%)
+2023-11-15 12:58:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-66
+2023-11-15 12:58:32,302 INFO o.a.j.r.Summariser: summary +     30 in 00:00:32 =    0.9/s Avg: 76461 Min: 70970 Max: 100664 Err:     0 (0.00%) Active: 66 Started: 66 Finished: 0
+2023-11-15 12:58:32,302 INFO o.a.j.r.Summariser: summary =   3161 in 00:32:33 =    1.6/s Avg: 19631 Min:  1007 Max: 122185 Err:     1 (0.03%)
+2023-11-15 12:58:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-67
+2023-11-15 12:59:00,050 INFO o.a.j.r.Summariser: summary +     24 in 00:00:28 =    0.9/s Avg: 78628 Min: 69038 Max: 120772 Err:     0 (0.00%) Active: 67 Started: 67 Finished: 0
+2023-11-15 12:59:00,051 INFO o.a.j.r.Summariser: summary =   3185 in 00:33:00 =    1.6/s Avg: 20075 Min:  1007 Max: 122185 Err:     1 (0.03%)
+2023-11-15 12:59:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-68
+2023-11-15 12:59:30,581 INFO o.a.j.r.Summariser: summary +     24 in 00:00:31 =    0.8/s Avg: 77048 Min: 69766 Max: 114553 Err:     0 (0.00%) Active: 68 Started: 68 Finished: 0
+2023-11-15 12:59:30,583 INFO o.a.j.r.Summariser: summary =   3209 in 00:33:31 =    1.6/s Avg: 20501 Min:  1007 Max: 122185 Err:     1 (0.03%)
+2023-11-15 12:59:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-69
+2023-11-15 13:00:02,502 INFO o.a.j.r.Summariser: summary +     32 in 00:00:32 =    1.0/s Avg: 75136 Min: 68596 Max: 89377 Err:     0 (0.00%) Active: 69 Started: 69 Finished: 0
+2023-11-15 13:00:02,502 INFO o.a.j.r.Summariser: summary =   3241 in 00:34:03 =    1.6/s Avg: 21041 Min:  1007 Max: 122185 Err:     1 (0.03%)
+2023-11-15 13:00:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-70
+2023-11-15 13:00:30,504 INFO o.a.j.r.Summariser: summary +     17 in 00:00:28 =    0.6/s Avg: 77438 Min: 66829 Max: 105907 Err:     0 (0.00%) Active: 70 Started: 70 Finished: 0
+2023-11-15 13:00:30,504 INFO o.a.j.r.Summariser: summary =   3258 in 00:34:31 =    1.6/s Avg: 21335 Min:  1007 Max: 122185 Err:     1 (0.03%)
+2023-11-15 13:00:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-71
+2023-11-15 13:01:02,579 INFO o.a.j.r.Summariser: summary +     29 in 00:00:32 =    0.9/s Avg: 78919 Min: 71411 Max: 126068 Err:     0 (0.00%) Active: 71 Started: 71 Finished: 0
+2023-11-15 13:01:02,580 INFO o.a.j.r.Summariser: summary =   3287 in 00:35:03 =    1.6/s Avg: 21843 Min:  1007 Max: 126068 Err:     1 (0.03%)
+2023-11-15 13:01:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-72
+2023-11-15 13:01:30,715 INFO o.a.j.r.Summariser: summary +     21 in 00:00:28 =    0.7/s Avg: 84933 Min: 77533 Max: 103312 Err:     0 (0.00%) Active: 72 Started: 72 Finished: 0
+2023-11-15 13:01:30,715 INFO o.a.j.r.Summariser: summary =   3308 in 00:35:31 =    1.6/s Avg: 22244 Min:  1007 Max: 126068 Err:     1 (0.03%)
+2023-11-15 13:01:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-73
+2023-11-15 13:02:01,367 INFO o.a.j.r.Summariser: summary +     21 in 00:00:31 =    0.7/s Avg: 87819 Min: 80126 Max: 108474 Err:     0 (0.00%) Active: 73 Started: 73 Finished: 0
+2023-11-15 13:02:01,367 INFO o.a.j.r.Summariser: summary =   3329 in 00:36:02 =    1.5/s Avg: 22657 Min:  1007 Max: 126068 Err:     1 (0.03%)
+2023-11-15 13:02:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-74
+2023-11-15 13:02:30,630 INFO o.a.j.r.Summariser: summary +     26 in 00:00:29 =    0.9/s Avg: 94719 Min: 86795 Max: 129567 Err:     0 (0.00%) Active: 74 Started: 74 Finished: 0
+2023-11-15 13:02:30,630 INFO o.a.j.r.Summariser: summary =   3355 in 00:36:31 =    1.5/s Avg: 23216 Min:  1007 Max: 129567 Err:     1 (0.03%)
+2023-11-15 13:02:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-75
+2023-11-15 13:03:00,328 INFO o.a.j.r.Summariser: summary +     46 in 00:00:30 =    1.5/s Avg: 76890 Min: 58346 Max: 108349 Err:     0 (0.00%) Active: 75 Started: 75 Finished: 0
+2023-11-15 13:03:00,328 INFO o.a.j.r.Summariser: summary =   3401 in 00:37:01 =    1.5/s Avg: 23942 Min:  1007 Max: 129567 Err:     1 (0.03%)
+2023-11-15 13:03:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-76
+2023-11-15 13:03:35,936 INFO o.a.j.r.Summariser: summary +     46 in 00:00:36 =    1.3/s Avg: 48851 Min: 42690 Max: 98479 Err:     0 (0.00%) Active: 76 Started: 76 Finished: 0
+2023-11-15 13:03:35,936 INFO o.a.j.r.Summariser: summary =   3447 in 00:37:36 =    1.5/s Avg: 24274 Min:  1007 Max: 129567 Err:     1 (0.03%)
+2023-11-15 13:03:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-77
+2023-11-15 13:04:02,458 INFO o.a.j.r.Summariser: summary +     13 in 00:00:27 =    0.5/s Avg: 61356 Min: 54545 Max: 92329 Err:     0 (0.00%) Active: 77 Started: 77 Finished: 0
+2023-11-15 13:04:02,458 INFO o.a.j.r.Summariser: summary =   3460 in 00:38:03 =    1.5/s Avg: 24413 Min:  1007 Max: 129567 Err:     1 (0.03%)
+2023-11-15 13:04:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-78
+2023-11-15 13:04:31,709 INFO o.a.j.r.Summariser: summary +     24 in 00:00:29 =    0.8/s Avg: 77635 Min: 67661 Max: 107452 Err:     0 (0.00%) Active: 78 Started: 78 Finished: 0
+2023-11-15 13:04:31,710 INFO o.a.j.r.Summariser: summary =   3484 in 00:38:32 =    1.5/s Avg: 24780 Min:  1007 Max: 129567 Err:     1 (0.03%)
+2023-11-15 13:04:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-79
+2023-11-15 13:05:02,103 INFO o.a.j.r.Summariser: summary +     30 in 00:00:30 =    1.0/s Avg: 92325 Min: 84019 Max: 105624 Err:     0 (0.00%) Active: 79 Started: 79 Finished: 0
+2023-11-15 13:05:02,103 INFO o.a.j.r.Summariser: summary =   3514 in 00:39:02 =    1.5/s Avg: 25357 Min:  1007 Max: 129567 Err:     1 (0.03%)
+2023-11-15 13:05:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-80
+2023-11-15 13:05:32,092 INFO o.a.j.r.Summariser: summary +     20 in 00:00:30 =    0.7/s Avg: 100551 Min: 92180 Max: 123310 Err:     0 (0.00%) Active: 80 Started: 80 Finished: 0
+2023-11-15 13:05:32,093 INFO o.a.j.r.Summariser: summary =   3534 in 00:39:32 =    1.5/s Avg: 25782 Min:  1007 Max: 129567 Err:     1 (0.03%)
+2023-11-15 13:05:59,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-81
+2023-11-15 13:06:00,501 INFO o.a.j.r.Summariser: summary +     21 in 00:00:28 =    0.7/s Avg: 96176 Min: 90148 Max: 102145 Err:     0 (0.00%) Active: 81 Started: 81 Finished: 0
+2023-11-15 13:06:00,502 INFO o.a.j.r.Summariser: summary =   3555 in 00:40:01 =    1.5/s Avg: 26198 Min:  1007 Max: 129567 Err:     1 (0.03%)
+2023-11-15 13:06:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-82
+2023-11-15 13:06:31,590 INFO o.a.j.r.Summariser: summary +     26 in 00:00:31 =    0.8/s Avg: 97469 Min: 88539 Max: 107359 Err:     0 (0.00%) Active: 82 Started: 82 Finished: 0
+2023-11-15 13:06:31,590 INFO o.a.j.r.Summariser: summary =   3581 in 00:40:32 =    1.5/s Avg: 26715 Min:  1007 Max: 129567 Err:     1 (0.03%)
+2023-11-15 13:06:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-83
+2023-11-15 13:07:03,416 INFO o.a.j.r.Summariser: summary +     21 in 00:00:32 =    0.7/s Avg: 107297 Min: 99509 Max: 133043 Err:     0 (0.00%) Active: 83 Started: 83 Finished: 0
+2023-11-15 13:07:03,417 INFO o.a.j.r.Summariser: summary =   3602 in 00:41:04 =    1.5/s Avg: 27185 Min:  1007 Max: 133043 Err:     1 (0.03%)
+2023-11-15 13:07:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-84
+2023-11-15 13:07:34,389 INFO o.a.j.r.Summariser: summary +     17 in 00:00:31 =    0.5/s Avg: 109802 Min: 100951 Max: 140820 Err:     0 (0.00%) Active: 84 Started: 84 Finished: 0
+2023-11-15 13:07:34,389 INFO o.a.j.r.Summariser: summary =   3619 in 00:41:35 =    1.5/s Avg: 27573 Min:  1007 Max: 140820 Err:     1 (0.03%)
+2023-11-15 13:07:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-85
+2023-11-15 13:08:00,497 INFO o.a.j.r.Summariser: summary +     20 in 00:00:26 =    0.8/s Avg: 112646 Min: 107478 Max: 116839 Err:     0 (0.00%) Active: 85 Started: 85 Finished: 0
+2023-11-15 13:08:00,498 INFO o.a.j.r.Summariser: summary =   3639 in 00:42:01 =    1.4/s Avg: 28041 Min:  1007 Max: 140820 Err:     1 (0.03%)
+2023-11-15 13:08:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-86
+2023-11-15 13:08:31,410 INFO o.a.j.r.Summariser: summary +     25 in 00:00:31 =    0.8/s Avg: 118008 Min: 108599 Max: 131331 Err:     0 (0.00%) Active: 86 Started: 86 Finished: 0
+2023-11-15 13:08:31,412 INFO o.a.j.r.Summariser: summary =   3664 in 00:42:32 =    1.4/s Avg: 28655 Min:  1007 Max: 140820 Err:     1 (0.03%)
+2023-11-15 13:08:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-87
+2023-11-15 13:09:01,275 INFO o.a.j.r.Summariser: summary +     21 in 00:00:30 =    0.7/s Avg: 115397 Min: 108921 Max: 123518 Err:     0 (0.00%) Active: 87 Started: 87 Finished: 0
+2023-11-15 13:09:01,275 INFO o.a.j.r.Summariser: summary =   3685 in 00:43:02 =    1.4/s Avg: 29149 Min:  1007 Max: 140820 Err:     1 (0.03%)
+2023-11-15 13:09:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-88
+2023-11-15 13:09:31,022 INFO o.a.j.r.Summariser: summary +     24 in 00:00:30 =    0.8/s Avg: 111477 Min: 96614 Max: 136860 Err:     0 (0.00%) Active: 88 Started: 88 Finished: 0
+2023-11-15 13:09:31,022 INFO o.a.j.r.Summariser: summary =   3709 in 00:43:31 =    1.4/s Avg: 29682 Min:  1007 Max: 140820 Err:     1 (0.03%)
+2023-11-15 13:09:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-89
+2023-11-15 13:10:00,579 INFO o.a.j.r.Summariser: summary +     26 in 00:00:30 =    0.9/s Avg: 107909 Min: 97551 Max: 138020 Err:     0 (0.00%) Active: 89 Started: 89 Finished: 0
+2023-11-15 13:10:00,580 INFO o.a.j.r.Summariser: summary =   3735 in 00:44:01 =    1.4/s Avg: 30226 Min:  1007 Max: 140820 Err:     1 (0.03%)
+2023-11-15 13:10:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-90
+2023-11-15 13:10:30,002 INFO o.a.j.r.Summariser: summary +     45 in 00:00:29 =    1.5/s Avg: 96373 Min: 74167 Max: 137874 Err:     0 (0.00%) Active: 90 Started: 90 Finished: 0
+2023-11-15 13:10:30,002 INFO o.a.j.r.Summariser: summary =   3780 in 00:44:30 =    1.4/s Avg: 31014 Min:  1007 Max: 140820 Err:     1 (0.03%)
+2023-11-15 13:10:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-91
+2023-11-15 13:11:00,440 INFO o.a.j.r.Summariser: summary +     45 in 00:00:30 =    1.5/s Avg: 64968 Min: 46942 Max: 116216 Err:     0 (0.00%) Active: 91 Started: 91 Finished: 0
+2023-11-15 13:11:00,440 INFO o.a.j.r.Summariser: summary =   3825 in 00:45:01 =    1.4/s Avg: 31413 Min:  1007 Max: 140820 Err:     1 (0.03%)
+2023-11-15 13:11:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-92
+2023-11-15 13:11:30,605 INFO o.a.j.r.Summariser: summary +     53 in 00:00:30 =    1.8/s Avg: 56507 Min: 41258 Max: 107342 Err:     0 (0.00%) Active: 92 Started: 92 Finished: 0
+2023-11-15 13:11:30,605 INFO o.a.j.r.Summariser: summary =   3878 in 00:45:31 =    1.4/s Avg: 31756 Min:  1007 Max: 140820 Err:     1 (0.03%)
+2023-11-15 13:11:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-93
+2023-11-15 13:12:00,429 INFO o.a.j.r.Summariser: summary +     46 in 00:00:30 =    1.5/s Avg: 53365 Min: 38086 Max: 82584 Err:     0 (0.00%) Active: 93 Started: 93 Finished: 0
+2023-11-15 13:12:00,429 INFO o.a.j.r.Summariser: summary =   3924 in 00:46:01 =    1.4/s Avg: 32010 Min:  1007 Max: 140820 Err:     1 (0.03%)
+2023-11-15 13:12:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-94
+2023-11-15 13:12:31,127 INFO o.a.j.r.Summariser: summary +     54 in 00:00:31 =    1.8/s Avg: 52026 Min: 38267 Max: 96283 Err:     0 (0.00%) Active: 94 Started: 94 Finished: 0
+2023-11-15 13:12:31,128 INFO o.a.j.r.Summariser: summary =   3978 in 00:46:31 =    1.4/s Avg: 32281 Min:  1007 Max: 140820 Err:     1 (0.03%)
+2023-11-15 13:12:59,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-95
+2023-11-15 13:13:00,048 INFO o.a.j.r.Summariser: summary +     15 in 00:00:29 =    0.5/s Avg: 62455 Min: 51507 Max: 88765 Err:     0 (0.00%) Active: 95 Started: 95 Finished: 0
+2023-11-15 13:13:00,049 INFO o.a.j.r.Summariser: summary =   3993 in 00:47:00 =    1.4/s Avg: 32395 Min:  1007 Max: 140820 Err:     1 (0.03%)
+2023-11-15 13:13:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-96
+2023-11-15 13:13:30,483 INFO o.a.j.r.Summariser: summary +     24 in 00:00:30 =    0.8/s Avg: 89637 Min: 70613 Max: 122040 Err:     0 (0.00%) Active: 96 Started: 96 Finished: 0
+2023-11-15 13:13:30,484 INFO o.a.j.r.Summariser: summary =   4017 in 00:47:31 =    1.4/s Avg: 32737 Min:  1007 Max: 140820 Err:     1 (0.02%)
+2023-11-15 13:13:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-97
+2023-11-15 13:14:02,881 INFO o.a.j.r.Summariser: summary +     63 in 00:00:32 =    1.9/s Avg: 90834 Min: 72891 Max: 122234 Err:     0 (0.00%) Active: 97 Started: 97 Finished: 0
+2023-11-15 13:14:02,881 INFO o.a.j.r.Summariser: summary =   4080 in 00:48:03 =    1.4/s Avg: 33634 Min:  1007 Max: 140820 Err:     1 (0.02%)
+2023-11-15 13:14:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-98
+2023-11-15 13:14:30,840 INFO o.a.j.r.Summariser: summary +     43 in 00:00:28 =    1.5/s Avg: 60113 Min: 51398 Max: 104948 Err:     0 (0.00%) Active: 98 Started: 98 Finished: 0
+2023-11-15 13:14:30,840 INFO o.a.j.r.Summariser: summary =   4123 in 00:48:31 =    1.4/s Avg: 33910 Min:  1007 Max: 140820 Err:     1 (0.02%)
+2023-11-15 13:14:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-99
+2023-11-15 13:15:00,190 INFO o.a.j.r.Summariser: summary +     50 in 00:00:29 =    1.7/s Avg: 53551 Min: 50888 Max: 85287 Err:     0 (0.00%) Active: 99 Started: 99 Finished: 0
+2023-11-15 13:15:00,191 INFO o.a.j.r.Summariser: summary =   4173 in 00:49:00 =    1.4/s Avg: 34145 Min:  1007 Max: 140820 Err:     1 (0.02%)
+2023-11-15 13:15:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-100
+2023-11-15 13:15:30,405 INFO o.a.j.r.Summariser: summary +     54 in 00:00:30 =    1.8/s Avg: 59364 Min: 50715 Max: 99449 Err:     0 (0.00%) Active: 100 Started: 100 Finished: 0
+2023-11-15 13:15:30,405 INFO o.a.j.r.Summariser: summary =   4227 in 00:49:31 =    1.4/s Avg: 34467 Min:  1007 Max: 140820 Err:     1 (0.02%)
+2023-11-15 13:15:59,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-101
+2023-11-15 13:16:01,175 INFO o.a.j.r.Summariser: summary +     45 in 00:00:31 =    1.5/s Avg: 58666 Min: 51007 Max: 106188 Err:     0 (0.00%) Active: 101 Started: 101 Finished: 0
+2023-11-15 13:16:01,176 INFO o.a.j.r.Summariser: summary =   4272 in 00:50:01 =    1.4/s Avg: 34722 Min:  1007 Max: 140820 Err:     1 (0.02%)
+2023-11-15 13:16:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-102
+2023-11-15 13:16:30,470 INFO o.a.j.r.Summariser: summary +     56 in 00:00:29 =    1.9/s Avg: 56678 Min: 52082 Max: 97565 Err:     0 (0.00%) Active: 102 Started: 102 Finished: 0
+2023-11-15 13:16:30,470 INFO o.a.j.r.Summariser: summary =   4328 in 00:50:31 =    1.4/s Avg: 35006 Min:  1007 Max: 140820 Err:     1 (0.02%)
+2023-11-15 13:16:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-103
+2023-11-15 13:17:01,132 INFO o.a.j.r.Summariser: summary +     41 in 00:00:31 =    1.3/s Avg: 59806 Min: 52581 Max: 130286 Err:     0 (0.00%) Active: 103 Started: 103 Finished: 0
+2023-11-15 13:17:01,132 INFO o.a.j.r.Summariser: summary =   4369 in 00:51:01 =    1.4/s Avg: 35239 Min:  1007 Max: 140820 Err:     1 (0.02%)
+2023-11-15 13:17:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-104
+2023-11-15 13:17:30,906 INFO o.a.j.r.Summariser: summary +     61 in 00:00:30 =    2.0/s Avg: 60773 Min: 52867 Max: 143062 Err:     0 (0.00%) Active: 104 Started: 104 Finished: 0
+2023-11-15 13:17:30,907 INFO o.a.j.r.Summariser: summary =   4430 in 00:51:31 =    1.4/s Avg: 35591 Min:  1007 Max: 143062 Err:     1 (0.02%)
+2023-11-15 13:17:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-105
+2023-11-15 13:18:00,760 INFO o.a.j.r.Summariser: summary +     34 in 00:00:30 =    1.1/s Avg: 65467 Min: 54143 Max: 143264 Err:     0 (0.00%) Active: 105 Started: 105 Finished: 0
+2023-11-15 13:18:00,760 INFO o.a.j.r.Summariser: summary =   4464 in 00:52:01 =    1.4/s Avg: 35818 Min:  1007 Max: 143264 Err:     1 (0.02%)
+2023-11-15 13:18:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-106
+2023-11-15 13:18:30,110 INFO o.a.j.r.Summariser: summary +     64 in 00:00:29 =    2.2/s Avg: 65326 Min: 56498 Max: 128317 Err:     0 (0.00%) Active: 106 Started: 106 Finished: 0
+2023-11-15 13:18:30,110 INFO o.a.j.r.Summariser: summary =   4528 in 00:52:30 =    1.4/s Avg: 36235 Min:  1007 Max: 143264 Err:     1 (0.02%)
+2023-11-15 13:18:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-107
+2023-11-15 13:19:00,611 INFO o.a.j.r.Summariser: summary +     29 in 00:00:31 =    1.0/s Avg: 68223 Min: 60107 Max: 100590 Err:     0 (0.00%) Active: 107 Started: 107 Finished: 0
+2023-11-15 13:19:00,611 INFO o.a.j.r.Summariser: summary =   4557 in 00:53:01 =    1.4/s Avg: 36439 Min:  1007 Max: 143264 Err:     1 (0.02%)
+2023-11-15 13:19:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-108
+2023-11-15 13:19:30,302 INFO o.a.j.r.Summariser: summary +     40 in 00:00:30 =    1.3/s Avg: 73022 Min: 65184 Max: 91386 Err:     0 (0.00%) Active: 108 Started: 108 Finished: 0
+2023-11-15 13:19:30,302 INFO o.a.j.r.Summariser: summary =   4597 in 00:53:31 =    1.4/s Avg: 36757 Min:  1007 Max: 143264 Err:     1 (0.02%)
+2023-11-15 13:19:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-109
+2023-11-15 13:20:00,901 INFO o.a.j.r.Summariser: summary +     53 in 00:00:31 =    1.7/s Avg: 76191 Min: 67125 Max: 116090 Err:     0 (0.00%) Active: 109 Started: 109 Finished: 0
+2023-11-15 13:20:00,901 INFO o.a.j.r.Summariser: summary =   4650 in 00:54:01 =    1.4/s Avg: 37207 Min:  1007 Max: 143264 Err:     1 (0.02%)
+2023-11-15 13:20:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-110
+2023-11-15 13:20:31,690 INFO o.a.j.r.Summariser: summary +     24 in 00:00:31 =    0.8/s Avg: 80318 Min: 66699 Max: 121464 Err:     0 (0.00%) Active: 110 Started: 110 Finished: 0
+2023-11-15 13:20:31,690 INFO o.a.j.r.Summariser: summary =   4674 in 00:54:32 =    1.4/s Avg: 37428 Min:  1007 Max: 143264 Err:     1 (0.02%)
+2023-11-15 13:20:59,731 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-111
+2023-11-15 13:21:00,138 INFO o.a.j.r.Summariser: summary +     32 in 00:00:28 =    1.1/s Avg: 84059 Min: 75453 Max: 120970 Err:     0 (0.00%) Active: 111 Started: 111 Finished: 0
+2023-11-15 13:21:00,138 INFO o.a.j.r.Summariser: summary =   4706 in 00:55:00 =    1.4/s Avg: 37745 Min:  1007 Max: 143264 Err:     1 (0.02%)
+2023-11-15 13:21:29,731 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-112
+2023-11-15 13:21:34,132 INFO o.a.j.r.Summariser: summary +     28 in 00:00:34 =    0.8/s Avg: 100020 Min: 89715 Max: 119372 Err:     0 (0.00%) Active: 112 Started: 112 Finished: 0
+2023-11-15 13:21:34,133 INFO o.a.j.r.Summariser: summary =   4734 in 00:55:34 =    1.4/s Avg: 38113 Min:  1007 Max: 143264 Err:     1 (0.02%)
+2023-11-15 13:21:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-113
+2023-11-15 13:22:00,257 INFO o.a.j.r.Summariser: summary +     22 in 00:00:26 =    0.8/s Avg: 113697 Min: 106645 Max: 128781 Err:     0 (0.00%) Active: 113 Started: 113 Finished: 0
+2023-11-15 13:22:00,257 INFO o.a.j.r.Summariser: summary =   4756 in 00:56:01 =    1.4/s Avg: 38463 Min:  1007 Max: 143264 Err:     1 (0.02%)
+2023-11-15 13:22:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-114
+2023-11-15 13:22:30,604 INFO o.a.j.r.Summariser: summary +     20 in 00:00:30 =    0.7/s Avg: 125171 Min: 117970 Max: 144514 Err:     0 (0.00%) Active: 114 Started: 114 Finished: 0
+2023-11-15 13:22:30,604 INFO o.a.j.r.Summariser: summary =   4776 in 00:56:31 =    1.4/s Avg: 38826 Min:  1007 Max: 144514 Err:     1 (0.02%)
+2023-11-15 13:22:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-115
+2023-11-15 13:23:00,065 INFO o.a.j.r.Summariser: summary +     38 in 00:00:29 =    1.3/s Avg: 126887 Min: 119663 Max: 136405 Err:     0 (0.00%) Active: 115 Started: 115 Finished: 0
+2023-11-15 13:23:00,066 INFO o.a.j.r.Summariser: summary =   4814 in 00:57:00 =    1.4/s Avg: 39521 Min:  1007 Max: 144514 Err:     1 (0.02%)
+2023-11-15 13:23:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-116
+2023-11-15 13:23:31,126 INFO o.a.j.r.Summariser: summary +     27 in 00:00:31 =    0.9/s Avg: 123136 Min: 112249 Max: 137013 Err:     0 (0.00%) Active: 116 Started: 116 Finished: 0
+2023-11-15 13:23:31,126 INFO o.a.j.r.Summariser: summary =   4841 in 00:57:31 =    1.4/s Avg: 39988 Min:  1007 Max: 144514 Err:     1 (0.02%)
+2023-11-15 13:23:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-117
+2023-11-15 13:24:00,578 INFO o.a.j.r.Summariser: summary +     17 in 00:00:29 =    0.6/s Avg: 125342 Min: 119983 Max: 133171 Err:     0 (0.00%) Active: 117 Started: 117 Finished: 0
+2023-11-15 13:24:00,578 INFO o.a.j.r.Summariser: summary =   4858 in 00:58:01 =    1.4/s Avg: 40286 Min:  1007 Max: 144514 Err:     1 (0.02%)
+2023-11-15 13:24:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-118
+2023-11-15 13:24:30,301 INFO o.a.j.r.Summariser: summary +     28 in 00:00:30 =    0.9/s Avg: 134239 Min: 126696 Max: 140961 Err:     0 (0.00%) Active: 118 Started: 118 Finished: 0
+2023-11-15 13:24:30,301 INFO o.a.j.r.Summariser: summary =   4886 in 00:58:31 =    1.4/s Avg: 40825 Min:  1007 Max: 144514 Err:     1 (0.02%)
+2023-11-15 13:24:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-119
+2023-11-15 13:25:00,103 INFO o.a.j.r.Summariser: summary +     50 in 00:00:30 =    1.7/s Avg: 118034 Min: 103029 Max: 134739 Err:     0 (0.00%) Active: 119 Started: 119 Finished: 0
+2023-11-15 13:25:00,103 INFO o.a.j.r.Summariser: summary =   4936 in 00:59:00 =    1.4/s Avg: 41607 Min:  1007 Max: 144514 Err:     1 (0.02%)
+2023-11-15 13:25:29,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-120
+2023-11-15 13:25:30,306 INFO o.a.j.r.Summariser: summary +     53 in 00:00:30 =    1.8/s Avg: 91886 Min: 67332 Max: 129757 Err:     0 (0.00%) Active: 120 Started: 120 Finished: 0
+2023-11-15 13:25:30,306 INFO o.a.j.r.Summariser: summary =   4989 in 00:59:31 =    1.4/s Avg: 42141 Min:  1007 Max: 144514 Err:     1 (0.02%)
+2023-11-15 13:25:59,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-121
+2023-11-15 13:26:00,847 INFO o.a.j.r.Summariser: summary +     45 in 00:00:31 =    1.5/s Avg: 68800 Min: 64376 Max: 139714 Err:     0 (0.00%) Active: 121 Started: 121 Finished: 0
+2023-11-15 13:26:00,847 INFO o.a.j.r.Summariser: summary =   5034 in 01:00:01 =    1.4/s Avg: 42379 Min:  1007 Max: 144514 Err:     1 (0.02%)
+2023-11-15 13:26:29,730 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-122
+2023-11-15 13:26:30,145 INFO o.a.j.r.Summariser: summary +     55 in 00:00:29 =    1.9/s Avg: 70190 Min: 63416 Max: 120230 Err:     0 (0.00%) Active: 122 Started: 122 Finished: 0
+2023-11-15 13:26:30,145 INFO o.a.j.r.Summariser: summary =   5089 in 01:00:30 =    1.4/s Avg: 42680 Min:  1007 Max: 144514 Err:     1 (0.02%)
+2023-11-15 13:26:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-123
+2023-11-15 13:27:00,871 INFO o.a.j.r.Summariser: summary +     37 in 00:00:31 =    1.2/s Avg: 78184 Min: 62954 Max: 120572 Err:     0 (0.00%) Active: 123 Started: 123 Finished: 0
+2023-11-15 13:27:00,871 INFO o.a.j.r.Summariser: summary =   5126 in 01:01:01 =    1.4/s Avg: 42936 Min:  1007 Max: 144514 Err:     1 (0.02%)
+2023-11-15 13:27:29,735 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-124
+2023-11-15 13:27:31,198 INFO o.a.j.r.Summariser: summary +     39 in 00:00:30 =    1.3/s Avg: 78440 Min: 68361 Max: 108579 Err:     0 (0.00%) Active: 124 Started: 124 Finished: 0
+2023-11-15 13:27:31,198 INFO o.a.j.r.Summariser: summary =   5165 in 01:01:32 =    1.4/s Avg: 43204 Min:  1007 Max: 144514 Err:     1 (0.02%)
+2023-11-15 13:27:59,734 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-125
+2023-11-15 13:28:01,813 INFO o.a.j.r.Summariser: summary +     19 in 00:00:31 =    0.6/s Avg: 90417 Min: 81098 Max: 118496 Err:     0 (0.00%) Active: 125 Started: 125 Finished: 0
+2023-11-15 13:28:01,813 INFO o.a.j.r.Summariser: summary =   5184 in 01:02:02 =    1.4/s Avg: 43377 Min:  1007 Max: 144514 Err:     1 (0.02%)
+2023-11-15 13:28:29,735 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-126
+2023-11-15 13:28:31,817 INFO o.a.j.r.Summariser: summary +     27 in 00:00:30 =    0.9/s Avg: 114977 Min: 98891 Max: 148061 Err:     0 (0.00%) Active: 126 Started: 126 Finished: 0
+2023-11-15 13:28:31,817 INFO o.a.j.r.Summariser: summary =   5211 in 01:02:32 =    1.4/s Avg: 43748 Min:  1007 Max: 148061 Err:     1 (0.02%)
+2023-11-15 13:28:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-127
+2023-11-15 13:29:00,764 INFO o.a.j.r.Summariser: summary +     15 in 00:00:29 =    0.5/s Avg: 131529 Min: 116162 Max: 148390 Err:     0 (0.00%) Active: 127 Started: 127 Finished: 0
+2023-11-15 13:29:00,764 INFO o.a.j.r.Summariser: summary =   5226 in 01:03:01 =    1.4/s Avg: 44000 Min:  1007 Max: 148390 Err:     1 (0.02%)
+2023-11-15 13:29:29,731 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-128
+2023-11-15 13:29:30,754 INFO o.a.j.r.Summariser: summary +     32 in 00:00:30 =    1.1/s Avg: 146225 Min: 138519 Max: 170774 Err:     0 (0.00%) Active: 128 Started: 128 Finished: 0
+2023-11-15 13:29:30,754 INFO o.a.j.r.Summariser: summary =   5258 in 01:03:31 =    1.4/s Avg: 44622 Min:  1007 Max: 170774 Err:     1 (0.02%)
+2023-11-15 13:29:59,730 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-129
+2023-11-15 13:30:00,255 INFO o.a.j.r.Summariser: summary +     52 in 00:00:30 =    1.8/s Avg: 135857 Min: 115283 Max: 158604 Err:     0 (0.00%) Active: 129 Started: 129 Finished: 0
+2023-11-15 13:30:00,255 INFO o.a.j.r.Summariser: summary =   5310 in 01:04:01 =    1.4/s Avg: 45516 Min:  1007 Max: 170774 Err:     1 (0.02%)
+2023-11-15 13:30:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-130
+2023-11-15 13:30:30,315 INFO o.a.j.r.Summariser: summary +     45 in 00:00:30 =    1.5/s Avg: 102644 Min: 78216 Max: 161274 Err:     0 (0.00%) Active: 130 Started: 130 Finished: 0
+2023-11-15 13:30:30,316 INFO o.a.j.r.Summariser: summary =   5355 in 01:04:31 =    1.4/s Avg: 45996 Min:  1007 Max: 170774 Err:     1 (0.02%)
+2023-11-15 13:30:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-131
+2023-11-15 13:31:00,045 INFO o.a.j.r.Summariser: summary +     45 in 00:00:30 =    1.5/s Avg: 79421 Min: 77145 Max: 97940 Err:     0 (0.00%) Active: 131 Started: 131 Finished: 0
+2023-11-15 13:31:00,045 INFO o.a.j.r.Summariser: summary =   5400 in 01:05:00 =    1.4/s Avg: 46274 Min:  1007 Max: 170774 Err:     1 (0.02%)
+2023-11-15 13:31:29,726 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-132
+2023-11-15 13:31:30,338 INFO o.a.j.r.Summariser: summary +     61 in 00:00:30 =    2.0/s Avg: 80044 Min: 76274 Max: 108736 Err:     0 (0.00%) Active: 132 Started: 132 Finished: 0
+2023-11-15 13:31:30,338 INFO o.a.j.r.Summariser: summary =   5461 in 01:05:31 =    1.4/s Avg: 46652 Min:  1007 Max: 170774 Err:     1 (0.02%)
+2023-11-15 13:31:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-133
+2023-11-15 13:32:00,279 INFO o.a.j.r.Summariser: summary +     24 in 00:00:30 =    0.8/s Avg: 87534 Min: 76136 Max: 150188 Err:     0 (0.00%) Active: 133 Started: 133 Finished: 0
+2023-11-15 13:32:00,279 INFO o.a.j.r.Summariser: summary =   5485 in 01:06:01 =    1.4/s Avg: 46830 Min:  1007 Max: 170774 Err:     1 (0.02%)
+2023-11-15 13:32:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-134
+2023-11-15 13:32:33,054 INFO o.a.j.r.Summariser: summary +      6 in 00:00:33 =    0.2/s Avg: 99842 Min: 89074 Max: 111878 Err:     0 (0.00%) Active: 134 Started: 134 Finished: 0
+2023-11-15 13:32:33,055 INFO o.a.j.r.Summariser: summary =   5491 in 01:06:33 =    1.4/s Avg: 46888 Min:  1007 Max: 170774 Err:     1 (0.02%)
+2023-11-15 13:32:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-135
+2023-11-15 13:33:02,061 INFO o.a.j.r.Summariser: summary +     14 in 00:00:29 =    0.5/s Avg: 127105 Min: 113258 Max: 145972 Err:     0 (0.00%) Active: 135 Started: 135 Finished: 0
+2023-11-15 13:33:02,061 INFO o.a.j.r.Summariser: summary =   5505 in 01:07:02 =    1.4/s Avg: 47092 Min:  1007 Max: 170774 Err:     1 (0.02%)
+2023-11-15 13:33:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-136
+2023-11-15 13:33:30,418 INFO o.a.j.r.Summariser: summary +     19 in 00:00:28 =    0.7/s Avg: 141331 Min: 132054 Max: 162608 Err:     0 (0.00%) Active: 136 Started: 136 Finished: 0
+2023-11-15 13:33:30,418 INFO o.a.j.r.Summariser: summary =   5524 in 01:07:31 =    1.4/s Avg: 47417 Min:  1007 Max: 170774 Err:     1 (0.02%)
+2023-11-15 13:33:59,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-137
+2023-11-15 13:34:00,437 INFO o.a.j.r.Summariser: summary +     25 in 00:00:30 =    0.8/s Avg: 164267 Min: 150032 Max: 199171 Err:     0 (0.00%) Active: 137 Started: 137 Finished: 0
+2023-11-15 13:34:00,437 INFO o.a.j.r.Summariser: summary =   5549 in 01:08:01 =    1.4/s Avg: 47943 Min:  1007 Max: 199171 Err:     1 (0.02%)
+2023-11-15 13:34:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-138
+2023-11-15 13:34:31,286 INFO o.a.j.r.Summariser: summary +     20 in 00:00:31 =    0.6/s Avg: 186729 Min: 175722 Max: 211399 Err:     0 (0.00%) Active: 138 Started: 138 Finished: 0
+2023-11-15 13:34:31,286 INFO o.a.j.r.Summariser: summary =   5569 in 01:08:32 =    1.4/s Avg: 48441 Min:  1007 Max: 211399 Err:     1 (0.02%)
+2023-11-15 13:34:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-139
+2023-11-15 13:35:01,081 INFO o.a.j.r.Summariser: summary +     23 in 00:00:30 =    0.8/s Avg: 200988 Min: 189889 Max: 218946 Err:     0 (0.00%) Active: 139 Started: 139 Finished: 0
+2023-11-15 13:35:01,081 INFO o.a.j.r.Summariser: summary =   5592 in 01:09:01 =    1.4/s Avg: 49069 Min:  1007 Max: 218946 Err:     1 (0.02%)
+2023-11-15 13:35:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-140
+2023-11-15 13:35:30,583 INFO o.a.j.r.Summariser: summary +     12 in 00:00:30 =    0.4/s Avg: 218368 Min: 210566 Max: 232414 Err:     0 (0.00%) Active: 140 Started: 140 Finished: 0
+2023-11-15 13:35:30,583 INFO o.a.j.r.Summariser: summary =   5604 in 01:09:31 =    1.3/s Avg: 49431 Min:  1007 Max: 232414 Err:     1 (0.02%)
+2023-11-15 13:35:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-141
+2023-11-15 13:36:03,520 INFO o.a.j.r.Summariser: summary +     15 in 00:00:33 =    0.5/s Avg: 232612 Min: 223311 Max: 244932 Err:     0 (0.00%) Active: 141 Started: 141 Finished: 0
+2023-11-15 13:36:03,520 INFO o.a.j.r.Summariser: summary =   5619 in 01:10:04 =    1.3/s Avg: 49920 Min:  1007 Max: 244932 Err:     1 (0.02%)
+2023-11-15 13:36:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-142
+2023-11-15 13:36:30,297 INFO o.a.j.r.Summariser: summary +     12 in 00:00:27 =    0.4/s Avg: 228488 Min: 216622 Max: 249699 Err:     0 (0.00%) Active: 142 Started: 142 Finished: 0
+2023-11-15 13:36:30,297 INFO o.a.j.r.Summariser: summary =   5631 in 01:10:31 =    1.3/s Avg: 50301 Min:  1007 Max: 249699 Err:     1 (0.02%)
+2023-11-15 13:36:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-143
+2023-11-15 13:37:00,337 INFO o.a.j.r.Summariser: summary +     17 in 00:00:30 =    0.6/s Avg: 228362 Min: 219077 Max: 243499 Err:     0 (0.00%) Active: 143 Started: 143 Finished: 0
+2023-11-15 13:37:00,338 INFO o.a.j.r.Summariser: summary =   5648 in 01:11:01 =    1.3/s Avg: 50837 Min:  1007 Max: 249699 Err:     1 (0.02%)
+2023-11-15 13:37:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-144
+2023-11-15 13:37:30,602 INFO o.a.j.r.Summariser: summary +     42 in 00:00:30 =    1.4/s Avg: 215342 Min: 192907 Max: 232386 Err:     0 (0.00%) Active: 144 Started: 144 Finished: 0
+2023-11-15 13:37:30,602 INFO o.a.j.r.Summariser: summary =   5690 in 01:11:31 =    1.3/s Avg: 52051 Min:  1007 Max: 249699 Err:     1 (0.02%)
+2023-11-15 13:37:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-145
+2023-11-15 13:38:01,165 INFO o.a.j.r.Summariser: summary +     52 in 00:00:31 =    1.7/s Avg: 180627 Min: 149068 Max: 211106 Err:     0 (0.00%) Active: 145 Started: 145 Finished: 0
+2023-11-15 13:38:01,165 INFO o.a.j.r.Summariser: summary =   5742 in 01:12:01 =    1.3/s Avg: 53215 Min:  1007 Max: 249699 Err:     1 (0.02%)
+2023-11-15 13:38:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-146
+2023-11-15 13:38:31,655 INFO o.a.j.r.Summariser: summary +     18 in 00:00:30 =    0.6/s Avg: 145492 Min: 139690 Max: 152040 Err:     0 (0.00%) Active: 146 Started: 146 Finished: 0
+2023-11-15 13:38:31,655 INFO o.a.j.r.Summariser: summary =   5760 in 01:12:32 =    1.3/s Avg: 53504 Min:  1007 Max: 249699 Err:     1 (0.02%)
+2023-11-15 13:38:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-147
+2023-11-15 13:39:01,841 INFO o.a.j.r.Summariser: summary +     19 in 00:00:30 =    0.6/s Avg: 144791 Min: 134902 Max: 190307 Err:     0 (0.00%) Active: 147 Started: 147 Finished: 0
+2023-11-15 13:39:01,841 INFO o.a.j.r.Summariser: summary =   5779 in 01:13:02 =    1.3/s Avg: 53804 Min:  1007 Max: 249699 Err:     1 (0.02%)
+2023-11-15 13:39:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-148
+2023-11-15 13:39:34,199 INFO o.a.j.r.Summariser: summary +     18 in 00:00:32 =    0.6/s Avg: 141771 Min: 133307 Max: 187552 Err:     0 (0.00%) Active: 148 Started: 148 Finished: 0
+2023-11-15 13:39:34,199 INFO o.a.j.r.Summariser: summary =   5797 in 01:13:35 =    1.3/s Avg: 54077 Min:  1007 Max: 249699 Err:     1 (0.02%)
+2023-11-15 13:39:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-149
+2023-11-15 13:40:00,150 INFO o.a.j.r.Summariser: summary +     19 in 00:00:26 =    0.7/s Avg: 151166 Min: 141271 Max: 178958 Err:     0 (0.00%) Active: 149 Started: 149 Finished: 0
+2023-11-15 13:40:00,150 INFO o.a.j.r.Summariser: summary =   5816 in 01:14:00 =    1.3/s Avg: 54394 Min:  1007 Max: 249699 Err:     1 (0.02%)
+2023-11-15 13:40:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-150
+2023-11-15 13:40:31,319 INFO o.a.j.r.Summariser: summary +     26 in 00:00:31 =    0.8/s Avg: 164594 Min: 156707 Max: 190691 Err:     0 (0.00%) Active: 150 Started: 150 Finished: 0
+2023-11-15 13:40:31,319 INFO o.a.j.r.Summariser: summary =   5842 in 01:14:32 =    1.3/s Avg: 54885 Min:  1007 Max: 249699 Err:     1 (0.02%)
+2023-11-15 13:40:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-151
+2023-11-15 13:41:01,725 INFO o.a.j.r.Summariser: summary +     34 in 00:00:30 =    1.1/s Avg: 186445 Min: 172764 Max: 203601 Err:     0 (0.00%) Active: 151 Started: 151 Finished: 0
+2023-11-15 13:41:01,726 INFO o.a.j.r.Summariser: summary =   5876 in 01:15:02 =    1.3/s Avg: 55646 Min:  1007 Max: 249699 Err:     1 (0.02%)
+2023-11-15 13:41:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-152
+2023-11-15 13:41:30,034 INFO o.a.j.r.Summariser: summary +     21 in 00:00:28 =    0.7/s Avg: 193256 Min: 188072 Max: 201986 Err:     0 (0.00%) Active: 152 Started: 152 Finished: 0
+2023-11-15 13:41:30,034 INFO o.a.j.r.Summariser: summary =   5897 in 01:15:30 =    1.3/s Avg: 56136 Min:  1007 Max: 249699 Err:     1 (0.02%)
+2023-11-15 13:41:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-153
+2023-11-15 13:42:00,211 INFO o.a.j.r.Summariser: summary +     22 in 00:00:30 =    0.7/s Avg: 190929 Min: 182313 Max: 200268 Err:     0 (0.00%) Active: 153 Started: 153 Finished: 0
+2023-11-15 13:42:00,211 INFO o.a.j.r.Summariser: summary =   5919 in 01:16:01 =    1.3/s Avg: 56637 Min:  1007 Max: 249699 Err:     1 (0.02%)
+2023-11-15 13:42:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-154
+2023-11-15 13:42:30,094 INFO o.a.j.r.Summariser: summary +     23 in 00:00:30 =    0.8/s Avg: 188186 Min: 175894 Max: 199473 Err:     0 (0.00%) Active: 154 Started: 154 Finished: 0
+2023-11-15 13:42:30,095 INFO o.a.j.r.Summariser: summary =   5942 in 01:16:30 =    1.3/s Avg: 57146 Min:  1007 Max: 249699 Err:     1 (0.02%)
+2023-11-15 13:42:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-155
+2023-11-15 13:43:00,571 INFO o.a.j.r.Summariser: summary +     25 in 00:00:30 =    0.8/s Avg: 169758 Min: 149977 Max: 191683 Err:     1 (4.00%) Active: 155 Started: 155 Finished: 0
+2023-11-15 13:43:00,573 INFO o.a.j.r.Summariser: summary =   5967 in 01:17:01 =    1.3/s Avg: 57618 Min:  1007 Max: 249699 Err:     2 (0.03%)
+2023-11-15 13:43:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-156
+2023-11-15 13:43:30,102 INFO o.a.j.r.Summariser: summary +     68 in 00:00:30 =    2.3/s Avg: 145539 Min: 114038 Max: 201203 Err:    29 (42.65%) Active: 156 Started: 156 Finished: 0
+2023-11-15 13:43:30,103 INFO o.a.j.r.Summariser: summary =   6035 in 01:17:30 =    1.3/s Avg: 58609 Min:  1007 Max: 249699 Err:    31 (0.51%)
+2023-11-15 13:43:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-157
+2023-11-15 13:44:01,835 INFO o.a.j.r.Summariser: summary +     44 in 00:00:32 =    1.4/s Avg: 118616 Min: 84064 Max: 249799 Err:    20 (45.45%) Active: 157 Started: 157 Finished: 0
+2023-11-15 13:44:01,836 INFO o.a.j.r.Summariser: summary =   6079 in 01:18:02 =    1.3/s Avg: 59043 Min:  1007 Max: 249799 Err:    51 (0.84%)
+2023-11-15 13:44:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-158
+2023-11-15 13:44:34,635 INFO o.a.j.r.Summariser: summary +     60 in 00:00:33 =    1.8/s Avg: 88708 Min: 17286 Max: 260587 Err:    41 (68.33%) Active: 158 Started: 158 Finished: 0
+2023-11-15 13:44:34,636 INFO o.a.j.r.Summariser: summary =   6139 in 01:18:35 =    1.3/s Avg: 59333 Min:  1007 Max: 260587 Err:    92 (1.50%)
+2023-11-15 13:44:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-159
+2023-11-15 13:45:01,517 INFO o.a.j.r.Summariser: summary +      4 in 00:00:27 =    0.1/s Avg: 123950 Min: 111762 Max: 150521 Err:     0 (0.00%) Active: 159 Started: 159 Finished: 0
+2023-11-15 13:45:01,517 INFO o.a.j.r.Summariser: summary =   6143 in 01:19:02 =    1.3/s Avg: 59375 Min:  1007 Max: 260587 Err:    92 (1.50%)
+2023-11-15 13:45:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-160
+2023-11-15 13:45:30,613 INFO o.a.j.r.Summariser: summary +     28 in 00:00:29 =    1.0/s Avg: 128530 Min: 121550 Max: 142249 Err:     0 (0.00%) Active: 160 Started: 160 Finished: 0
+2023-11-15 13:45:30,613 INFO o.a.j.r.Summariser: summary =   6171 in 01:19:31 =    1.3/s Avg: 59689 Min:  1007 Max: 260587 Err:    92 (1.49%)
+2023-11-15 13:45:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-161
+2023-11-15 13:46:00,151 INFO o.a.j.r.Summariser: summary +     27 in 00:00:30 =    0.9/s Avg: 150101 Min: 137255 Max: 175974 Err:     0 (0.00%) Active: 161 Started: 161 Finished: 0
+2023-11-15 13:46:00,151 INFO o.a.j.r.Summariser: summary =   6198 in 01:20:00 =    1.3/s Avg: 60083 Min:  1007 Max: 260587 Err:    92 (1.48%)
+2023-11-15 13:46:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-162
+2023-11-15 13:46:32,983 INFO o.a.j.r.Summariser: summary +     24 in 00:00:33 =    0.7/s Avg: 156050 Min: 146788 Max: 170340 Err:     0 (0.00%) Active: 162 Started: 162 Finished: 0
+2023-11-15 13:46:32,983 INFO o.a.j.r.Summariser: summary =   6222 in 01:20:33 =    1.3/s Avg: 60453 Min:  1007 Max: 260587 Err:    92 (1.48%)
+2023-11-15 13:46:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-163
+2023-11-15 13:47:01,632 INFO o.a.j.r.Summariser: summary +     57 in 00:00:29 =    2.0/s Avg: 167139 Min: 154767 Max: 178919 Err:    17 (29.82%) Active: 163 Started: 163 Finished: 0
+2023-11-15 13:47:01,633 INFO o.a.j.r.Summariser: summary =   6279 in 01:21:02 =    1.3/s Avg: 61421 Min:  1007 Max: 260587 Err:   109 (1.74%)
+2023-11-15 13:47:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-164
+2023-11-15 13:47:30,755 INFO o.a.j.r.Summariser: summary +     18 in 00:00:29 =    0.6/s Avg: 174043 Min: 164584 Max: 190007 Err:     0 (0.00%) Active: 164 Started: 164 Finished: 0
+2023-11-15 13:47:30,755 INFO o.a.j.r.Summariser: summary =   6297 in 01:21:31 =    1.3/s Avg: 61743 Min:  1007 Max: 260587 Err:   109 (1.73%)
+2023-11-15 13:47:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-165
+2023-11-15 13:48:03,451 INFO o.a.j.r.Summariser: summary +      4 in 00:00:33 =    0.1/s Avg: 179499 Min: 170399 Max: 185345 Err:     0 (0.00%) Active: 165 Started: 165 Finished: 0
+2023-11-15 13:48:03,451 INFO o.a.j.r.Summariser: summary =   6301 in 01:22:04 =    1.3/s Avg: 61818 Min:  1007 Max: 260587 Err:   109 (1.73%)
+2023-11-15 13:48:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-166
+2023-11-15 13:48:30,120 INFO o.a.j.r.Summariser: summary +     18 in 00:00:27 =    0.7/s Avg: 191304 Min: 181966 Max: 205474 Err:     0 (0.00%) Active: 166 Started: 166 Finished: 0
+2023-11-15 13:48:30,120 INFO o.a.j.r.Summariser: summary =   6319 in 01:22:30 =    1.3/s Avg: 62187 Min:  1007 Max: 260587 Err:   109 (1.72%)
+2023-11-15 13:48:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-167
+2023-11-15 13:49:00,627 INFO o.a.j.r.Summariser: summary +     20 in 00:00:31 =    0.7/s Avg: 200307 Min: 192396 Max: 212439 Err:     0 (0.00%) Active: 167 Started: 167 Finished: 0
+2023-11-15 13:49:00,627 INFO o.a.j.r.Summariser: summary =   6339 in 01:23:01 =    1.3/s Avg: 62623 Min:  1007 Max: 260587 Err:   109 (1.72%)
+2023-11-15 13:49:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-168
+2023-11-15 13:49:32,648 INFO o.a.j.r.Summariser: summary +     10 in 00:00:32 =    0.3/s Avg: 208073 Min: 201546 Max: 217800 Err:     0 (0.00%) Active: 168 Started: 168 Finished: 0
+2023-11-15 13:49:32,648 INFO o.a.j.r.Summariser: summary =   6349 in 01:23:33 =    1.3/s Avg: 62852 Min:  1007 Max: 260587 Err:   109 (1.72%)
+2023-11-15 13:49:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-169
+2023-11-15 13:50:03,198 INFO o.a.j.r.Summariser: summary +     43 in 00:00:31 =    1.4/s Avg: 204574 Min: 159343 Max: 245629 Err:    27 (62.79%) Active: 169 Started: 169 Finished: 0
+2023-11-15 13:50:03,198 INFO o.a.j.r.Summariser: summary =   6392 in 01:24:04 =    1.3/s Avg: 63805 Min:  1007 Max: 260587 Err:   136 (2.13%)
+2023-11-15 13:50:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-170
+2023-11-15 13:50:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-171
+2023-11-15 13:51:00,306 INFO o.a.j.r.Summariser: summary +     39 in 00:00:57 =    0.7/s Avg: 243528 Min: 232790 Max: 254681 Err:     0 (0.00%) Active: 171 Started: 171 Finished: 0
+2023-11-15 13:51:00,307 INFO o.a.j.r.Summariser: summary =   6431 in 01:25:01 =    1.3/s Avg: 64895 Min:  1007 Max: 260587 Err:   136 (2.11%)
+2023-11-15 13:51:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-172
+2023-11-15 13:51:34,033 INFO o.a.j.r.Summariser: summary +     34 in 00:00:34 =    1.0/s Avg: 236282 Min: 214305 Max: 251059 Err:     0 (0.00%) Active: 172 Started: 172 Finished: 0
+2023-11-15 13:51:34,034 INFO o.a.j.r.Summariser: summary =   6465 in 01:25:34 =    1.3/s Avg: 65796 Min:  1007 Max: 260587 Err:   136 (2.10%)
+2023-11-15 13:51:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-173
+2023-11-15 13:52:01,468 INFO o.a.j.r.Summariser: summary +     30 in 00:00:27 =    1.1/s Avg: 200973 Min: 182512 Max: 222591 Err:     0 (0.00%) Active: 173 Started: 173 Finished: 0
+2023-11-15 13:52:01,468 INFO o.a.j.r.Summariser: summary =   6495 in 01:26:02 =    1.3/s Avg: 66421 Min:  1007 Max: 260587 Err:   136 (2.09%)
+2023-11-15 13:52:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-174
+2023-11-15 13:52:30,157 INFO o.a.j.r.Summariser: summary +     29 in 00:00:29 =    1.0/s Avg: 171634 Min: 144911 Max: 208565 Err:    17 (58.62%) Active: 174 Started: 174 Finished: 0
+2023-11-15 13:52:30,158 INFO o.a.j.r.Summariser: summary =   6524 in 01:26:30 =    1.3/s Avg: 66888 Min:  1007 Max: 260587 Err:   153 (2.35%)
+2023-11-15 13:52:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-175
+2023-11-15 13:53:02,331 INFO o.a.j.r.Summariser: summary +     37 in 00:00:32 =    1.1/s Avg: 166106 Min: 20833 Max: 216068 Err:    12 (32.43%) Active: 175 Started: 175 Finished: 0
+2023-11-15 13:53:02,337 INFO o.a.j.r.Summariser: summary =   6561 in 01:27:03 =    1.3/s Avg: 67448 Min:  1007 Max: 260587 Err:   165 (2.51%)
+2023-11-15 13:53:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-176
+2023-11-15 13:53:30,442 INFO o.a.j.r.Summariser: summary +     64 in 00:00:28 =    2.3/s Avg: 115533 Min:  7644 Max: 271773 Err:    37 (57.81%) Active: 176 Started: 176 Finished: 0
+2023-11-15 13:53:30,442 INFO o.a.j.r.Summariser: summary =   6625 in 01:27:31 =    1.3/s Avg: 67912 Min:  1007 Max: 271773 Err:   202 (3.05%)
+2023-11-15 13:53:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-177
+2023-11-15 13:54:00,869 INFO o.a.j.r.Summariser: summary +     36 in 00:00:30 =    1.2/s Avg: 159027 Min: 137347 Max: 182209 Err:     0 (0.00%) Active: 177 Started: 177 Finished: 0
+2023-11-15 13:54:00,870 INFO o.a.j.r.Summariser: summary =   6661 in 01:28:01 =    1.3/s Avg: 68405 Min:  1007 Max: 271773 Err:   202 (3.03%)
+2023-11-15 13:54:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-178
+2023-11-15 13:54:30,213 INFO o.a.j.r.Summariser: summary +     27 in 00:00:29 =    0.9/s Avg: 145376 Min: 140437 Max: 153746 Err:     0 (0.00%) Active: 178 Started: 178 Finished: 0
+2023-11-15 13:54:30,213 INFO o.a.j.r.Summariser: summary =   6688 in 01:28:31 =    1.3/s Avg: 68716 Min:  1007 Max: 271773 Err:   202 (3.02%)
+2023-11-15 13:54:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-179
+2023-11-15 13:55:01,399 INFO o.a.j.r.Summariser: summary +     14 in 00:00:31 =    0.4/s Avg: 155803 Min: 148022 Max: 161653 Err:     0 (0.00%) Active: 179 Started: 179 Finished: 0
+2023-11-15 13:55:01,399 INFO o.a.j.r.Summariser: summary =   6702 in 01:29:02 =    1.3/s Avg: 68898 Min:  1007 Max: 271773 Err:   202 (3.01%)
+2023-11-15 13:55:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-180
+2023-11-15 13:55:30,338 INFO o.a.j.r.Summariser: summary +     19 in 00:00:29 =    0.7/s Avg: 172056 Min: 162222 Max: 188724 Err:     0 (0.00%) Active: 180 Started: 180 Finished: 0
+2023-11-15 13:55:30,338 INFO o.a.j.r.Summariser: summary =   6721 in 01:29:31 =    1.3/s Avg: 69189 Min:  1007 Max: 271773 Err:   202 (3.01%)
+2023-11-15 13:55:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-181
+2023-11-15 13:56:00,551 INFO o.a.j.r.Summariser: summary +     13 in 00:00:30 =    0.4/s Avg: 178628 Min: 170730 Max: 187580 Err:     0 (0.00%) Active: 181 Started: 181 Finished: 0
+2023-11-15 13:56:00,551 INFO o.a.j.r.Summariser: summary =   6734 in 01:30:01 =    1.2/s Avg: 69400 Min:  1007 Max: 271773 Err:   202 (3.00%)
+2023-11-15 13:56:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-182
+2023-11-15 13:56:33,542 INFO o.a.j.r.Summariser: summary +     43 in 00:00:33 =    1.3/s Avg: 183739 Min: 173781 Max: 203882 Err:    21 (48.84%) Active: 182 Started: 182 Finished: 0
+2023-11-15 13:56:33,542 INFO o.a.j.r.Summariser: summary =   6777 in 01:30:34 =    1.2/s Avg: 70126 Min:  1007 Max: 271773 Err:   223 (3.29%)
+2023-11-15 13:56:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-183
+2023-11-15 13:57:02,255 INFO o.a.j.r.Summariser: summary +     19 in 00:00:29 =    0.7/s Avg: 207987 Min: 202430 Max: 217961 Err:     0 (0.00%) Active: 183 Started: 183 Finished: 0
+2023-11-15 13:57:02,256 INFO o.a.j.r.Summariser: summary =   6796 in 01:31:03 =    1.2/s Avg: 70511 Min:  1007 Max: 271773 Err:   223 (3.28%)
+2023-11-15 13:57:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-184
+2023-11-15 13:57:30,006 INFO o.a.j.r.Summariser: summary +     20 in 00:00:28 =    0.7/s Avg: 223650 Min: 214198 Max: 232446 Err:     0 (0.00%) Active: 184 Started: 184 Finished: 0
+2023-11-15 13:57:30,007 INFO o.a.j.r.Summariser: summary =   6816 in 01:31:30 =    1.2/s Avg: 70961 Min:  1007 Max: 271773 Err:   223 (3.27%)
+2023-11-15 13:57:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-185
+2023-11-15 13:58:00,644 INFO o.a.j.r.Summariser: summary +     36 in 00:00:31 =    1.2/s Avg: 229871 Min: 221432 Max: 238663 Err:     0 (0.00%) Active: 185 Started: 185 Finished: 0
+2023-11-15 13:58:00,644 INFO o.a.j.r.Summariser: summary =   6852 in 01:32:01 =    1.2/s Avg: 71796 Min:  1007 Max: 271773 Err:   223 (3.25%)
+2023-11-15 13:58:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-186
+2023-11-15 13:58:31,342 INFO o.a.j.r.Summariser: summary +     42 in 00:00:31 =    1.4/s Avg: 185522 Min: 122469 Max: 247225 Err:    20 (47.62%) Active: 186 Started: 186 Finished: 0
+2023-11-15 13:58:31,343 INFO o.a.j.r.Summariser: summary =   6894 in 01:32:32 =    1.2/s Avg: 72488 Min:  1007 Max: 271773 Err:   243 (3.52%)
+2023-11-15 13:58:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-187
+2023-11-15 13:59:00,310 INFO o.a.j.r.Summariser: summary +     57 in 00:00:29 =    2.0/s Avg: 183359 Min: 146198 Max: 259453 Err:    17 (29.82%) Active: 187 Started: 187 Finished: 0
+2023-11-15 13:59:00,311 INFO o.a.j.r.Summariser: summary =   6951 in 01:33:01 =    1.2/s Avg: 73398 Min:  1007 Max: 271773 Err:   260 (3.74%)
+2023-11-15 13:59:29,730 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-188
+2023-11-15 13:59:30,459 INFO o.a.j.r.Summariser: summary +     47 in 00:00:30 =    1.6/s Avg: 137613 Min: 116848 Max: 189481 Err:     0 (0.00%) Active: 188 Started: 188 Finished: 0
+2023-11-15 13:59:30,459 INFO o.a.j.r.Summariser: summary =   6998 in 01:33:31 =    1.2/s Avg: 73829 Min:  1007 Max: 271773 Err:   260 (3.72%)
+2023-11-15 13:59:59,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-189
+2023-11-15 14:00:00,029 INFO o.a.j.r.Summariser: summary +     30 in 00:00:30 =    1.0/s Avg: 126573 Min: 116749 Max: 204738 Err:     0 (0.00%) Active: 189 Started: 189 Finished: 0
+2023-11-15 14:00:00,030 INFO o.a.j.r.Summariser: summary =   7028 in 01:34:00 =    1.2/s Avg: 74054 Min:  1007 Max: 271773 Err:   260 (3.70%)
+2023-11-15 14:00:29,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-190
+2023-11-15 14:00:32,940 INFO o.a.j.r.Summariser: summary +     11 in 00:00:33 =    0.3/s Avg: 150664 Min: 131773 Max: 250973 Err:     0 (0.00%) Active: 190 Started: 190 Finished: 0
+2023-11-15 14:00:32,940 INFO o.a.j.r.Summariser: summary =   7039 in 01:34:33 =    1.2/s Avg: 74174 Min:  1007 Max: 271773 Err:   260 (3.69%)
+2023-11-15 14:00:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-191
+2023-11-15 14:01:00,929 INFO o.a.j.r.Summariser: summary +     34 in 00:00:28 =    1.2/s Avg: 142903 Min: 107505 Max: 166838 Err:    18 (52.94%) Active: 191 Started: 191 Finished: 0
+2023-11-15 14:01:00,930 INFO o.a.j.r.Summariser: summary =   7073 in 01:35:01 =    1.2/s Avg: 74504 Min:  1007 Max: 271773 Err:   278 (3.93%)
+2023-11-15 14:01:29,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-192
+2023-11-15 14:01:30,012 INFO o.a.j.r.Summariser: summary +     38 in 00:00:29 =    1.3/s Avg: 169815 Min: 159030 Max: 226397 Err:     0 (0.00%) Active: 192 Started: 192 Finished: 0
+2023-11-15 14:01:30,012 INFO o.a.j.r.Summariser: summary =   7111 in 01:35:30 =    1.2/s Avg: 75013 Min:  1007 Max: 271773 Err:   278 (3.91%)
+2023-11-15 14:01:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-193
+2023-11-15 14:02:01,144 INFO o.a.j.r.Summariser: summary +     24 in 00:00:31 =    0.8/s Avg: 179617 Min: 173239 Max: 195008 Err:     0 (0.00%) Active: 193 Started: 193 Finished: 0
+2023-11-15 14:02:01,145 INFO o.a.j.r.Summariser: summary =   7135 in 01:36:01 =    1.2/s Avg: 75365 Min:  1007 Max: 271773 Err:   278 (3.90%)
+2023-11-15 14:02:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-194
+2023-11-15 14:02:31,028 INFO o.a.j.r.Summariser: summary +     41 in 00:00:30 =    1.4/s Avg: 179384 Min: 132279 Max: 215001 Err:    22 (53.66%) Active: 194 Started: 194 Finished: 0
+2023-11-15 14:02:31,028 INFO o.a.j.r.Summariser: summary =   7176 in 01:36:31 =    1.2/s Avg: 75960 Min:  1007 Max: 271773 Err:   300 (4.18%)
+2023-11-15 14:02:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-195
+2023-11-15 14:03:01,371 INFO o.a.j.r.Summariser: summary +     15 in 00:00:30 =    0.5/s Avg: 199932 Min: 191019 Max: 212876 Err:     0 (0.00%) Active: 195 Started: 195 Finished: 0
+2023-11-15 14:03:01,371 INFO o.a.j.r.Summariser: summary =   7191 in 01:37:02 =    1.2/s Avg: 76218 Min:  1007 Max: 271773 Err:   300 (4.17%)
+2023-11-15 14:03:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-196
+2023-11-15 14:03:30,034 INFO o.a.j.r.Summariser: summary +     13 in 00:00:29 =    0.5/s Avg: 220058 Min: 209926 Max: 234010 Err:     0 (0.00%) Active: 196 Started: 196 Finished: 0
+2023-11-15 14:03:30,034 INFO o.a.j.r.Summariser: summary =   7204 in 01:37:30 =    1.2/s Avg: 76478 Min:  1007 Max: 271773 Err:   300 (4.16%)
+2023-11-15 14:03:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-197
+2023-11-15 14:04:00,686 INFO o.a.j.r.Summariser: summary +     25 in 00:00:31 =    0.8/s Avg: 212439 Min: 175619 Max: 265155 Err:    14 (56.00%) Active: 197 Started: 197 Finished: 0
+2023-11-15 14:04:00,687 INFO o.a.j.r.Summariser: summary =   7229 in 01:38:01 =    1.2/s Avg: 76948 Min:  1007 Max: 271773 Err:   314 (4.34%)
+2023-11-15 14:04:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-198
+2023-11-15 14:04:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-199
+2023-11-15 14:05:00,295 INFO o.a.j.r.Summariser: summary +     14 in 00:01:00 =    0.2/s Avg: 243705 Min: 226367 Max: 263048 Err:     0 (0.00%) Active: 199 Started: 199 Finished: 0
+2023-11-15 14:05:00,295 INFO o.a.j.r.Summariser: summary =   7243 in 01:39:01 =    1.2/s Avg: 77270 Min:  1007 Max: 271773 Err:   314 (4.34%)
+2023-11-15 14:05:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-200
+2023-11-15 14:05:31,093 INFO o.a.j.r.Summariser: summary +     41 in 00:00:31 =    1.3/s Avg: 237793 Min: 168194 Max: 274017 Err:    21 (51.22%) Active: 200 Started: 200 Finished: 0
+2023-11-15 14:05:31,093 INFO o.a.j.r.Summariser: summary =   7284 in 01:39:31 =    1.2/s Avg: 78174 Min:  1007 Max: 274017 Err:   335 (4.60%)
+2023-11-15 14:05:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-201
+2023-11-15 14:06:02,454 INFO o.a.j.r.Summariser: summary +     15 in 00:00:31 =    0.5/s Avg: 277362 Min: 270146 Max: 291008 Err:     0 (0.00%) Active: 201 Started: 201 Finished: 0
+2023-11-15 14:06:02,455 INFO o.a.j.r.Summariser: summary =   7299 in 01:40:03 =    1.2/s Avg: 78583 Min:  1007 Max: 291008 Err:   335 (4.59%)
+2023-11-15 14:06:29,726 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-202
+2023-11-15 14:06:32,829 INFO o.a.j.r.Summariser: summary +     10 in 00:00:30 =    0.3/s Avg: 295348 Min: 289820 Max: 305294 Err:     0 (0.00%) Active: 202 Started: 202 Finished: 0
+2023-11-15 14:06:32,829 INFO o.a.j.r.Summariser: summary =   7309 in 01:40:33 =    1.2/s Avg: 78880 Min:  1007 Max: 305294 Err:   335 (4.58%)
+2023-11-15 14:06:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-203
+2023-11-15 14:07:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-204
+2023-11-15 14:07:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-205
+2023-11-15 14:08:00,718 INFO o.a.j.r.Summariser: summary +     47 in 00:01:28 =    0.5/s Avg: 321425 Min: 287352 Max: 348412 Err:    22 (46.81%) Active: 205 Started: 205 Finished: 0
+2023-11-15 14:08:00,718 INFO o.a.j.r.Summariser: summary =   7356 in 01:42:01 =    1.2/s Avg: 80430 Min:  1007 Max: 348412 Err:   357 (4.85%)
+2023-11-15 14:08:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-206
+2023-11-15 14:08:33,394 INFO o.a.j.r.Summariser: summary +     29 in 00:00:33 =    0.9/s Avg: 338175 Min: 308787 Max: 360214 Err:    13 (44.83%) Active: 206 Started: 206 Finished: 0
+2023-11-15 14:08:33,394 INFO o.a.j.r.Summariser: summary =   7385 in 01:42:34 =    1.2/s Avg: 81442 Min:  1007 Max: 360214 Err:   370 (5.01%)
+2023-11-15 14:08:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-207
+2023-11-15 14:09:00,418 INFO o.a.j.r.Summariser: summary +     28 in 00:00:27 =    1.0/s Avg: 310381 Min: 278043 Max: 343829 Err:    15 (53.57%) Active: 207 Started: 207 Finished: 0
+2023-11-15 14:09:00,418 INFO o.a.j.r.Summariser: summary =   7413 in 01:43:01 =    1.2/s Avg: 82306 Min:  1007 Max: 360214 Err:   385 (5.19%)
+2023-11-15 14:09:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-208
+2023-11-15 14:09:32,157 INFO o.a.j.r.Summariser: summary +     34 in 00:00:32 =    1.1/s Avg: 280790 Min: 236394 Max: 332558 Err:    17 (50.00%) Active: 208 Started: 208 Finished: 0
+2023-11-15 14:09:32,159 INFO o.a.j.r.Summariser: summary =   7447 in 01:43:32 =    1.2/s Avg: 83213 Min:  1007 Max: 360214 Err:   402 (5.40%)
+2023-11-15 14:09:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-209
+2023-11-15 14:10:00,862 INFO o.a.j.r.Summariser: summary +     58 in 00:00:29 =    2.0/s Avg: 239008 Min: 149547 Max: 366035 Err:    25 (43.10%) Active: 209 Started: 209 Finished: 0
+2023-11-15 14:10:00,862 INFO o.a.j.r.Summariser: summary =   7505 in 01:44:01 =    1.2/s Avg: 84417 Min:  1007 Max: 366035 Err:   427 (5.69%)
+2023-11-15 14:10:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-210
+2023-11-15 14:10:31,341 INFO o.a.j.r.Summariser: summary +     41 in 00:00:30 =    1.3/s Avg: 175757 Min: 83969 Max: 372033 Err:    19 (46.34%) Active: 210 Started: 210 Finished: 0
+2023-11-15 14:10:31,342 INFO o.a.j.r.Summariser: summary =   7546 in 01:44:32 =    1.2/s Avg: 84913 Min:  1007 Max: 372033 Err:   446 (5.91%)
+2023-11-15 14:10:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-211
+2023-11-15 14:11:00,645 INFO o.a.j.r.Summariser: summary +     38 in 00:00:29 =    1.3/s Avg: 195681 Min: 131932 Max: 334609 Err:    27 (71.05%) Active: 211 Started: 211 Finished: 0
+2023-11-15 14:11:00,645 INFO o.a.j.r.Summariser: summary =   7584 in 01:45:01 =    1.2/s Avg: 85468 Min:  1007 Max: 372033 Err:   473 (6.24%)
+2023-11-15 14:11:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-212
+2023-11-15 14:11:30,581 INFO o.a.j.r.Summariser: summary +     25 in 00:00:30 =    0.8/s Avg: 190333 Min: 167145 Max: 254104 Err:     5 (20.00%) Active: 212 Started: 212 Finished: 0
+2023-11-15 14:11:30,581 INFO o.a.j.r.Summariser: summary =   7609 in 01:45:31 =    1.2/s Avg: 85812 Min:  1007 Max: 372033 Err:   478 (6.28%)
+2023-11-15 14:11:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-213
+2023-11-15 14:12:01,550 INFO o.a.j.r.Summariser: summary +     36 in 00:00:31 =    1.2/s Avg: 150428 Min: 106956 Max: 186351 Err:    25 (69.44%) Active: 213 Started: 213 Finished: 0
+2023-11-15 14:12:01,550 INFO o.a.j.r.Summariser: summary =   7645 in 01:46:02 =    1.2/s Avg: 86117 Min:  1007 Max: 372033 Err:   503 (6.58%)
+2023-11-15 14:12:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-214
+2023-11-15 14:12:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-215
+2023-11-15 14:13:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-216
+2023-11-15 14:13:32,200 INFO o.a.j.r.Summariser: summary +     48 in 00:01:31 =    0.5/s Avg: 207632 Min: 175678 Max: 238406 Err:    19 (39.58%) Active: 216 Started: 216 Finished: 0
+2023-11-15 14:13:32,200 INFO o.a.j.r.Summariser: summary =   7693 in 01:47:33 =    1.2/s Avg: 86875 Min:  1007 Max: 372033 Err:   522 (6.79%)
+2023-11-15 14:13:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-217
+2023-11-15 14:14:02,227 INFO o.a.j.r.Summariser: summary +      6 in 00:00:30 =    0.2/s Avg: 249330 Min: 242238 Max: 255763 Err:     0 (0.00%) Active: 217 Started: 217 Finished: 0
+2023-11-15 14:14:02,227 INFO o.a.j.r.Summariser: summary =   7699 in 01:48:03 =    1.2/s Avg: 87001 Min:  1007 Max: 372033 Err:   522 (6.78%)
+2023-11-15 14:14:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-218
+2023-11-15 14:14:30,982 INFO o.a.j.r.Summariser: summary +     10 in 00:00:29 =    0.3/s Avg: 271721 Min: 259057 Max: 283507 Err:     0 (0.00%) Active: 218 Started: 218 Finished: 0
+2023-11-15 14:14:30,982 INFO o.a.j.r.Summariser: summary =   7709 in 01:48:31 =    1.2/s Avg: 87241 Min:  1007 Max: 372033 Err:   522 (6.77%)
+2023-11-15 14:14:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-219
+2023-11-15 14:15:05,842 INFO o.a.j.r.Summariser: summary +      3 in 00:00:35 =    0.1/s Avg: 298300 Min: 290930 Max: 304978 Err:     1 (33.33%) Active: 219 Started: 219 Finished: 0
+2023-11-15 14:15:05,842 INFO o.a.j.r.Summariser: summary =   7712 in 01:49:06 =    1.2/s Avg: 87323 Min:  1007 Max: 372033 Err:   523 (6.78%)
+2023-11-15 14:15:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-220
+2023-11-15 14:15:33,394 INFO o.a.j.r.Summariser: summary +     27 in 00:00:28 =    1.0/s Avg: 284148 Min: 242773 Max: 330710 Err:    23 (85.19%) Active: 220 Started: 220 Finished: 0
+2023-11-15 14:15:33,394 INFO o.a.j.r.Summariser: summary =   7739 in 01:49:34 =    1.2/s Avg: 88010 Min:  1007 Max: 372033 Err:   546 (7.06%)
+2023-11-15 14:15:59,733 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-221
+2023-11-15 14:16:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-222
+2023-11-15 14:16:31,345 INFO o.a.j.r.Summariser: summary +     22 in 00:00:58 =    0.4/s Avg: 352068 Min: 328535 Max: 369475 Err:     0 (0.00%) Active: 222 Started: 222 Finished: 0
+2023-11-15 14:16:31,346 INFO o.a.j.r.Summariser: summary =   7761 in 01:50:32 =    1.2/s Avg: 88758 Min:  1007 Max: 372033 Err:   546 (7.04%)
+2023-11-15 14:16:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-223
+2023-11-15 14:17:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-224
+2023-11-15 14:17:33,718 INFO o.a.j.r.Summariser: summary +     25 in 00:01:02 =    0.4/s Avg: 369642 Min: 351099 Max: 401399 Err:    16 (64.00%) Active: 224 Started: 224 Finished: 0
+2023-11-15 14:17:33,719 INFO o.a.j.r.Summariser: summary =   7786 in 01:51:34 =    1.2/s Avg: 89660 Min:  1007 Max: 401399 Err:   562 (7.22%)
+2023-11-15 14:17:59,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-225
+2023-11-15 14:18:00,038 INFO o.a.j.r.Summariser: summary +     34 in 00:00:26 =    1.3/s Avg: 387112 Min: 347103 Max: 416131 Err:    16 (47.06%) Active: 225 Started: 225 Finished: 0
+2023-11-15 14:18:00,038 INFO o.a.j.r.Summariser: summary =   7820 in 01:52:00 =    1.2/s Avg: 90954 Min:  1007 Max: 416131 Err:   578 (7.39%)
+2023-11-15 14:18:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-226
+2023-11-15 14:18:30,833 INFO o.a.j.r.Summariser: summary +      9 in 00:00:31 =    0.3/s Avg: 416935 Min: 411193 Max: 422432 Err:     0 (0.00%) Active: 226 Started: 226 Finished: 0
+2023-11-15 14:18:30,834 INFO o.a.j.r.Summariser: summary =   7829 in 01:52:31 =    1.2/s Avg: 91328 Min:  1007 Max: 422432 Err:   578 (7.38%)
+2023-11-15 14:18:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-227
+2023-11-15 14:19:00,215 INFO o.a.j.r.Summariser: summary +     28 in 00:00:29 =    1.0/s Avg: 426033 Min: 399501 Max: 438976 Err:    13 (46.43%) Active: 227 Started: 227 Finished: 0
+2023-11-15 14:19:00,215 INFO o.a.j.r.Summariser: summary =   7857 in 01:53:01 =    1.2/s Avg: 92521 Min:  1007 Max: 438976 Err:   591 (7.52%)
+2023-11-15 14:19:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-228
+2023-11-15 14:19:30,366 INFO o.a.j.r.Summariser: summary +     21 in 00:00:30 =    0.7/s Avg: 388046 Min: 324199 Max: 446098 Err:    13 (61.90%) Active: 228 Started: 228 Finished: 0
+2023-11-15 14:19:30,366 INFO o.a.j.r.Summariser: summary =   7878 in 01:53:31 =    1.2/s Avg: 93309 Min:  1007 Max: 446098 Err:   604 (7.67%)
+2023-11-15 14:19:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-229
+2023-11-15 14:20:29,728 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-230
+2023-11-15 14:20:33,442 INFO o.a.j.r.Summariser: summary +     25 in 00:01:03 =    0.4/s Avg: 390700 Min: 314279 Max: 463543 Err:    11 (44.00%) Active: 230 Started: 230 Finished: 0
+2023-11-15 14:20:33,443 INFO o.a.j.r.Summariser: summary =   7903 in 01:54:34 =    1.1/s Avg: 94250 Min:  1007 Max: 463543 Err:   615 (7.78%)
+2023-11-15 14:20:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-231
+2023-11-15 14:21:05,968 INFO o.a.j.r.Summariser: summary +     21 in 00:00:33 =    0.6/s Avg: 448324 Min: 435933 Max: 456241 Err:     0 (0.00%) Active: 231 Started: 231 Finished: 0
+2023-11-15 14:21:05,968 INFO o.a.j.r.Summariser: summary =   7924 in 01:55:06 =    1.1/s Avg: 95188 Min:  1007 Max: 463543 Err:   615 (7.76%)
+2023-11-15 14:21:29,729 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-232
+2023-11-15 14:21:30,372 INFO o.a.j.r.Summariser: summary +      4 in 00:00:24 =    0.2/s Avg: 444637 Min: 442271 Max: 447680 Err:     0 (0.00%) Active: 232 Started: 232 Finished: 0
+2023-11-15 14:21:30,372 INFO o.a.j.r.Summariser: summary =   7928 in 01:55:31 =    1.1/s Avg: 95364 Min:  1007 Max: 463543 Err:   615 (7.76%)
+2023-11-15 14:21:59,733 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-233
+2023-11-15 14:22:03,305 INFO o.a.j.r.Summariser: summary +     21 in 00:00:33 =    0.6/s Avg: 418312 Min: 382239 Max: 446659 Err:     9 (42.86%) Active: 233 Started: 233 Finished: 0
+2023-11-15 14:22:03,306 INFO o.a.j.r.Summariser: summary =   7949 in 01:56:04 =    1.1/s Avg: 96217 Min:  1007 Max: 463543 Err:   624 (7.85%)
+2023-11-15 14:22:29,730 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-234
+2023-11-15 14:22:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-235
+2023-11-15 14:23:00,870 INFO o.a.j.r.Summariser: summary +     40 in 00:00:58 =    0.7/s Avg: 356022 Min: 273587 Max: 430697 Err:    22 (55.00%) Active: 235 Started: 235 Finished: 0
+2023-11-15 14:23:00,870 INFO o.a.j.r.Summariser: summary =   7989 in 01:57:01 =    1.1/s Avg: 97518 Min:  1007 Max: 463543 Err:   646 (8.09%)
+2023-11-15 14:23:29,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-236
+2023-11-15 14:23:33,092 INFO o.a.j.r.Summariser: summary +     23 in 00:00:32 =    0.7/s Avg: 336963 Min: 263692 Max: 459990 Err:    14 (60.87%) Active: 236 Started: 236 Finished: 0
+2023-11-15 14:23:33,092 INFO o.a.j.r.Summariser: summary =   8012 in 01:57:33 =    1.1/s Avg: 98206 Min:  1007 Max: 463543 Err:   660 (8.24%)
+2023-11-15 14:23:59,727 INFO o.a.j.t.JMeterThread: Thread started: Prueba 1 1-237
+2023-11-15 14:24:05,627 INFO o.a.j.r.Summariser: summary +     15 in 00:00:33 =    0.5/s Avg: 439192 Min: 386422 Max: 487948 Err:     8 (53.33%) Active: 237 Started: 237 Finished: 0
+2023-11-15 14:24:05,627 INFO o.a.j.r.Summariser: summary =   8027 in 01:58:06 =    1.1/s Avg: 98843 Min:  1007 Max: 487948 Err:   668 (8.32%)
+2023-11-15 14:24:28,326 INFO o.a.j.r.ResultCollector: Shutdown hook started

@@ -68,7 +68,12 @@ def conversion_callback(message):
     publisher = pubsub_v1.PublisherClient()
     signal_message = {'task_id': id_video, 'status': 'completed', 'task_completed': datetime.datetime.utcnow().isoformat()}
     future = publisher.publish(PUBSUB_TOPIC_COMPLETION, json.dumps(signal_message).encode('utf-8'))
-    future.result()
+
+    try:
+        future.result()
+    except KeyboardInterrupt:
+        future.cancel()
+    
 
 with pubsub_v1.SubscriberClient() as subscriber:
     executor = futures.ThreadPoolExecutor(max_workers=1)
