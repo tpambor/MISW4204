@@ -77,17 +77,16 @@ def conversion_callback(message):
 
 
 with pubsub_v1.SubscriberClient() as subscriber:
-    # The subscriber pulls a specific number of messages. The actual
-    # number of messages pulled may be smaller than max_messages.
-    response = subscriber.pull(
-        request={"subscription": SUBSCRIPTION_NAME, "max_messages": 1},
-        retry=retry.Retry(deadline=300),
-    )
+    while True:
+        # The subscriber pulls a specific number of messages. The actual
+        # number of messages pulled may be smaller than max_messages.
+        response = subscriber.pull(
+            request={"subscription": SUBSCRIPTION_NAME, "max_messages": 1},
+            retry=retry.Retry(deadline=300),
+        )
 
-    if len(response.received_messages) == 0:
-        return
-    for received_message in response.received_messages:
-        conversion_callback(received_message.message)
+        for received_message in response.received_messages:
+            conversion_callback(received_message.message)
 
 # with pubsub_v1.SubscriberClient() as subscriber:
 #     executor = futures.ThreadPoolExecutor(max_workers=1)
