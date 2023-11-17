@@ -80,9 +80,9 @@ with pubsub_v1.SubscriberClient() as subscriber:
                     request={"subscription": SUBSCRIPTION_NAME, "ack_ids": [received_message.ack_id]}
                 )
             except sub_exceptions.RetryError as exc:
-                print(f"Ack for message {message.message_id} (video {id_video}) failed", flush=True)
+                print(f"Ack for message {received_message.message.message_id} (video {id_video}) failed", flush=True)
                 continue
 
-            print(f"Ack for message {message.message_id} (video {id_video}) successful", flush=True)
+            print(f"Ack for message {received_message.message.message_id} (video {id_video}) successful", flush=True)
 
             convert(id_video, old_format, new_format)
