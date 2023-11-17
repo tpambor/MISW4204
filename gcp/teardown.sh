@@ -22,9 +22,13 @@ gcloud -q compute instance-groups managed delete web-mig --region=$REGION || tru
 gcloud -q compute instance-templates delete web-template --region=$REGION || true
 
 gcloud -q pubsub subscriptions remove-iam-policy-binding converter-sub --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/pubsub.subscriber" || true
+gcloud -q pubsub subscriptions remove-iam-policy-binding converter-monitor-sub --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/pubsub.subscriber" || true
+gcloud -q pubsub subscriptions remove-iam-policy-binding conversion-completion-monitor-sub --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/pubsub.subscriber" || true
 gcloud -q pubsub subscriptions delete converter-sub || true
-gcloud -q pubsub subscriptions delete conversion-completion-sub || true
+gcloud -q pubsub subscriptions delete converter-monitor-sub || true
+gcloud -q pubsub subscriptions delete conversion-completion-monitor-sub || true
 gcloud -q pubsub topics remove-iam-policy-binding converter --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/pubsub.publisher" || true
+gcloud -q pubsub topics remove-iam-policy-binding conversion-completion --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/pubsub.publisher" || true
 gcloud -q pubsub topics delete converter || true
 gcloud -q pubsub topics delete conversion-completion || true
 

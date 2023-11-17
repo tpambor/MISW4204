@@ -5,16 +5,16 @@ export ZONE2=us-central1-f
 
 export PROJECT_ID=$(gcloud config get-value project)
 
-
 #### Enable required services
 gcloud services enable compute.googleapis.com
-gcloud services enable sqladmin.googleapis.com 
+gcloud services enable sqladmin.googleapis.com
 gcloud services enable monitoring.googleapis.com
 gcloud services enable iamcredentials.googleapis.com
 
 echo ""
 
-# #### Create service account
+#### Create service account
+
 export SERVICE_ACCOUNT="converter@$PROJECT_ID.iam.gserviceaccount.com"
 
 gcloud iam service-accounts create converter \
@@ -45,6 +45,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 echo ""
 
 #### Configure Cloud Storage
+
 # Bucket name has to be globally unique, therefore add suffix
 BUCKET_SUFFIX=$(tr -dc a-z </dev/urandom | head -c 4 ; echo '')
 export BUCKET=misw4204-$BUCKET_SUFFIX
@@ -57,24 +58,25 @@ gcloud storage buckets create gs://$BUCKET \
 echo ""
 
 #### Create PubSub topic converter
+
 gcloud pubsub topics create converter
 
 export PUBSUB_TOPIC="projects/$PROJECT_ID/topics/converter"
 
 echo ""
 
-#### Create PubSub topic para saber cuando finaliza una tarea
-gcloud pubsub topics create conversion-completion
-
-export PUBSUB_TOPIC_COMPLETION="projects/$PROJECT_ID/topics/conversion-completion"
-
-echo ""
-
-
 # Assign role for PubSub publisher to service account
 gcloud pubsub topics add-iam-policy-binding converter \
   --member="serviceAccount:$SERVICE_ACCOUNT" \
   --role="roles/pubsub.publisher"
+
+echo ""
+
+#### Create PubSub topic para saber cuando finaliza una tarea
+
+gcloud pubsub topics create conversion-completion
+
+export PUBSUB_TOPIC_COMPLETION="projects/$PROJECT_ID/topics/conversion-completion"
 
 echo ""
 
@@ -86,29 +88,12 @@ gcloud pubsub topics add-iam-policy-binding conversion-completion \
 echo ""
 
 #### Create PubSub subscription converter-sub
+
 gcloud pubsub subscriptions create converter-sub \
   --topic $PUBSUB_TOPIC \
   --enable-exactly-once-delivery
 
 export PUBSUB_SUBSCRIPTION="projects/$PROJECT_ID/subscriptions/converter-sub"
-
-echo ""
-
-#### Create PubSub subscription converter-monitor-sub
-gcloud pubsub subscriptions create converter-monitor-sub \
-  --topic $PUBSUB_TOPIC \
-  --enable-exactly-once-delivery
-
-export PUBSUB_MONITOR_SUBSCRIPTION="projects/$PROJECT_ID/subscriptions/converter-monitor-sub"
-
-echo ""
-
-#### Create PubSub subscription conversion-completion-monitor-sub
-gcloud pubsub subscriptions create conversion-completion-monitor-sub \
-  --topic $PUBSUB_TOPIC_COMPLETION \
-  --enable-exactly-once-delivery
-
-export PUBSUB_COMPLETION_MONITOR_SUBSCRIPTION="projects/$PROJECT_ID/subscriptions/conversion-completion-monitor-sub"
 
 echo ""
 
@@ -119,10 +104,30 @@ gcloud pubsub subscriptions add-iam-policy-binding converter-sub \
 
 echo ""
 
+#### Create PubSub subscription converter-monitor-sub
+
+gcloud pubsub subscriptions create converter-monitor-sub \
+  --topic $PUBSUB_TOPIC \
+  --enable-exactly-once-delivery
+
+export PUBSUB_MONITOR_SUBSCRIPTION="projects/$PROJECT_ID/subscriptions/converter-monitor-sub"
+
+echo ""
+
 # Assign role for PubSub subscription to service account
 gcloud pubsub subscriptions add-iam-policy-binding converter-monitor-sub \
   --member="serviceAccount:$SERVICE_ACCOUNT" \
   --role="roles/pubsub.subscriber"
+
+echo ""
+
+#### Create PubSub subscription conversion-completion-monitor-sub
+
+gcloud pubsub subscriptions create conversion-completion-monitor-sub \
+  --topic $PUBSUB_TOPIC_COMPLETION \
+  --enable-exactly-once-delivery
+
+export PUBSUB_COMPLETION_MONITOR_SUBSCRIPTION="projects/$PROJECT_ID/subscriptions/conversion-completion-monitor-sub"
 
 echo ""
 
@@ -132,6 +137,7 @@ gcloud pubsub subscriptions add-iam-policy-binding conversion-completion-monitor
   --role="roles/pubsub.subscriber"
 
 echo ""
+
 
 #### Configure Database
 
