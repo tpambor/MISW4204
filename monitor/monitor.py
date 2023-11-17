@@ -19,6 +19,8 @@ time_per_request = []
 sent_per_request = []
 completed_per_request = []
 time_request_avg = 0
+initial_time = 0
+completed_time = 0
 
 NUM_PARALLEL_TASKS = os.getenv('NUM_PARALLEL_TASKS')
 NUM_CYCLES = os.getenv('NUM_CYCLES')
