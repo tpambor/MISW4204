@@ -18,27 +18,8 @@ BUCKET = os.getenv('BUCKET')
 SUBSCRIPTION_NAME = os.getenv('SUBSCRIPTION')
 PUBSUB_TOPIC_COMPLETION = os.getenv('PUBSUB_TOPIC_COMPLETION')
 
-def conversion_callback(message):
-    req = json.loads(message.data)
 
-    id_video = req['id_video']
-    old_format = req['old_format']
-    new_format = req['new_format']
-
-    print(f"Received request to convert video {id_video} from {old_format} to {new_format}", flush=True)
-    
-    try:
-        # Use `ack_with_response()` instead of `ack()` to get a future that tracks
-        # the result of the acknowledge call. When exactly-once delivery is enabled
-        # on the subscription, the message is guaranteed to not be delivered again
-        # if the ack future succeeds.
-        ack_future = message.ack_with_response()
-        ack_future.result()
-        print(f"Ack for message {message.message_id} (video {id_video}) successful", flush=True)
-    except sub_exceptions.AcknowledgeError as e:
-        print(f"Ack for message {message.message_id} (video {id_video}) failed with error: {e.error_code}", flush=True)
-        return
-
+def convert(id_video, old_format, new_format):
     path_old = os.path.join(VIDEO_DIR, f'{id_video}.{old_format}')
     path_new = os.path.join(VIDEO_DIR, f'{id_video}.{new_format}')
 
@@ -78,21 +59,31 @@ def conversion_callback(message):
 
 with pubsub_v1.SubscriberClient() as subscriber:
     while True:
-        # The subscriber pulls a specific number of messages. The actual
-        # number of messages pulled may be smaller than max_messages.
+    # The subscriber pulls a specific number of messages. The actual
+    # number of messages pulled may be smaller than max_messages.
         response = subscriber.pull(
             request={"subscription": SUBSCRIPTION_NAME, "max_messages": 1},
             retry=retry.Retry(deadline=300),
         )
 
         for received_message in response.received_messages:
-            conversion_callback(received_message.message)
+            req = json.loads(received_message.message.data)
 
-# with pubsub_v1.SubscriberClient() as subscriber:
-#     executor = futures.ThreadPoolExecutor(max_workers=1)
-#     scheduler = pubsub_v1.subscriber.scheduler.ThreadScheduler(executor)
-#     future = subscriber.subscribe(SUBSCRIPTION_NAME, conversion_callback, scheduler=scheduler)
+            id_video = req['id_video']
+            old_format = req['old_format']
+            new_format = req['new_format']
 
-#     print("Worker started", flush=True)
+            print(f"Received request to convert video {id_video} from {old_format} to {new_format}", flush=True)
+
+            try:
+                subscriber.acknowledge(
+                    request={"subscription": SUBSCRIPTION_NAME, "ack_ids": [received_message.ack_id]}
+                )
+            except exceptions.RetryError as exc:
+                continue
+
+            convert(id_video, old_format, new_format)
+
+
 
 #     future.result()
