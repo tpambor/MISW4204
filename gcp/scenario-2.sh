@@ -4,8 +4,8 @@ export ZONE=us-central1-c
 export PROJECT_ID=$(gcloud config get-value project)
 
 ### Modificar variables (Opcional)
-NUM_CYCLES=1
-NUM_PARALLEL_TASKS=2
+NUM_CYCLES=2
+NUM_PARALLEL_TASKS=5
 
 gcloud compute ssh --zone $ZONE "monitoring-worker" --project $PROJECT_ID --command "sudo su -c '
 sed -i 's/^NUM_CYCLES=.*/NUM_CYCLES=$NUM_CYCLES/' /etc/api.env &&
