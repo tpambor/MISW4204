@@ -59,8 +59,8 @@ def convert(id_video, old_format, new_format):
 
 with pubsub_v1.SubscriberClient() as subscriber:
     while True:
-    # The subscriber pulls a specific number of messages. The actual
-    # number of messages pulled may be smaller than max_messages.
+        # The subscriber pulls a specific number of messages. The actual
+        # number of messages pulled may be smaller than max_messages.
         response = subscriber.pull(
             request={"subscription": SUBSCRIPTION_NAME, "max_messages": 1},
             retry=retry.Retry(deadline=300),
@@ -80,6 +80,9 @@ with pubsub_v1.SubscriberClient() as subscriber:
                     request={"subscription": SUBSCRIPTION_NAME, "ack_ids": [received_message.ack_id]}
                 )
             except sub_exceptions.RetryError as exc:
+                print(f"Ack for message {message.message_id} (video {id_video}) failed", flush=True)
                 continue
+
+            print(f"Ack for message {message.message_id} (video {id_video}) successful", flush=True)
 
             convert(id_video, old_format, new_format)
