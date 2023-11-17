@@ -7,6 +7,7 @@ from sqlalchemy import update
 from google.cloud import pubsub_v1
 from google.cloud.pubsub_v1.subscriber import exceptions as sub_exceptions
 from google.cloud import storage
+from google.api_core import retry
 import db
 from models import Task, TaskStatus
 import datetime
@@ -73,7 +74,20 @@ def conversion_callback(message):
         future.result()
     except KeyboardInterrupt:
         future.cancel()
-    
+
+
+with pubsub_v1.SubscriberClient() as subscriber:
+    # The subscriber pulls a specific number of messages. The actual
+    # number of messages pulled may be smaller than max_messages.
+    response = subscriber.pull(
+        request={"subscription": SUBSCRIPTION_NAME, "max_messages": 1},
+        retry=retry.Retry(deadline=300),
+    )
+
+    if len(response.received_messages) == 0:
+        return
+    for received_message in response.received_messages:
+        conversion_callback(received_message.message)
 
 with pubsub_v1.SubscriberClient() as subscriber:
     executor = futures.ThreadPoolExecutor(max_workers=1)
