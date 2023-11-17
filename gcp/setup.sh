@@ -6,6 +6,7 @@ export ZONE2=us-central1-f
 export PROJECT_ID=$(gcloud config get-value project)
 
 #### Enable required services
+
 gcloud services enable compute.googleapis.com
 gcloud services enable sqladmin.googleapis.com
 gcloud services enable monitoring.googleapis.com
@@ -254,7 +255,7 @@ gcloud compute instance-groups set-named-ports web-mig \
 
 echo ""
 
-### Configure autoscaling
+### Configure autoscaling for web
 
 gcloud compute instance-groups managed set-autoscaling web-mig \
   --region=$REGION \
@@ -267,6 +268,15 @@ gcloud compute instance-groups managed set-autoscaling web-mig \
   --cool-down-period=180
 
 echo ""
+
+### Configure autoscaling for worker
+
+gcloud compute instance-groups managed set-autoscaling worker-mig \
+  --zone=$ZONE \
+  --max-num-replicas=3 \
+  --min-num-replicas=1 \
+  --target-cpu-utilization=0.80 \
+  --cool-down-period=120
 
 #### Create health check for API REST / Web
 

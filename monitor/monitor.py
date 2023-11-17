@@ -8,24 +8,30 @@ import sys
 from google.cloud import pubsub_v1
 from concurrent import futures
 import json
+import threading
 
+
+lock = threading.Lock()
 
 csv_filename = 'output.csv'
 data = {}
 time_per_request = []
+sent_per_request = []
+completed_per_request = []
 time_request_avg = 0
 
 NUM_PARALLEL_TASKS = os.getenv('NUM_PARALLEL_TASKS')
 NUM_CYCLES = os.getenv('NUM_CYCLES')
-PUBSUB_TOPIC = os.getenv('PUBSUB_TOPIC')
 PUBSUB_MONITOR_SUBSCRIPTION = os.getenv('PUBSUB_MONITOR_SUBSCRIPTION')
 PUBSUB_COMPLETION_MONITOR_SUBSCRIPTION = os.getenv('PUBSUB_COMPLETION_MONITOR_SUBSCRIPTION')
 
 def message_received_callback(message):
+    global initial_time
     message_json = json.loads(message.data)
     print(f"Petición de conversion enviada: {message_json}", flush=True)
     id_video = message_json['id_video']
     sent = message_json['task_sent']
+    sent_per_request.append(datetime.datetime.fromisoformat(sent))
     if id_video in data:
         data[id_video]['sent'] = sent
     else:
@@ -41,6 +47,8 @@ def completion_message_received_callback(message):
 
     id_video = message_json['task_id']
     finished = message_json['task_completed']
+    completed_per_request.append(datetime.datetime.fromisoformat(finished))
+
     if id_video in data:
         data[id_video]['finished'] = finished
     else:
@@ -52,16 +60,18 @@ def completion_message_received_callback(message):
     
 
 def time_request_calc(id_video):
-    if(data[id_video]['sent'] != None and data[id_video]['finished'] != None):
-        sent = datetime.datetime.fromisoformat(data[id_video]['sent'])
-        finished = datetime.datetime.fromisoformat(data[id_video]['finished'])
-        time_request = (finished - sent).total_seconds() * 1000
-        data[id_video]['time_request'] = time_request
-        time_per_request.append(time_request)
-        write_cvs(id_video)
+    global completed_time
+    with lock:
+        if(data[id_video]['sent'] != None and data[id_video]['finished'] != None):
+            sent = datetime.datetime.fromisoformat(data[id_video]['sent'])
+            finished = datetime.datetime.fromisoformat(data[id_video]['finished'])
+            time_request = (finished - sent).total_seconds() * 1000
+            data[id_video]['time_request'] = time_request
+            time_per_request.append(time_request)
+            write_cvs(id_video)
 
-        if len(time_per_request) == int(NUM_PARALLEL_TASKS)*int(NUM_CYCLES):
-            generate_reports()
+            if len(time_per_request) == int(NUM_PARALLEL_TASKS)*int(NUM_CYCLES):
+                generate_reports()
 
 def write_cvs(id_video):
     with open(csv_filename, mode='a', newline='') as file:
@@ -75,12 +85,17 @@ def write_cvs(id_video):
         writer.writerow(data[id_video])
 
 def generate_reports():
-    ordered_time_per_request = sorted(time_per_request, reverse=True)
-    total_requests = len(ordered_time_per_request)
-    acum_time_ms = sum(ordered_time_per_request)
-    total_time_ms = ordered_time_per_request[len(ordered_time_per_request) - 1]
-    total_time_min = total_time_ms / (1000 * 60)
-    sorted_times = sorted(ordered_time_per_request)
+    initial_time = sorted(sent_per_request)[0]
+    completed_time = sorted(completed_per_request, reverse=True)[0]
+    print(f'initial_time', initial_time)
+    print(f'completed_time', completed_time)
+    total_requests = len(time_per_request)
+    acum_time_ms = sum(time_per_request)
+    total_time_sec = (completed_time - initial_time).total_seconds()
+    total_time_min = total_time_sec / 60
+    print(f'total_time_sec', total_time_sec)
+    print(f'total_time_min', total_time_min)
+    sorted_times = sorted(time_per_request)
     percentil_95 = np.percentile(sorted_times, 95)
 
     report = f"""
@@ -98,8 +113,6 @@ Peticiones por minuto (Throughput): {total_requests / total_time_min:.2f}
 
     with open('reporte.txt', 'w') as file:
         file.write(report)
-
-    print("Entra aqui")
     
 
     plot_script = f"""
@@ -117,6 +130,7 @@ plot "output.csv" using 4 smooth sbezier
         file.write(plot_script)
 
     subprocess.run("gnuplot plot.p", shell=True, check=True)
+
     os._exit(0)
 
 def my_monitor():
@@ -125,6 +139,7 @@ def my_monitor():
     with subscriber:
         future_a = subscriber.subscribe(PUBSUB_MONITOR_SUBSCRIPTION, message_received_callback)
         future_b = subscriber.subscribe(PUBSUB_COMPLETION_MONITOR_SUBSCRIPTION, completion_message_received_callback)
+
         try:
             future_a.result()
             future_b.result()
