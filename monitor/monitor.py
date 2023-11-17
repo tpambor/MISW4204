@@ -8,10 +8,7 @@ import sys
 from google.cloud import pubsub_v1
 from concurrent import futures
 import json
-import threading
 
-
-lock = threading.Lock()
 
 csv_filename = 'output.csv'
 data = {}
@@ -28,7 +25,6 @@ PUBSUB_MONITOR_SUBSCRIPTION = os.getenv('PUBSUB_MONITOR_SUBSCRIPTION')
 PUBSUB_COMPLETION_MONITOR_SUBSCRIPTION = os.getenv('PUBSUB_COMPLETION_MONITOR_SUBSCRIPTION')
 
 def message_received_callback(message):
-    global initial_time
     message_json = json.loads(message.data)
     print(f"Petición de conversion enviada: {message_json}", flush=True)
     id_video = message_json['id_video']
@@ -62,18 +58,16 @@ def completion_message_received_callback(message):
     
 
 def time_request_calc(id_video):
-    global completed_time
-    with lock:
-        if(data[id_video]['sent'] != None and data[id_video]['finished'] != None):
-            sent = datetime.datetime.fromisoformat(data[id_video]['sent'])
-            finished = datetime.datetime.fromisoformat(data[id_video]['finished'])
-            time_request = (finished - sent).total_seconds() * 1000
-            data[id_video]['time_request'] = time_request
-            time_per_request.append(time_request)
-            write_cvs(id_video)
+    if(data[id_video]['sent'] != None and data[id_video]['finished'] != None):
+        sent = datetime.datetime.fromisoformat(data[id_video]['sent'])
+        finished = datetime.datetime.fromisoformat(data[id_video]['finished'])
+        time_request = (finished - sent).total_seconds() * 1000
+        data[id_video]['time_request'] = time_request
+        time_per_request.append(time_request)
+        write_cvs(id_video)
 
-            if len(time_per_request) == int(NUM_PARALLEL_TASKS)*int(NUM_CYCLES):
-                generate_reports()
+        if len(time_per_request) == int(NUM_PARALLEL_TASKS)*int(NUM_CYCLES):
+            generate_reports()
 
 def write_cvs(id_video):
     with open(csv_filename, mode='a', newline='') as file:
@@ -141,7 +135,6 @@ def my_monitor():
     with subscriber:
         future_a = subscriber.subscribe(PUBSUB_MONITOR_SUBSCRIPTION, message_received_callback)
         future_b = subscriber.subscribe(PUBSUB_COMPLETION_MONITOR_SUBSCRIPTION, completion_message_received_callback)
-
         try:
             future_a.result()
             future_b.result()
