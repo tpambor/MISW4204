@@ -1,19 +1,21 @@
 #!/bin/bash
 export REGION=us-central1
 export ZONE=us-central1-c
+export ZONE2=us-central1-f
 
 export PROJECT_ID=$(gcloud config get-value project)
 
 #### Enable required services
 
 gcloud services enable compute.googleapis.com
-gcloud services enable sqladmin.googleapis.com 
+gcloud services enable sqladmin.googleapis.com
 gcloud services enable monitoring.googleapis.com
 gcloud services enable iamcredentials.googleapis.com
 
 echo ""
 
 #### Create service account
+
 export SERVICE_ACCOUNT="converter@$PROJECT_ID.iam.gserviceaccount.com"
 
 gcloud iam service-accounts create converter \
@@ -44,6 +46,7 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 echo ""
 
 #### Configure Cloud Storage
+
 # Bucket name has to be globally unique, therefore add suffix
 BUCKET_SUFFIX=$(tr -dc a-z </dev/urandom | head -c 4 ; echo '')
 export BUCKET=misw4204-$BUCKET_SUFFIX
@@ -55,10 +58,94 @@ gcloud storage buckets create gs://$BUCKET \
 
 echo ""
 
+#### Create PubSub topic converter
+
+gcloud pubsub topics create converter
+
+export PUBSUB_TOPIC="projects/$PROJECT_ID/topics/converter"
+
+echo ""
+
+# Assign role for PubSub publisher to service account
+gcloud pubsub topics add-iam-policy-binding converter \
+  --member="serviceAccount:$SERVICE_ACCOUNT" \
+  --role="roles/pubsub.publisher"
+
+echo ""
+
+#### Create PubSub topic para saber cuando finaliza una tarea
+
+gcloud pubsub topics create conversion-completion
+
+export PUBSUB_TOPIC_COMPLETION="projects/$PROJECT_ID/topics/conversion-completion"
+
+echo ""
+
+# Assign role for PubSub publisher to service account
+gcloud pubsub topics add-iam-policy-binding conversion-completion \
+  --member="serviceAccount:$SERVICE_ACCOUNT" \
+  --role="roles/pubsub.publisher"
+
+echo ""
+
+#### Create PubSub subscription converter-sub
+
+gcloud pubsub subscriptions create converter-sub \
+  --topic $PUBSUB_TOPIC \
+  --enable-exactly-once-delivery
+
+export PUBSUB_SUBSCRIPTION="projects/$PROJECT_ID/subscriptions/converter-sub"
+
+echo ""
+
+# Assign role for PubSub subscription to service account
+gcloud pubsub subscriptions add-iam-policy-binding converter-sub \
+  --member="serviceAccount:$SERVICE_ACCOUNT" \
+  --role="roles/pubsub.subscriber"
+
+echo ""
+
+#### Create PubSub subscription converter-monitor-sub
+
+gcloud pubsub subscriptions create converter-monitor-sub \
+  --topic $PUBSUB_TOPIC \
+  --enable-exactly-once-delivery
+
+export PUBSUB_MONITOR_SUBSCRIPTION="projects/$PROJECT_ID/subscriptions/converter-monitor-sub"
+
+echo ""
+
+# Assign role for PubSub subscription to service account
+gcloud pubsub subscriptions add-iam-policy-binding converter-monitor-sub \
+  --member="serviceAccount:$SERVICE_ACCOUNT" \
+  --role="roles/pubsub.subscriber"
+
+echo ""
+
+#### Create PubSub subscription conversion-completion-monitor-sub
+
+gcloud pubsub subscriptions create conversion-completion-monitor-sub \
+  --topic $PUBSUB_TOPIC_COMPLETION \
+  --enable-exactly-once-delivery
+
+export PUBSUB_COMPLETION_MONITOR_SUBSCRIPTION="projects/$PROJECT_ID/subscriptions/conversion-completion-monitor-sub"
+
+echo ""
+
+# Assign role for PubSub subscription to service account
+gcloud pubsub subscriptions add-iam-policy-binding conversion-completion-monitor-sub \
+  --member="serviceAccount:$SERVICE_ACCOUNT" \
+  --role="roles/pubsub.subscriber"
+
+echo ""
+
+
 #### Configure Database
 
 gcloud sql instances create db1 \
+  --availability-type=regional \
   --zone=$ZONE \
+  --secondary-zone=$ZONE2 \
   --database-version=POSTGRES_15 \
   --cpu=1 \
   --memory=4096MB \
@@ -84,22 +171,29 @@ gcloud sql users set-password postgres \
 
 export DATABASE_URL="postgresql://postgres:$POSTGRES_PASSWORD@$DB_IP/converter"
 
+
 echo ""
 
-#### Configure Worker
+#### Configure instance template for worker
 
-gcloud compute instances create worker \
-  --zone $ZONE \
+gcloud compute instance-templates create worker-template \
+  --instance-template-region=$REGION \
   --machine-type=t2d-standard-4 \
   --image-family debian-12 \
   --image-project debian-cloud \
   --service-account=$SERVICE_ACCOUNT \
   --scopes=https://www.googleapis.com/auth/cloud-platform \
-  --metadata=database-url=$DATABASE_URL,bucket=$BUCKET \
+  --metadata=database-url=$DATABASE_URL,pubsub-subscription=$PUBSUB_SUBSCRIPTION,bucket=$BUCKET,pubsub-topic-completion=$PUBSUB_TOPIC_COMPLETION \
   --metadata-from-file startup-script=worker.startup-script
 
-export WORKER_IP=$(gcloud compute instances describe worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
-export WORKER_IP_PRIVATE=$(gcloud compute instances describe worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].networkIP')
+echo ""
+
+#### Create managed instance group for worker
+
+gcloud compute instance-groups managed create worker-mig \
+  --size=1 \
+  --template=https://www.googleapis.com/compute/v1/projects/$PROJECT_ID/regions/$REGION/instanceTemplates/worker-template \
+  --zone=$ZONE
 
 echo ""
 
@@ -113,7 +207,7 @@ gcloud compute instance-templates create web-template \
   --tags=allow-health-check,allow-load-balancer \
   --service-account=$SERVICE_ACCOUNT \
   --scopes=https://www.googleapis.com/auth/cloud-platform \
-  --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,bucket=$BUCKET \
+  --metadata=database-url=$DATABASE_URL,pubsub-topic=$PUBSUB_TOPIC,bucket=$BUCKET \
   --metadata-from-file startup-script=web.startup-script
 
 echo ""
@@ -147,33 +241,42 @@ echo ""
 #### Create managed instance group for API REST / Web
 
 gcloud compute instance-groups managed create web-mig \
-  --size=1 \
+  --size=2 \
   --template=https://www.googleapis.com/compute/v1/projects/$PROJECT_ID/regions/$REGION/instanceTemplates/web-template \
-  --zone=$ZONE
+  --zones=$ZONE,$ZONE2
 
 echo ""
 
 #### Configure named port http (80)
 
 gcloud compute instance-groups set-named-ports web-mig \
-  --zone=$ZONE \
+  --region=$REGION \
   --named-ports=http:80
 
 echo ""
 
-### Configure autoscaling
+### Configure autoscaling for web
 
 gcloud compute instance-groups managed set-autoscaling web-mig \
-  --zone=$ZONE \
+  --region=$REGION \
   --max-num-replicas=3 \
-  --min-num-replicas=1 \
+  --min-num-replicas=2 \
   --update-stackdriver-metric=agent.googleapis.com/memory/percent_used \
   --stackdriver-metric-filter="metric.labels.state = \"used\"" \
   --stackdriver-metric-utilization-target-type=gauge \
-  --stackdriver-metric-utilization-target=55 \
+  --stackdriver-metric-utilization-target=60 \
   --cool-down-period=180
 
 echo ""
+
+### Configure autoscaling for worker
+
+gcloud compute instance-groups managed set-autoscaling worker-mig \
+  --zone=$ZONE \
+  --max-num-replicas=3 \
+  --min-num-replicas=1 \
+  --target-cpu-utilization=0.80 \
+  --cool-down-period=120
 
 #### Create health check for API REST / Web
 
@@ -204,18 +307,18 @@ gcloud compute backend-services create web-backend-service \
 
 echo ""
 
-#### Add managed instance group to backend service
+### Add managed instance group to backend service
 
 gcloud compute backend-services add-backend web-backend-service \
   --region=$REGION \
   --instance-group=web-mig \
-  --instance-group-zone=$ZONE \
+  --instance-group-region=$REGION \
   --balancing-mode=utilization \
   --max-utilization=0.55
 
 echo ""
 
-#### Create url map
+### Create url map
 
 gcloud compute url-maps create web-url-map \
   --region=$REGION \
@@ -223,7 +326,7 @@ gcloud compute url-maps create web-url-map \
 
 echo ""
 
-#### Create http proxy
+### Create http proxy
 
 gcloud compute target-http-proxies create web-proxy \
   --region=$REGION \
@@ -232,7 +335,7 @@ gcloud compute target-http-proxies create web-proxy \
 
 echo ""
 
-#### Create forwarding rule
+### Create forwarding rule
 
 gcloud compute forwarding-rules create web-forwarding-rule \
   --region=$REGION \
@@ -249,22 +352,22 @@ echo ""
 
 #### Configure Trigger / Monitoring
 
-export NUM_PARALLEL_TASKS=5
+export NUM_PARALLEL_TASKS=1
 export NUM_CYCLES=1
 export OLD_FORMAT=mp4
 export NEW_FORMAT=webm
 export DEMO_VIDEO=salento-720p.mp4
 
 gcloud compute instances create monitoring-worker \
-  --zone $ZONE \
-  --machine-type=e2-highcpu-2 \
-  --image-family debian-12 \
-  --image-project debian-cloud \
-  --tags ssh-server \
-  --service-account=$SERVICE_ACCOUNT \
-  --scopes=https://www.googleapis.com/auth/cloud-platform \
-  --metadata=database-url=$DATABASE_URL,broker=redis://$WORKER_IP_PRIVATE:6379/0,num-parallel-taks=$NUM_PARALLEL_TASKS,num-cycles=$NUM_CYCLES,old-format=$OLD_FORMAT,new-format=$NEW_FORMAT,demo-video=$DEMO_VIDEO,bucket=$BUCKET  \
-  --metadata-from-file startup-script=monitoring.startup-script
+ --zone $ZONE \
+ --machine-type=e2-highcpu-2 \
+ --image-family debian-12 \
+ --image-project debian-cloud \
+ --tags ssh-server \
+ --service-account=$SERVICE_ACCOUNT \
+ --scopes=https://www.googleapis.com/auth/cloud-platform \
+ --metadata=database-url=$DATABASE_URL,num-parallel-taks=$NUM_PARALLEL_TASKS,num-cycles=$NUM_CYCLES,old-format=$OLD_FORMAT,new-format=$NEW_FORMAT,demo-video=$DEMO_VIDEO,bucket=$BUCKET,pubsub-topic=$PUBSUB_TOPIC,pubsub-monitor-sub=$PUBSUB_MONITOR_SUBSCRIPTION,pubsub-completion-monitor-sub=$PUBSUB_COMPLETION_MONITOR_SUBSCRIPTION  \
+ --metadata-from-file startup-script=monitoring.startup-script
 
 export MONITOR_IP=$(gcloud compute instances describe monitoring-worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
 

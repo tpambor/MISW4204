@@ -15,4 +15,4 @@ RUN mkdir /video
 
 WORKDIR /app
 
-CMD exec celery -A tasks worker -E $CELERY_EXTRA_OPTS
+CMD ["python",  "worker.py"]
