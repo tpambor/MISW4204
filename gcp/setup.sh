@@ -73,7 +73,7 @@ gcloud pubsub topics add-iam-policy-binding converter \
 
 echo ""
 
-#### Create PubSub topic para saber cuando finaliza una tarea
+#### Create PubSub topic para saber cuando finaliza una tarea (Experimento 2)
 
 gcloud pubsub topics create conversion-completion
 
@@ -105,7 +105,7 @@ gcloud pubsub subscriptions add-iam-policy-binding converter-sub \
 
 echo ""
 
-#### Create PubSub subscription converter-monitor-sub
+#### Create PubSub subscription converter-monitor-sub (Experimento 2)
 
 gcloud pubsub subscriptions create converter-monitor-sub \
   --topic $PUBSUB_TOPIC \
@@ -122,7 +122,7 @@ gcloud pubsub subscriptions add-iam-policy-binding converter-monitor-sub \
 
 echo ""
 
-#### Create PubSub subscription conversion-completion-monitor-sub
+#### Create PubSub subscription conversion-completion-monitor-sub (Experimento 2)
 
 gcloud pubsub subscriptions create conversion-completion-monitor-sub \
   --topic $PUBSUB_TOPIC_COMPLETION \
@@ -194,6 +194,17 @@ gcloud compute instance-groups managed create worker-mig \
   --size=1 \
   --template=https://www.googleapis.com/compute/v1/projects/$PROJECT_ID/regions/$REGION/instanceTemplates/worker-template \
   --zone=$ZONE
+
+echo ""
+
+### Configure autoscaling for worker
+
+gcloud compute instance-groups managed set-autoscaling worker-mig \
+  --zone=$ZONE \
+  --max-num-replicas=3 \
+  --min-num-replicas=1 \
+  --target-cpu-utilization=0.80 \
+  --cool-down-period=120
 
 echo ""
 
@@ -269,15 +280,6 @@ gcloud compute instance-groups managed set-autoscaling web-mig \
 
 echo ""
 
-### Configure autoscaling for worker
-
-gcloud compute instance-groups managed set-autoscaling worker-mig \
-  --zone=$ZONE \
-  --max-num-replicas=3 \
-  --min-num-replicas=1 \
-  --target-cpu-utilization=0.80 \
-  --cool-down-period=120
-
 #### Create health check for API REST / Web
 
 gcloud compute health-checks create http hc-http \
@@ -350,7 +352,7 @@ export WEB_IP=$(gcloud compute forwarding-rules describe web-forwarding-rule --r
 
 echo ""
 
-#### Configure Trigger / Monitoring
+#### Configure Trigger / Monitoring (Experimento 2)
 
 export NUM_PARALLEL_TASKS=1
 export NUM_CYCLES=1
