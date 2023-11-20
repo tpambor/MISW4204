@@ -20,6 +20,8 @@ A continuación, encontrarás información sobre la aplicación, cómo configura
 | Shadith Perez Rivera | s.perezr@uniandes.edu.co |
 
 ## Sustentación
+[Video Entrega 4]()
+
 [Video Entrega 3](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/EVBmocJw6JVMtB-i-m353gEBtQ2Jya8inYP6IFat20XnVA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0RpcmVjdCJ9fQ&e=RbEcdP)
 
 [Video Entrega 2](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/ESXecRTbUxpKisAP5cWweW4B4SUSKG880KrYFCgVAyrz6w?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0RpcmVjdCJ9fQ&e=3UmHj0)
@@ -58,7 +60,7 @@ Consulta la documentación completa de la arquitectura.
 - [Entrega 1 - Arquitectura tradicional](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%201%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
 - [Entrega 2 - Arquitectura Cloud](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%202%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
 - [Entrega 3 - Arquitectura Cloud con escalabilidad en la capa web](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%203%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
--  [Entrega 4 - Arquitectura Cloud con Escalabilidad en el Backend​]()
+-  [Entrega 4 - Arquitectura Cloud con Escalabilidad en el Backend​](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%204%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
 
     
 ## API REST
