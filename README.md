@@ -80,7 +80,6 @@ El objetivo de este plan es evaluar la capacidad de la aplicación de convertido
 - [Entrega 3 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%203%20Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
 - [Entrega 4 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/files/13405336/Entrega.4.-.Escenario.y.Pruebas.de.Estres.API.REST.y.Batch.pdf)
 
-- 
 ## Configuración Escenario 1 JMeter
 - [Configuración](https://github.com/tpambor/MISW4204/blob/main/Docs/Experimento%201%20-%20Configuraci%C3%B3n.pdf)
 - [Video](https://uniandes-my.sharepoint.com/personal/ld_molina11_uniandes_edu_co/_layouts/15/stream.aspx?id=%2Fpersonal%2Fld%5Fmolina11%5Funiandes%5Fedu%5Fco%2FDocuments%2FDesarrollo%20de%20software%20en%20la%20nube%2FSemana%203%2FVideo%2F2%2E%20Experimento%201%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview)
