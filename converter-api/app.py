@@ -20,10 +20,10 @@ def create_app():
     cloudsql_user = credentials.service_account_email.replace('.gserviceaccount.com', '')
     print(cloudsql_user, flush=True)
 
-    cloudsql_instance = os.getenv('CLOUDSQL_INSTANCE', 'misw4204-e3:us-central1:db1')
+    cloudsql_instance = os.getenv('CLOUDSQL_INSTANCE')
     print(cloudsql_instance, flush=True)
 
-    cloudsql_db = os.getenv('CLOUDSQL_DB', 'converter')
+    cloudsql_db = os.getenv('CLOUDSQL_DB')
     print(cloudsql_db, flush=True)
 
     # Python Cloud SQL Connector database connection function
