@@ -16,14 +16,15 @@ def create_app():
     connector = Connector()
 
     credentials, _ = google.auth.default()
+    credentials.refresh(request=google.auth.transport.requests.Request())
     cloudsql_user = credentials.service_account_email
-    print(cloudsql_user)
+    print(cloudsql_user, flush=True)
 
     cloudsql_instance = os.getenv('CLOUDSQL_INSTANCE', 'misw4204-e3:us-central1:db1')
-    print(cloudsql_instance)
+    print(cloudsql_instance, flush=True)
 
     cloudsql_db = os.getenv('CLOUDSQL_DB', 'converter')
-    print(cloudsql_db)
+    print(cloudsql_db, flush=True)
 
     # Python Cloud SQL Connector database connection function
     def getconn():
