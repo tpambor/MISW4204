@@ -18,13 +18,8 @@ def create_app():
     credentials, _ = google.auth.default()
     credentials.refresh(request=google.auth.transport.requests.Request())
     cloudsql_user = credentials.service_account_email.replace('.gserviceaccount.com', '')
-    print(cloudsql_user, flush=True)
-
     cloudsql_instance = os.getenv('CLOUDSQL_INSTANCE')
-    print(cloudsql_instance, flush=True)
-
     cloudsql_db = os.getenv('CLOUDSQL_DB')
-    print(cloudsql_db, flush=True)
 
     # Python Cloud SQL Connector database connection function
     def getconn():
@@ -45,8 +40,8 @@ def create_app():
         "creator": getconn
     }
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['GCP_BUCKET'] = os.getenv('BUCKET', '')
-    app.config['PUBSUB_TOPIC'] = os.getenv('TOPIC', '')
+    app.config['GCP_BUCKET'] = os.getenv('STORAGE_BUCKET')
+    app.config['PUBSUB_TOPIC'] = os.getenv('PUBSUB_TOPIC')
     app.config['OPENAPI_VERSION'] = '3.1.0'
     app.config['OPENAPI_URL_PREFIX'] = '/'
     app.config['OPENAPI_SWAGGER_UI_PATH'] = '/swagger-ui'
