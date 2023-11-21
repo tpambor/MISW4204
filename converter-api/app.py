@@ -33,9 +33,7 @@ def create_app():
             'pg8000',
             db=cloudsql_db,
             user=cloudsql_user,
-            enable_iam_auth=True,
-            ip_type=IPTypes.PRIVATE,
-            timeout=5
+            enable_iam_auth=True
         )
         return conn
 
