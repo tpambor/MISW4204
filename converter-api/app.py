@@ -34,7 +34,8 @@ def create_app():
             db=cloudsql_db,
             user=cloudsql_user,
             enable_iam_auth=True,
-            ip_type=IPTypes.PRIVATE
+            ip_type=IPTypes.PRIVATE,
+            timeout=10
         )
         return conn
 
