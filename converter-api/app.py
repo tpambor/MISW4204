@@ -1,7 +1,9 @@
 import os
 from flask import Flask
 import flask_smorest
+import google.auth
 from google.cloud import pubsub_v1
+from google.cloud.sql.connector import Connector, IPTypes
 from db import db
 from vistas import BlueprintTasks, BlueprintAuth, BlueprintHealth
 from flask_jwt_extended import JWTManager
@@ -10,10 +12,38 @@ class CloudConversionToolApi(flask_smorest.Api):
     DEFAULT_ERROR_RESPONSE_NAME = None
 
 def create_app():
+    # Initialize Python Cloud SQL Connector object
+    connector = Connector()
+
+    credentials, _ = google.auth.default()
+    cloudsql_user = credentials.service_account_email
+    print(cloudsql_user)
+
+    cloudsql_instance = os.getenv('CLOUDSQL_INSTANCE', 'misw4204-e3:us-central1:db1')
+    print(cloudsql_instance)
+
+    cloudsql_db = os.getenv('CLOUDSQL_DB', 'converter')
+    print(cloudsql_db)
+
+    # Python Cloud SQL Connector database connection function
+    def getconn():
+        conn = connector.connect(
+            cloudsql_instance,
+            'pg8000',
+            db=cloudsql_db,
+            user=cloudsql_user,
+            enable_iam_auth=True,
+            ip_type=IPTypes.PRIVATE
+        )
+        return conn
+
     app = Flask(__name__)
     app.config['API_TITLE'] = 'Cloud Conversion Tool API'
     app.config['API_VERSION'] = 'v1'
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///app.sqlite')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+pg8000://'
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+        "creator": getconn
+    }
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['GCP_BUCKET'] = os.getenv('BUCKET', '')
     app.config['PUBSUB_TOPIC'] = os.getenv('TOPIC', '')
