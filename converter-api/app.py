@@ -17,7 +17,7 @@ def create_app():
 
     credentials, _ = google.auth.default()
     credentials.refresh(request=google.auth.transport.requests.Request())
-    cloudsql_user = credentials.service_account_email
+    cloudsql_user = credentials.service_account_email.replace('.gserviceaccount.com', '')
     print(cloudsql_user, flush=True)
 
     cloudsql_instance = os.getenv('CLOUDSQL_INSTANCE', 'misw4204-e3:us-central1:db1')
