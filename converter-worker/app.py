@@ -76,3 +76,7 @@ def index():
     print(f"info: finished converting video {id_video} in {duration}s", flush=True)
 
     return ("", 204)
+
+@app.route("/health-check")
+def health_check():
+    return ("Happy and alive", 200)
