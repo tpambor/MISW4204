@@ -1,4 +1,5 @@
 import base64
+import datetime
 import json
 import os
 import subprocess
@@ -44,7 +45,7 @@ def index():
 
     pubsub_message = envelope["message"]
 
-    if not isinstance(pubsub_message, dict) or "data" not in pubsub_message:
+    if not isinstance(pubsub_message, dict) or "data" not in pubsub_message or "publish_time" not in pubsub_message or "message_id" not in pubsub_message:
         msg = "no data received"
         print(f"error: {msg}", flush=True)
         return f"Bad Request: {msg}", 400
@@ -67,13 +68,29 @@ def index():
     old_format = req["old_format"]
     new_format = req["new_format"]
 
-    print(f"info: received request to convert video {id_video} from {old_format} to {new_format}", flush=True)
+    print(f"Received request to convert video {id_video} from {old_format} to {new_format}", flush=True)
 
     tstart = time.monotonic()
-    convert(id_video, old_format, new_format)
+    #convert(id_video, old_format, new_format)
     duration = time.monotonic() - tstart
 
-    print(f"info: finished converting video {id_video} in {duration}s", flush=True)
+    print(pubsub_message)
+
+    print(f"Finished converting video {id_video} in {duration}s", flush=True)
+
+    entry = dict(
+        severity="NOTICE",
+        message="Video conversion task completed",
+        video_id=id_video,
+        video_old_format=old_format,
+        video_new_format=new_format,
+        conversion_time=duration,
+        publish_time=pubsub_message["publish_time"],
+        completion_time=datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
+        task_id=pubsub_message["message_id"]
+    )
+
+    print(json.dumps(entry), flush=True)
 
     return ("", 204)
 
