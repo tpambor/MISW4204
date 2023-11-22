@@ -6,8 +6,8 @@ import time
 from flask import Flask, request
 from google.cloud import storage
 
-VIDEO_DIR = os.getenv('VIDEO_DIR')
-BUCKET = os.getenv('BUCKET')
+VIDEO_DIR = "/video"
+BUCKET = os.getenv('STORAGE_BUCKET')
 
 app = Flask(__name__)
 
