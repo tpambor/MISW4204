@@ -75,7 +75,9 @@ def index():
     #convert(id_video, old_format, new_format)
     duration = time.monotonic() - tstart
 
-    print(pubsub_message)
+    sent = datetime.datetime.fromisoformat(pubsub_message["publish_time"])
+    finished = datetime.datetime.now(datetime.timezone.utc)
+    time_request = (finished - sent).total_seconds() * 1000
 
     print(f"Finished converting video {id_video} in {duration}s", flush=True)
 
@@ -102,8 +104,9 @@ def index():
         video_old_format=old_format,
         video_new_format=new_format,
         conversion_time=duration,
+        processing_time=time_request,
         publish_time=pubsub_message["publish_time"],
-        completion_time=datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
+        completion_time=finished.isoformat().replace("+00:00", "Z"),
         task_id=pubsub_message["message_id"],
         **global_log_fields
     )
