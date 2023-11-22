@@ -9,6 +9,7 @@ from google.cloud import storage
 
 VIDEO_DIR = "/video"
 BUCKET = os.getenv('STORAGE_BUCKET')
+PROJECT = 'misw4204-e3'
 
 app = Flask(__name__)
 
@@ -78,6 +79,22 @@ def index():
 
     print(f"Finished converting video {id_video} in {duration}s", flush=True)
 
+    # Build structured log messages as an object.
+    global_log_fields = {}
+
+    # Add log correlation to nest all log messages.
+    # This is only relevant in HTTP-based contexts, and is ignored elsewhere.
+    # (In particular, non-HTTP-based Cloud Functions.)
+    request_is_defined = "request" in globals() or "request" in locals()
+    if request_is_defined and request:
+        trace_header = request.headers.get("X-Cloud-Trace-Context")
+
+        if trace_header and PROJECT:
+            trace = trace_header.split("/")
+            global_log_fields[
+                "logging.googleapis.com/trace"
+            ] = f"projects/{PROJECT}/traces/{trace[0]}"
+
     entry = dict(
         severity="NOTICE",
         message="Video conversion task completed",
@@ -87,7 +104,8 @@ def index():
         conversion_time=duration,
         publish_time=pubsub_message["publish_time"],
         completion_time=datetime.datetime.now(datetime.timezone.utc).isoformat().replace("+00:00", "Z"),
-        task_id=pubsub_message["message_id"]
+        task_id=pubsub_message["message_id"],
+        **global_log_fields
     )
 
     print(json.dumps(entry), flush=True)
