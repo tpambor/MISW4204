@@ -15,4 +15,4 @@ RUN mkdir /video
 
 WORKDIR /app
 
-CMD ["python",  "worker.py"]
+CMD ["gunicorn",  "--bind", "0.0.0.0:8000", "--timeout", "0", "app:app"]

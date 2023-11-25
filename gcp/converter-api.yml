@@ -1,0 +1,38 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: converter-api
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: '3'
+        autoscaling.knative.dev/maxScale: '3'
+        run.googleapis.com/startup-cpu-boost: 'true'
+    spec:
+      serviceAccountName: $SERVICE_ACCOUNT
+      containers:
+      - image: $REGION-docker.pkg.dev/$PROJECT_ID/cloud-converter/converter-api:entrega5
+        ports:
+        - name: http1
+          containerPort: 8000
+        env:
+        - name: CLOUDSQL_INSTANCE
+          value: $PROJECT_ID:$REGION:db1
+        - name: CLOUDSQL_DB
+          value: converter
+        - name: STORAGE_BUCKET
+          value: $BUCKET
+        - name: PUBSUB_TOPIC
+          value: $PUBSUB_TOPIC
+        resources:
+          limits:
+            memory: 2Gi
+            cpu: 2000m
+        startupProbe:
+          timeoutSeconds: 5
+          periodSeconds: 5
+          failureThreshold: 10
+          httpGet:
+            path: /health-check
+            port: 8000

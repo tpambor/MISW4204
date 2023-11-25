@@ -3,24 +3,21 @@
 export REGION=us-central1
 export PROJECT_ID=$(gcloud config get-value project)
 
-gcloud services enable networkconnectivity.googleapis.com
+# Enable required services
+gcloud services enable artifactregistry.googleapis.com
 
-gcloud compute addresses create google-managed-services-default \
-  --global \
-  --purpose=VPC_PEERING \
-  --prefix-length=24 \
-  --network=projects/$PROJECT_ID/global/networks/default
+# Create artifact repository for Cloud Run
+gcloud artifacts repositories create cloud-converter \
+  --location=$REGION \
+  --repository-format=docker
 
-gcloud services vpc-peerings update \
-  --service=servicenetworking.googleapis.com \
-  --ranges=google-managed-services-default \
-  --network=default \
-  --project=$PROJECT_ID \
-  --force
+# Create service account for GitHub CI
+gcloud iam service-accounts create github-ci \
+  --display-name="GitHub CI" \
+  --description="Service account for GitHub CI"
 
-gcloud compute networks subnets create proxy-only-subnet \
-  --region=$REGION \
-  --purpose=REGIONAL_MANAGED_PROXY \
-  --role=ACTIVE \
-  --network=default \
-  --range=10.16.16.0/24
+# Assign role to write container images to Cloud Artifacts from GitHub CI
+gcloud artifacts repositories add-iam-policy-binding cloud-converter \
+  --location=$REGION \
+  --member="serviceAccount:github-ci@$PROJECT_ID.iam.gserviceaccount.com" \
+  --role="roles/artifactregistry.writer"
