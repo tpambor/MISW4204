@@ -82,7 +82,9 @@ echo ""
 #### Configure Database
 
 gcloud sql instances create db1 \
+  --availability-type=regional \
   --zone=$ZONE \
+  --secondary-zone=$ZONE2 \
   --database-version=POSTGRES_14 \
   --cpu=1 \
   --memory=4096MB \
@@ -108,6 +110,8 @@ echo ""
 cat converter-api.yml | envsubst | gcloud run services replace - \
   --region=$REGION
 
+export API_URL=$(gcloud run services describe converter-api --region=$REGION --format=json | jq -r '.status.url')
+
 echo ""
 
 #### Make API REST / Web publicly available
@@ -116,4 +120,34 @@ gcloud run services add-iam-policy-binding converter-api \
   --member="allUsers" \
   --role="roles/run.invoker"
 
+echo ""
+
+#### Create Cloud Run service for worker
+cat converter-worker.yml | envsubst | gcloud run services replace - \
+  --region=$REGION
+
+export WORKER_URL=$(gcloud run services describe converter-worker --region=$REGION --format=json | jq -r '.status.url')
+
+echo ""
+
+#### Make worker publicly available
+gcloud run services add-iam-policy-binding converter-worker \
+  --region=$REGION \
+  --member="serviceAccount:$SERVICE_ACCOUNT" \
+  --role="roles/run.invoker"
+
+echo ""
+
+#### Create PubSub subscription converter-sub
+gcloud pubsub subscriptions create converter-sub \
+  --topic=$PUBSUB_TOPIC \
+  --push-endpoint=$WORKER_URL \
+  --push-auth-service-account=$SERVICE_ACCOUNT \
+  --ack-deadline=600  
+
+echo ""
+
+echo "Setup completed!"
+echo ""
+echo "API: $API_URL"
 echo ""

@@ -5,6 +5,10 @@ export REGION=us-central1
 export PROJECT_ID=$(gcloud config get-value project)
 export SERVICE_ACCOUNT="converter@$PROJECT_ID.iam.gserviceaccount.com"
 
+gcloud -q pubsub subscriptions delete converter-sub || true
+gcloud -q run services remove-iam-policy-binding converter-worker --region=$REGION --member="serviceAccount:$SERVICE_ACCOUNT" --role="roles/run.invoker" || true
+gcloud -q run services delete converter-worker --region=$REGION
+
 gcloud -q run services remove-iam-policy-binding converter-api --region=$REGION --member="allUsers" --role="roles/run.invoker" || true
 gcloud -q run services delete converter-api --region=$REGION
 
