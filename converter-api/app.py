@@ -7,6 +7,7 @@ from google.cloud.sql.connector import Connector
 from db import db
 from vistas import BlueprintTasks, BlueprintAuth, BlueprintHealth
 from flask_jwt_extended import JWTManager
+from sqlalchemy.exc import DatabaseError
 
 class CloudConversionToolApi(flask_smorest.Api):
     DEFAULT_ERROR_RESPONSE_NAME = None
@@ -62,7 +63,16 @@ def create_app():
 
     db.init_app(app)
     with app.app_context():
-        db.create_all()
+        retries = 0
+        while True:
+            try:
+                db.create_all()
+            except DatabaseError:
+                if retries < 5:
+                    continue
+                else:
+                    raise
+            break
 
     app.extensions["pubsub"] = pubsub_v1.PublisherClient()
 
