@@ -1,4 +1,5 @@
 import os
+import time
 from flask import Flask
 import flask_smorest
 import google.auth
@@ -69,6 +70,7 @@ def create_app():
                 db.create_all()
             except DatabaseError:
                 if retries < 5:
+                    time.sleep(1)
                     continue
                 else:
                     raise
