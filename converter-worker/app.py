@@ -9,7 +9,9 @@ from google.cloud import storage
 
 VIDEO_DIR = "/video"
 BUCKET = os.getenv('STORAGE_BUCKET')
-PROJECT = 'misw4204-e3'
+PROJECT = 'misw4204-e5'
+
+print(os.environ)
 
 app = Flask(__name__)
 
@@ -72,7 +74,7 @@ def index():
     print(f"Received request to convert video {id_video} from {old_format} to {new_format}", flush=True)
 
     tstart = time.monotonic()
-    #convert(id_video, old_format, new_format)
+    convert(id_video, old_format, new_format)
     duration = time.monotonic() - tstart
 
     sent = datetime.datetime.fromisoformat(pubsub_message["publish_time"])
