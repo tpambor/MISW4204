@@ -9,9 +9,7 @@ from google.cloud import storage
 
 VIDEO_DIR = "/video"
 BUCKET = os.getenv('STORAGE_BUCKET')
-PROJECT = 'misw4204-e5'
-
-print(os.environ)
+PROJECT = os.getenv('GCP_PROJECT')
 
 app = Flask(__name__)
 
