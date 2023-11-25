@@ -5,13 +5,45 @@ import os
 import subprocess
 import time
 from flask import Flask, request
+import google.auth
 from google.cloud import storage
+from google.cloud.sql.connector import Connector
+from db import db
+from modelos import Task, TaskStatus
+from sqlalchemy import update
 
 VIDEO_DIR = "/video"
 BUCKET = os.getenv('STORAGE_BUCKET')
 PROJECT = os.getenv('GCP_PROJECT')
 
+# Initialize Python Cloud SQL Connector object
+connector = Connector()
+
+credentials, _ = google.auth.default()
+credentials.refresh(request=google.auth.transport.requests.Request())
+cloudsql_user = credentials.service_account_email.replace('.gserviceaccount.com', '')
+cloudsql_instance = os.getenv('CLOUDSQL_INSTANCE')
+cloudsql_db = os.getenv('CLOUDSQL_DB')
+
+# Python Cloud SQL Connector database connection function
+def getconn():
+    conn = connector.connect(
+        cloudsql_instance,
+        'pg8000',
+        db=cloudsql_db,
+        user=cloudsql_user,
+        enable_iam_auth=True
+    )
+    return conn
+
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+pg8000://'
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+    "creator": getconn
+}
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
 
 def convert(id_video, old_format, new_format):
     path_old = os.path.join(VIDEO_DIR, f'{id_video}.{old_format}')
@@ -29,6 +61,11 @@ def convert(id_video, old_format, new_format):
 
     os.remove(path_old)
     os.remove(path_new)
+
+    db.session.execute(
+        update(Task).where(Task.id == id_video).values(status=TaskStatus.PROCESSED)
+    )
+    db.session.commit()
 
 @app.route("/", methods=["POST"])
 def index():

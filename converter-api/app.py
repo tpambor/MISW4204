@@ -3,7 +3,7 @@ from flask import Flask
 import flask_smorest
 import google.auth
 from google.cloud import pubsub_v1
-from google.cloud.sql.connector import Connector, IPTypes
+from google.cloud.sql.connector import Connector
 from db import db
 from vistas import BlueprintTasks, BlueprintAuth, BlueprintHealth
 from flask_jwt_extended import JWTManager
