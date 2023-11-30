@@ -6,8 +6,8 @@ export PROJECT_ID=$(gcloud config get-value project)
 
 #### Modificar variables (Opcional)
 
-NUM_CYCLES=2
-NUM_PARALLEL_TASKS=10
+NUM_CYCLES=1
+NUM_PARALLEL_TASKS=1
 
 gcloud compute ssh --zone $ZONE "monitoring-worker" --project $PROJECT_ID --command "sudo su -c '
 sed -i 's/^NUM_CYCLES=.*/NUM_CYCLES=$NUM_CYCLES/' /etc/api.env &&
@@ -56,6 +56,19 @@ export MONITORING_CONTAINER_ID=\$(docker ps -aqf "name=monitoring-container") &&
 docker cp \$MONITORING_CONTAINER_ID:/monitor/output.png /home/$USER &&
 docker cp \$MONITORING_CONTAINER_ID:/monitor/output.csv /home/$USER && 
 docker cp \$MONITORING_CONTAINER_ID:/monitor/reporte.txt /home/$USER'"
+
+
+# gcloud compute ssh --zone $ZONE "monitoring-worker" --project $PROJECT_ID --command "sudo su -c '
+# echo \"Inicializar trigger-container\" &&
+# cd /tmp/trigger &&
+# if docker inspect trigger-container &> /dev/null; then
+#     docker stop trigger-container
+#     docker rm trigger-container
+#     docker rmi trigger-image
+# fi &&
+# docker build -t trigger-image . &&
+# docker run -d --env-file /etc/api.env --name trigger-container -v /mnt/video:/video trigger-image &&
+# docker logs -f trigger-container"
 
 #### Copiar archivos generados por el script a la carpeta destino
 
