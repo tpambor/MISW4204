@@ -63,7 +63,7 @@ docker cp \$MONITORING_CONTAINER_ID:/monitor/reporte.txt /home/$USER'"
 export FOLDER_SCENARIO=/home/ldmolinav/MISW4204/escenario2
 export FOLDER_ASSIGMENT=cuarta_entrega
 export SCENARIO_CASE=caso3
-export CASE_ITERATION=iteracion2
+export CASE_ITERATION=iteracion5
 
 mkdir -p "$FOLDER_SCENARIO/$FOLDER_ASSIGMENT/$SCENARIO_CASE/$CASE_ITERATION"
 
