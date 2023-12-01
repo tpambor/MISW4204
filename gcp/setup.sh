@@ -51,6 +51,14 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 
 echo ""
 
+# Assign roles to view Logging
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:$SERVICE_ACCOUNT" \
+  --role="roles/logging.viewer"
+
+echo ""
+
+
 #### Configure Cloud Storage
 
 # Bucket name has to be globally unique, therefore add suffix

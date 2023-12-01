@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@google-cloud/logging": "^11.0.0"
+    "@google-cloud/logging": "^11.0.0",
+    "percentile": "1.6.0"
   }
 }

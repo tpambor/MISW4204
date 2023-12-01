@@ -1,6 +1,7 @@
 const { Logging } = require('@google-cloud/logging');
 const fs = require('fs');
 const { execSync } = require('child_process');
+const percentile = require("percentile");
 
 const logging = new Logging();
 
@@ -23,26 +24,24 @@ var csvStream = fs.createWriteStream('output.csv');
 
 csvStream.write('id_video,sent,finished,time_request\n')
 
-const calculatePercentile = (arr, percentile) => {
-    const index = Math.ceil((percentile / 100) * arr.length) - 1;
-    return arr[index];
-};
-
 const generateReports = () => {
-    const initialTime = sentPerRequest.slice().sort()[0];
-    const completedTime = completedPerRequest.slice().sort((a, b) => b - a)[0];
+    console.log(sentPerRequest, 'sentPerRequest')
+    console.log(completedPerRequest, 'completedPerRequest')
+    console.log(timePerRequest, 'timePerRequest')
+    const initialTime = new Date(sentPerRequest.sort()[0]);
+    const completedTime = new Date(completedPerRequest.sort()[completedPerRequest.length - 1]);
     console.log('initialTime', initialTime);
     console.log('completedTime', completedTime);
 
     const totalRequests = timePerRequest.length;
     const acumTimeMs = timePerRequest.reduce((acc, time) => acc + time, 0);
-    const totalSeconds = (completedTime - initialTime) / 1000;
+    const totalSeconds = (completedTime.getTime() - initialTime.getTime()) / 1000;
     const totalTimeMin = totalSeconds / 60;
     console.log('totalSeconds', totalSeconds);
     console.log('totalTimeMin', totalTimeMin);
 
-    const sortedTimes = timePerRequest.slice().sort((a, b) => a - b);
-    const percentil95 = calculatePercentile(sortedTimes, 95);
+    const sortedTimes = timePerRequest.sort();
+    const percentil95 = percentile(95, sortedTimes);
 
     const report = `
 -----------------------
@@ -50,8 +49,8 @@ Report
 
 Total requests: ${totalRequests}
 Concurrent requests: ${NUM_PARALLEL_TASKS}
-Average response time per request (ms): ${(acumTimeMs / totalRequests).toFixed(2)}
-Response time (ms) P95: ${percentil95.toFixed(2)}
+Average response time per request (sec): ${((acumTimeMs / totalRequests)/1000).toFixed(2)}
+Response time (sec) P95: ${(percentil95/1000).toFixed(2)}
 Requests per minute (Throughput): ${(totalRequests / totalTimeMin).toFixed(2)}
 -----------------------
 `;
