@@ -7,7 +7,7 @@ export PROJECT_ID=$(gcloud config get-value project)
 #### Modificar variables (Opcional)
 
 NUM_CYCLES=2
-NUM_PARALLEL_TASKS=10
+NUM_PARALLEL_TASKS=5
 
 gcloud compute ssh --zone $ZONE "monitoring-worker" --project $PROJECT_ID --command "sudo su -c '
 sed -i 's/^NUM_CYCLES=.*/NUM_CYCLES=$NUM_CYCLES/' /etc/api.env &&
@@ -62,8 +62,8 @@ docker cp \$MONITORING_CONTAINER_ID:/monitor/reporte.txt /home/$USER'"
 
 export FOLDER_SCENARIO=/home/ldmolinav/MISW4204/escenario2
 export FOLDER_ASSIGMENT=cuarta_entrega
-export SCENARIO_CASE=caso2
-export CASE_ITERATION=iteracion4
+export SCENARIO_CASE=caso1
+export CASE_ITERATION=iteracion5
 
 mkdir -p "$FOLDER_SCENARIO/$FOLDER_ASSIGMENT/$SCENARIO_CASE/$CASE_ITERATION"
 
