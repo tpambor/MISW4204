@@ -4,7 +4,7 @@ Report
 
 Total requests: 20
 Concurrent requests: 10
-Average response time per request (sec): 932.64
-Response time (sec) P95: 1632.21
-Requests per minute (Throughput): 0.51
+Average response time per request (sec): 619.09
+Response time (sec) P95: 1098.73
+Requests per minute (Throughput): 1.08
 -----------------------
