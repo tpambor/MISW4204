@@ -138,7 +138,7 @@ export WORKER_URL=$(gcloud run services describe converter-worker --region=$REGI
 
 echo ""
 
-#### Make worker publicly available
+#### Make worker available for PubSub
 gcloud run services add-iam-policy-binding converter-worker \
   --region=$REGION \
   --member="serviceAccount:$SERVICE_ACCOUNT" \
