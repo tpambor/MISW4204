@@ -81,7 +81,8 @@ El objetivo de este plan es evaluar la capacidad de la aplicación de convertido
 
 - [Entrega 2 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%202%20Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
 - [Entrega 3 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%203%20Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
-- [Entrega 4 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/files/13405336/Entrega.4.-.Escenario.y.Pruebas.de.Estres.API.REST.y.Batch.pdf)
+- [Entrega 4 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%204%20-%20Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
+- [Entrega 5 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%205%20-%20Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
 
 ## Configuración Escenario 1 JMeter
 - [Configuración](https://github.com/tpambor/MISW4204/blob/main/Docs/Experimento%201%20-%20Configuraci%C3%B3n.pdf)
