@@ -1,4 +1,4 @@
-FROM python:3.11-bookworm
+FROM node:20-bookworm
 
 RUN apt -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update && \
   apt install --no-install-recommends --yes \
@@ -8,8 +8,8 @@ RUN apt -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false update 
 
 COPY . /monitor
 
-RUN pip install -r /monitor/requirements.txt
+RUN cd /monitor && npm install
 
 WORKDIR /monitor
 
-CMD python -u /monitor/monitor.py
+CMD node index.js

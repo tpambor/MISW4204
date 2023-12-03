@@ -57,17 +57,16 @@ docker cp \$MONITORING_CONTAINER_ID:/monitor/output.png /home/$USER &&
 docker cp \$MONITORING_CONTAINER_ID:/monitor/output.csv /home/$USER && 
 docker cp \$MONITORING_CONTAINER_ID:/monitor/reporte.txt /home/$USER'"
 
+
 #### Copiar archivos generados por el script a la carpeta destino
 
 export FOLDER_SCENARIO=/home/ldmolinav/MISW4204/escenario2
-export FOLDER_ASSIGMENT=tercera_entrega
+export FOLDER_ASSIGMENT=cuarta_entrega
 export SCENARIO_CASE=caso2
-export CASE_ITERATION=iteracion1
+export CASE_ITERATION=iteracion5
 
 mkdir -p "$FOLDER_SCENARIO/$FOLDER_ASSIGMENT/$SCENARIO_CASE/$CASE_ITERATION"
 
 gcloud compute scp monitoring-worker:~/output.png $FOLDER_SCENARIO/$FOLDER_ASSIGMENT/$SCENARIO_CASE/$CASE_ITERATION --zone=$ZONE
 gcloud compute scp monitoring-worker:~/output.csv $FOLDER_SCENARIO/$FOLDER_ASSIGMENT/$SCENARIO_CASE/$CASE_ITERATION --zone=$ZONE
 gcloud compute scp monitoring-worker:~/reporte.txt $FOLDER_SCENARIO/$FOLDER_ASSIGMENT/$SCENARIO_CASE/$CASE_ITERATION --zone=$ZONE
-
-gcloud compute instance-groups managed resize worker-mig --size=1 --zone=$ZONE
