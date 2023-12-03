@@ -60,7 +60,8 @@ Consulta la documentación completa de la arquitectura.
 - [Entrega 1 - Arquitectura tradicional](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%201%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
 - [Entrega 2 - Arquitectura Cloud](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%202%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
 - [Entrega 3 - Arquitectura Cloud con escalabilidad en la capa web](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%203%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
--  [Entrega 4 - Arquitectura Cloud con Escalabilidad en el Backend​](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%204%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
+- [Entrega 4 - Arquitectura Cloud con Escalabilidad en el Backend​](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%204%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
+- [Entrega 5 - Arquitectura Cloud con despliegue PaaS](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%205%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
 
     
 ## API REST
