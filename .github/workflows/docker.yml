@@ -6,6 +6,7 @@ on:
 env:
   REGISTRY_GITHUB: ghcr.io
   REGISTRY_TIM: us-central1-docker.pkg.dev/misw4204-e5/cloud-converter
+  REGISTRY_LAURA: us-central1-docker.pkg.dev/cloud-conversion-tool-cr/cloud-converter
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
@@ -32,12 +33,19 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Log in to the GCP Artifact registry - Tim
+#      - name: Log in to the GCP Artifact registry - Tim
+#        uses: docker/login-action@v3
+#        with:
+#          registry: ${{ env.REGISTRY_TIM }}
+#          username: _json_key
+#          password: ${{ secrets.GAR_JSON_KEY_TIM }}
+
+      - name: Log in to the GCP Artifact registry - Laura
         uses: docker/login-action@v3
         with:
-          registry: ${{ env.REGISTRY_TIM }}
+          registry: ${{ env.REGISTRY_LAURA }}
           username: _json_key
-          password: ${{ secrets.GAR_JSON_KEY_TIM }}
+          password: ${{ secrets.GAR_JSON_KEY_LAURA }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -45,7 +53,7 @@ jobs:
         with:
           images: |
             ${{ env.REGISTRY_GITHUB }}/${{ env.IMAGE_NAME }}/converter-worker
-            ${{ env.REGISTRY_TIM }}/converter-worker
+            ${{ env.REGISTRY_LAURA }}/converter-worker
           tags: |
             # set latest tag for master branch
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
@@ -83,12 +91,19 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Log in to the GCP Artifact registry - Tim
+#      - name: Log in to the GCP Artifact registry - Tim
+#        uses: docker/login-action@v3
+#        with:
+#          registry: ${{ env.REGISTRY_TIM }}
+#          username: _json_key
+#          password: ${{ secrets.GAR_JSON_KEY_TIM }}
+
+      - name: Log in to the GCP Artifact registry - Laura
         uses: docker/login-action@v3
         with:
-          registry: ${{ env.REGISTRY_TIM }}
+          registry: ${{ env.REGISTRY_LAURA }}
           username: _json_key
-          password: ${{ secrets.GAR_JSON_KEY_TIM }}
+          password: ${{ secrets.GAR_JSON_KEY_LAURA }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -96,7 +111,7 @@ jobs:
         with:
           images: |
             ${{ env.REGISTRY_GITHUB }}/${{ env.IMAGE_NAME }}/converter-api
-            ${{ env.REGISTRY_TIM }}/converter-api
+            ${{ env.REGISTRY_LAURA }}/converter-api
           tags: |
             # set latest tag for master branch
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}

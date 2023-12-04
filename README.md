@@ -60,7 +60,8 @@ Consulta la documentación completa de la arquitectura.
 - [Entrega 1 - Arquitectura tradicional](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%201%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
 - [Entrega 2 - Arquitectura Cloud](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%202%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
 - [Entrega 3 - Arquitectura Cloud con escalabilidad en la capa web](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%203%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
--  [Entrega 4 - Arquitectura Cloud con Escalabilidad en el Backend​](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%204%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
+- [Entrega 4 - Arquitectura Cloud con Escalabilidad en el Backend​](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%204%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
+- [Entrega 5 - Arquitectura Cloud con despliegue PaaS](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%205%20-%20Arquitectura%2C%20conclusiones%20y%20consideraciones.pdf)
 
     
 ## API REST
@@ -80,12 +81,13 @@ El objetivo de este plan es evaluar la capacidad de la aplicación de convertido
 
 - [Entrega 2 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%202%20Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
 - [Entrega 3 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%203%20Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
-- [Entrega 4 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/files/13405336/Entrega.4.-.Escenario.y.Pruebas.de.Estres.API.REST.y.Batch.pdf)
+- [Entrega 4 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%204%20-%20Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
+- [Entrega 5 - Documento Escenario y Pruebas de Estrés API REST y Batch](https://github.com/tpambor/MISW4204/blob/main/Docs/Entrega%205%20-%20Escenario%20y%20Pruebas%20de%20Estr%C3%A9s%20API%20REST%20y%20Batch.pdf)
 
 ## Configuración Escenario 1 JMeter
 - [Configuración](https://github.com/tpambor/MISW4204/blob/main/Docs/Experimento%201%20-%20Configuraci%C3%B3n.pdf)
 - [Video](https://uniandes-my.sharepoint.com/personal/ld_molina11_uniandes_edu_co/_layouts/15/stream.aspx?id=%2Fpersonal%2Fld%5Fmolina11%5Funiandes%5Fedu%5Fco%2FDocuments%2FDesarrollo%20de%20software%20en%20la%20nube%2FSemana%203%2FVideo%2F2%2E%20Experimento%201%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview)
 
 ## Configuración Escenario 2 Script GCP
-- [Configuración](https://github.com/tpambor/MISW4204/blob/main/Docs/Experimento%202%20-%20Configuraci%C3%B3n.pdf)
+- [Configuración](https://github.com/tpambor/MISW4204/blob/main/Docs/Experimento%202%20-%20Configuraci%C3%B3n%20Entrega%205.pdf)
 - [Video](https://uniandes-my.sharepoint.com/:v:/g/personal/ld_molina11_uniandes_edu_co/ERowgNb9SNxNhRiheiM35FgB8seEdbRzYU2Gky1t6o4FHQ?e=CIxKvy&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZyIsInJlZmVycmFsQXBwUGxhdGZvcm0iOiJXZWIiLCJyZWZlcnJhbE1vZGUiOiJ2aWV3In19)

@@ -51,6 +51,14 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 
 echo ""
 
+# Assign roles to view Logging
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member="serviceAccount:$SERVICE_ACCOUNT" \
+  --role="roles/logging.viewer"
+
+echo ""
+
+
 #### Configure Cloud Storage
 
 # Bucket name has to be globally unique, therefore add suffix
@@ -130,7 +138,7 @@ export WORKER_URL=$(gcloud run services describe converter-worker --region=$REGI
 
 echo ""
 
-#### Make worker publicly available
+#### Make worker available for PubSub
 gcloud run services add-iam-policy-binding converter-worker \
   --region=$REGION \
   --member="serviceAccount:$SERVICE_ACCOUNT" \
@@ -146,6 +154,28 @@ gcloud pubsub subscriptions create converter-sub \
   --ack-deadline=600  
 
 echo ""
+
+#### Configure Trigger / Monitoring
+export CLOUDSQL_INSTANCE=$PROJECT_ID:$REGION:db1
+export CLOUDSQL_DB=converter
+export NUM_PARALLEL_TASKS=1
+export NUM_CYCLES=1
+export OLD_FORMAT=mp4
+export NEW_FORMAT=webm
+export DEMO_VIDEO=salento-720p.mp4
+
+gcloud compute instances create monitoring-worker \
+ --zone $ZONE \
+ --machine-type=e2-highcpu-2 \
+ --image-family debian-12 \
+ --image-project debian-cloud \
+ --tags ssh-server \
+ --service-account=$SERVICE_ACCOUNT \
+ --scopes=https://www.googleapis.com/auth/cloud-platform \
+ --metadata=database-url=$DATABASE_URL,num-parallel-taks=$NUM_PARALLEL_TASKS,num-cycles=$NUM_CYCLES,old-format=$OLD_FORMAT,new-format=$NEW_FORMAT,demo-video=$DEMO_VIDEO,bucket=$BUCKET,pubsub-topic=$PUBSUB_TOPIC,pubsub-monitor-sub=$PUBSUB_MONITOR_SUBSCRIPTION,pubsub-completion-monitor-sub=$PUBSUB_COMPLETION_MONITOR_SUBSCRIPTION,cloudsql-instance=$CLOUDSQL_INSTANCE,cloudsql-db=$CLOUDSQL_DB  \
+ --metadata-from-file startup-script=monitoring.startup-script
+
+export MONITOR_IP=$(gcloud compute instances describe monitoring-worker --zone $ZONE --format json | jq -r '.networkInterfaces[0].accessConfigs[0].natIP')
 
 echo "Setup completed!"
 echo ""

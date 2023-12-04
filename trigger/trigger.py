@@ -10,7 +10,6 @@ from concurrent import futures
 import json
 
 BUCKET = os.getenv('BUCKET')
-DATABASE_URL = os.getenv('DATABASE_URL')
 NUM_PARALLEL_TASKS = int(os.getenv('NUM_PARALLEL_TASKS') or 100)
 NUM_CYCLES = int(os.getenv('NUM_CYCLES') or 10)
 OLD_FORMAT = os.getenv('OLD_FORMAT')
